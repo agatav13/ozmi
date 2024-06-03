@@ -1,0 +1,17 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc",
+    "start": "serve -s .",
+    "type-check": "tsc --noEmit"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "serve": "^14.2.3",
+    "types": "workspace:*",
+    "typescript": "^5.4.5"
+  }
+}
