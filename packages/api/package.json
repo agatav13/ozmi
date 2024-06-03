@@ -16,5 +16,9 @@
     "tsx": "^4.11.2",
     "types": "workspace:*",
     "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
   }
 }
