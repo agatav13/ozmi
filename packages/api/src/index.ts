@@ -4,7 +4,7 @@ import express from 'express';
 import { Workspace } from 'types';
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 app.use(cors({ origin: `http://localhost:${port}` }));
 
