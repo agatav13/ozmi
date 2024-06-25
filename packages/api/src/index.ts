@@ -4,9 +4,10 @@ import express from 'express';
 import { Workspace } from 'types';
 
 const app = express();
-const port = 3000;
+const port = 5000;
 
-app.use(cors({ origin: `http://localhost:${port}` }));
+// pozwala na requesty z frontendu
+app.use(cors({ origin: `http://localhost:3000` }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
