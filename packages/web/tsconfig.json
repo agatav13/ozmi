@@ -13,7 +13,8 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"  // to do react
+    "jsx": "preserve"
   },
-  "include": ["./src"]
+  "include": ["./src"],
+  "types": ["vite/client"]
 }
