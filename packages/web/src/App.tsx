@@ -1,21 +1,9 @@
-import React, { StrictMode, useEffect, useState } from 'react';
+import React, { StrictMode } from 'react';
 
-import { Workspace } from 'types';
-
-export default function App() {
-    const [data, setData] = useState<Workspace[]>([]);
-  
-    useEffect(() => {
-      fetch('http://localhost:5000/workspaces')
-        .then((response) => response.json())
-        .then(({ data }) => setData(data));
-    }, []);
-  
+export default function App() {  
     return (
-      <StrictMode>
-        <h1>Building a fullstack TypeScript project with Turborepo</h1>
-        <h2>Workspaces</h2>
-        <pre>{JSON.stringify(data, null, 2)}</pre>
-      </StrictMode>
+        <StrictMode>
+
+        </StrictMode>
     );
-  }
+}
