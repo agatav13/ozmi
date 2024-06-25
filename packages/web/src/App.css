@@ -1,0 +1,12 @@
+.footer {
+    background-color: gainsboro;
+    display: flex;
+}
+
+.footer img {
+    height: 160px;
+}
+
+.footer p {
+    padding-left: 40px;
+}
