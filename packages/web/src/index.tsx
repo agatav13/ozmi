@@ -8,13 +8,11 @@ import AdminPanel from './components/AdminPanel/AdminPanel';
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <App />,
-        children: [
-            {
-                path: "/admin",
-                element: <AdminPanel />
-            }
-        ]
+        element: <App />
+    },
+    {
+        path: "/admin",
+        element: <AdminPanel />
     }
 ]);
 
