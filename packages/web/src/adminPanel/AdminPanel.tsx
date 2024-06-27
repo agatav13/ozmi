@@ -1,4 +1,5 @@
-import LoginForm from "./LoginForm";
+import "./AdminPanel.css"
+import LoginForm from "./components/LoginForm";
 
 export default function AdminPanel() {
     return (

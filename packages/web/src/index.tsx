@@ -2,17 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './index.css'
-import App from './App';
-import AdminPanel from './components/AdminPanel/AdminPanel';
+import MainPage from './mainPage/MainPage';
+import AdminPanel from './adminPanel/AdminPanel';
+import ErrorPage from './error-page';
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <App />
+        element: <MainPage />,
+        errorElement: <ErrorPage />
     },
     {
         path: "/admin",
-        element: <AdminPanel />
+        element: <AdminPanel />,
+        errorElement: <ErrorPage />
     }
 ]);
 
