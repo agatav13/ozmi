@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './index.css'
 import MainPage from './mainPage/MainPage';
-import AdminPanel from './adminPanel/AdminPanel';
+import AdminPanelWrapper from './adminPanel/AdminPanelWrapper';
 import ErrorPage from './error-page';
 
 const router = createBrowserRouter([
@@ -14,16 +14,13 @@ const router = createBrowserRouter([
     },
     {
         path: "/admin",
-        element: <AdminPanel />,
+        element: <AdminPanelWrapper />,
         errorElement: <ErrorPage />
     }
 ]);
 
-const app = document.getElementById('app');
-if (app) {
-    ReactDOM.createRoot(app).render(
-        <React.StrictMode>
-            <RouterProvider router={router} />
-        </React.StrictMode>
-    );
-}
+ReactDOM.createRoot(document.getElementById('app')!).render(
+    <React.StrictMode>
+        <RouterProvider router={router} />
+    </React.StrictMode>
+);

@@ -1,4 +1,30 @@
-label {
-    display: block;
-    padding-bottom: 5px;
+.SignedOutContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.SignInButton {
+    background-color: gainsboro;
+    color: grey;
+    border: 2px solid grey;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.SignInButton:hover {
+    background-color: rgb(200, 200, 200);
+}
+
+.MainPageLink {
+    color: grey;
+    font-size: 18px;
+    padding-top: 12px;
+    text-decoration: none;
+}
+
+.MainPageLink:hover {
+    color: rgb(80, 80, 80);
 }
