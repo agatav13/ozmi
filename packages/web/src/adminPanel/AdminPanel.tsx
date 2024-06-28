@@ -1,5 +1,5 @@
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
-import "./AdminPanel.css"
+import "./assets/AdminPanel.css"
 import AdminApp from "./AdminApp";
 import SignedOutPage from "./components/SignedOutPage";
 
