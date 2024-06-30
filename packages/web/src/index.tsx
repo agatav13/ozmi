@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './index.css'
 import MainPage from './mainPage/MainPage';
-import AdminPanelWrapper from './adminPanel/AdminPanelWrapper';
-import ErrorPage from './error-page';
+import AdminPanel from './adminPanel/AdminPanel';
+import ErrorPage from './shared/ErrorPage';
 
 const router = createBrowserRouter([
     {
@@ -14,7 +14,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/admin",
-        element: <AdminPanelWrapper />,
+        element: <AdminPanel />,
         errorElement: <ErrorPage />
     }
 ]);
