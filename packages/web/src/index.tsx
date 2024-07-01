@@ -5,6 +5,7 @@ import './index.css'
 import MainPage from './mainPage/MainPage';
 import AdminPanel from './adminPanel/AdminPanel';
 import ErrorPage from './shared/ErrorPage';
+import AddPost from './adminPanel/components/AddPost';
 
 const router = createBrowserRouter([
     {
@@ -15,7 +16,13 @@ const router = createBrowserRouter([
     {
         path: "/admin",
         element: <AdminPanel />,
-        errorElement: <ErrorPage />
+        errorElement: <ErrorPage />,
+        children: [
+            {
+                path: '/admin/add-post',
+                element: <AddPost />
+            }
+        ]
     }
 ]);
 

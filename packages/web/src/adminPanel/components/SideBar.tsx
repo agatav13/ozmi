@@ -2,6 +2,7 @@ import '../assets/styles/SideBar.css'
 import { SignOutButton, UserButton } from "@clerk/clerk-react";
 import { Button, Menu, MenuProps } from "antd";
 import Sider from "antd/es/layout/Sider";
+import { Link } from 'react-router-dom';
 
 export default function SideBar() {
     const adminPageUrl = "/admin";
@@ -13,7 +14,7 @@ export default function SideBar() {
             key: 'sub1',
             label: 'Aktualności',
             children: [
-                {key: '1', label: 'Dodaj post'},
+                {key: '1', label: <Link to='/admin/add-post'>Dodaj post</Link>},
                 {key: '2', label: 'Edytuj post'},
                 {key: '3', label: 'Usuń post'}
             ]
@@ -56,10 +57,6 @@ export default function SideBar() {
         }
     ];
 
-    const onClick: MenuProps['onClick'] = (e) => {
-        console.log('click', e)
-    }
-
     return (
         <Sider style={{overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 0, bottom: 0}}>
             <div className="UserProfileContainer">
@@ -72,7 +69,6 @@ export default function SideBar() {
             </div>
             <div className="SideNav">
                 <Menu
-                    // onClick={onClick}
                     triggerSubMenuAction="click"
                     style={{width: 200}}
                     mode="inline"
