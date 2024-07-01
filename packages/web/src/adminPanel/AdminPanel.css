@@ -12,6 +12,7 @@
     border: 2px solid grey;
     padding: 10px;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .SignInButton:hover {
@@ -28,3 +29,4 @@
 .MainPageLink:hover {
     color: rgb(80, 80, 80);
 }
+

@@ -1,5 +1,5 @@
 import { ClerkProvider, SignInButton, SignedIn, SignedOut } from "@clerk/clerk-react";
-import "./assets/AdminPanel.css"
+import "./AdminPanel.css"
 import AdminApp from "./AdminApp";
 import { Link } from "react-router-dom";
 
