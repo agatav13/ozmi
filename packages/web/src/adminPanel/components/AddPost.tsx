@@ -25,7 +25,7 @@ export default function AddPost() {
                     <Input />
                 </Form.Item>
                 <Form.Item label="Kategoria" name="tags">
-                    <Select placeholder="Wybierz odpowiednią opjcę" allowClear>
+                    <Select placeholder="Wybierz odpowiednią opcję" allowClear>
                         <Option value="Szkoła Modelowania Matematycznego">Szkoła Modelowania Matematycznego</Option>
                         <Option value="inne">Inne</Option>
                     </Select>

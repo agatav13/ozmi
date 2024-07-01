@@ -15,8 +15,8 @@ export default function SideBar() {
             label: 'Aktualności',
             children: [
                 {key: '1', label: <Link to='/admin/add-post'>Dodaj post</Link>},
-                {key: '2', label: 'Edytuj post'},
-                {key: '3', label: 'Usuń post'}
+                {key: '2', label: <Link to='/admin/edit-post'>Edytuj post</Link>},
+                {key: '3', label: <Link to='/admin/delete-post'>Usuń post</Link>}
             ]
         },
         {
