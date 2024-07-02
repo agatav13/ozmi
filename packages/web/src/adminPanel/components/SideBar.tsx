@@ -4,8 +4,14 @@ import { SignOutButton, UserButton } from "@clerk/clerk-react";
 import { Button, Menu, MenuProps, Switch } from "antd";
 import Sider from "antd/es/layout/Sider";
 import { Link } from 'react-router-dom';
+import { dark } from "@clerk/themes";
 
-export default function SideBar({ onToggle }: { onToggle: () => void }) {
+interface SideBarProps {
+    isDarkMode: boolean;
+    onToggle: () => void;
+}
+
+export default function SideBar({ isDarkMode, onToggle }: SideBarProps) {
     const adminPageUrl = "/admin";
     
     type MenuItem = Required<MenuProps>['items'][number];
@@ -61,8 +67,13 @@ export default function SideBar({ onToggle }: { onToggle: () => void }) {
     return (
         <Sider className='Sider' style={{position: 'fixed'}}>
             <div className="UserProfileContainer">
-                <UserButton afterSignOutUrl={adminPageUrl} />
-                <Switch className='ToggleButton' onClick={onToggle} checkedChildren={<MoonFilled />} unCheckedChildren={<SunFilled />} />
+                <UserButton afterSignOutUrl={adminPageUrl} appearance={{
+                    variables: {
+                        fontFamily: 'Verdana, sans-serif'
+                    },
+                    baseTheme: isDarkMode ? dark : undefined
+                }} />
+                <Switch className='ToggleButton' onClick={onToggle} checked={isDarkMode} checkedChildren={<MoonFilled />} unCheckedChildren={<SunFilled />} />
             </div>
             <div className="SideNav">
                 <Menu
