@@ -8,6 +8,7 @@ import ErrorPage from './shared/ErrorPage';
 import AddPost from './adminPanel/components/AddPost';
 import EditPost from './adminPanel/components/EditPost';
 import DeletePost from './adminPanel/components/DeletePost';
+import Default from './adminPanel/components/Default';
 
 const router = createBrowserRouter([
     {
@@ -20,6 +21,11 @@ const router = createBrowserRouter([
         element: <AdminPanel />,
         errorElement: <ErrorPage />,
         children: [
+            {
+                path: '/admin',
+                element: <Default />,
+                errorElement: <ErrorPage />
+            },
             {
                 path: '/admin/add-post',
                 element: <AddPost />,
