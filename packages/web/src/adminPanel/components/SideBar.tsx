@@ -1,11 +1,16 @@
-import { LogoutOutlined } from '@ant-design/icons';
+import { LogoutOutlined, MoonFilled, SunFilled } from '@ant-design/icons';
 import '../assets/styles/SideBar.css'
 import { SignOutButton, UserButton } from "@clerk/clerk-react";
-import { Button, Menu, MenuProps } from "antd";
+import { Button, Menu, MenuProps, Switch } from "antd";
 import Sider from "antd/es/layout/Sider";
 import { Link } from 'react-router-dom';
 
-export default function SideBar() {
+interface SideBarProps {
+    isDarkMode: boolean;
+    onToggle: () => void;
+}
+
+export default function SideBar({ isDarkMode, onToggle }: SideBarProps) {
     const adminPageUrl = "/admin";
     
     type MenuItem = Required<MenuProps>['items'][number];
@@ -62,11 +67,7 @@ export default function SideBar() {
         <Sider className='Sider' style={{position: 'fixed'}}>
             <div className="UserProfileContainer">
                 <UserButton afterSignOutUrl={adminPageUrl} />
-                <SignOutButton redirectUrl={adminPageUrl}>
-                    <Button icon={<LogoutOutlined />} type="primary" ghost>
-                        Wyloguj się
-                    </Button>
-                </SignOutButton>
+                <Switch className='ToggleButton' onClick={onToggle} checkedChildren={<MoonFilled />} unCheckedChildren={<SunFilled />} />
             </div>
             <div className="SideNav">
                 <Menu
@@ -74,6 +75,13 @@ export default function SideBar() {
                     mode="inline"
                     items={items}
                 />
+            </div>
+            <div className='SignOutButtonContainer'>
+                <SignOutButton redirectUrl={adminPageUrl}>
+                    <Button icon={<LogoutOutlined />} type="primary" ghost>
+                        Wyloguj się
+                    </Button>
+                </SignOutButton>
             </div>
         </Sider>
     );
