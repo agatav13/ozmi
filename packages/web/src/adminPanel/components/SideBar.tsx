@@ -73,7 +73,6 @@ export default function SideBar() {
                     style={{width: 200}}
                     mode="inline"
                     items={items}
-                    theme="dark"
                 />
             </div>
         </Sider>
