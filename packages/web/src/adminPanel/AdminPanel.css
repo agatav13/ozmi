@@ -40,7 +40,8 @@
 .Header {
     display: flex;
     align-items: center;
-    height: 130px;
+    min-height: 130px;
+    height: auto;
     position: fixed;
     top: 0;
     right: 0;
@@ -52,4 +53,16 @@
 .Content {
     display: flex;
     justify-content: center;
+}
+
+@media (max-width: 659px) {
+    .AdminMainPage {
+        padding-top: 160px;
+    }
+}
+
+@media (max-width: 599px) {
+    .AdminMainPage {
+        padding-top: 200px;
+    }
 }

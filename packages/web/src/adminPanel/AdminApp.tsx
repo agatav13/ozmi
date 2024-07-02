@@ -17,7 +17,7 @@ export default function AdminApp(){
     return (
         <ConfigProvider theme={isDarkMode ? dark : light}>
             <Layout hasSider>
-                <SideBar isDarkMode={isDarkMode} onToggle={handleClick} />
+                <SideBar onToggle={handleClick} />
                 <Layout className="AdminMainPage">
                     <Header className="Header">
                         <Title level={2} style={{color: '#f5f5f5'}}>Ośrodek Zastosowań Matematyki i Informatyki</Title>

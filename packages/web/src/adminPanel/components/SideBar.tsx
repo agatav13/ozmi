@@ -5,12 +5,7 @@ import { Button, Menu, MenuProps, Switch } from "antd";
 import Sider from "antd/es/layout/Sider";
 import { Link } from 'react-router-dom';
 
-interface SideBarProps {
-    isDarkMode: boolean;
-    onToggle: () => void;
-}
-
-export default function SideBar({ isDarkMode, onToggle }: SideBarProps) {
+export default function SideBar({ onToggle }: { onToggle: () => void }) {
     const adminPageUrl = "/admin";
     
     type MenuItem = Required<MenuProps>['items'][number];
