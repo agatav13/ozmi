@@ -1,7 +1,11 @@
+import { Typography } from "antd";
+
 export default function EditPost() {
+    const { Title } = Typography;
+
     return (
         <>
-            <h2>Strona do edytowania postów</h2>
+            <Title level={3}>Strona do edytowania postów</Title>
         </>
     );
 }

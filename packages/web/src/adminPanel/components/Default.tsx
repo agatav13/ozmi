@@ -1,7 +1,11 @@
+import { Typography } from "antd";
+
 export default function Default() {
+    const { Title } = Typography;
+
     return (
         <>
-            <h2>To powinno się wyświetlać po wejściu do panelu</h2>
+            <Title level={3}>To powinno się wyświetlać po wejściu do panelu</Title>
         </>
     );
 }
