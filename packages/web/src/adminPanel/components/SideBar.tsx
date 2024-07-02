@@ -1,3 +1,4 @@
+import { LogoutOutlined } from '@ant-design/icons';
 import '../assets/styles/SideBar.css'
 import { SignOutButton, UserButton } from "@clerk/clerk-react";
 import { Button, Menu, MenuProps } from "antd";
@@ -62,7 +63,7 @@ export default function SideBar() {
             <div className="UserProfileContainer">
                 <UserButton afterSignOutUrl={adminPageUrl} />
                 <SignOutButton redirectUrl={adminPageUrl}>
-                    <Button type="primary" ghost>
+                    <Button icon={<LogoutOutlined />} type="primary" ghost>
                         Wyloguj się
                     </Button>
                 </SignOutButton>

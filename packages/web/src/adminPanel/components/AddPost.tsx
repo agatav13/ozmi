@@ -1,12 +1,14 @@
-import { Button, ConfigProvider, DatePicker, Form, Input, Select, Upload } from "antd";
+import { Button, ConfigProvider, DatePicker, Form, Input, Select, Typography, Upload } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import locale from 'antd/locale/pl_PL';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import 'dayjs/locale/pl';
+import { UploadOutlined } from '@ant-design/icons';
 
 export default function AddPost() {
+    const { Title } = Typography;
     const { Option } = Select;
 
     const dateFormat = 'DD-MM-YYYY'
@@ -20,7 +22,7 @@ export default function AddPost() {
     return (
         <ConfigProvider locale={locale}>
             <Form name="basic" layout="vertical" style={{width: '60%'}}>
-                <h2>Dodaj nowy post</h2>
+                <Title level={3}>Dodaj nowy post</Title>
                 <Form.Item label="Tytuł" name="title" rules={[{ required: true, message: "Pole jest wymagane" }]}>
                     <Input />
                 </Form.Item>
@@ -37,10 +39,8 @@ export default function AddPost() {
                     <TextArea rows={6} />
                 </Form.Item>
                 <Form.Item label="Zdjęcia" name="photos">
-                    <Upload action="" listType="picture-card">
-                        <button style={{ border: 0, background: 'none' }} type="button">
-                            <div style={{ marginTop: 8 }}>Dodaj zdjęcie</div>
-                        </button>
+                    <Upload action="">
+                        <Button icon={<UploadOutlined />}>Dodaj zdjęcie</Button>
                     </Upload>
                 </Form.Item>
                 <Form.Item>
