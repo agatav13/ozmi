@@ -9,17 +9,17 @@ export default function AdminApp(){
 
     return (
         <ConfigProvider theme={theme1}>
-        <Layout hasSider>
-            <SideBar />
-            <Layout className="AdminMainPage">
-                <Header style={{height: 'auto'}}>
-                    <Title level={2}>Ośrodek Zastosowań Matematyki i Informatyki</Title>
-                </Header>
-                <Content style={{display:'flex', justifyContent: 'center'}}>
-                    <Outlet />
-                </Content>
+            <Layout hasSider>
+                <SideBar />
+                <Layout className="AdminMainPage">
+                    <Header className="Header">
+                        <Title level={2}>Ośrodek Zastosowań Matematyki i Informatyki</Title>
+                    </Header>
+                    <Content className="Content">
+                        <Outlet />
+                    </Content>
+                </Layout>
             </Layout>
-        </Layout>
         </ConfigProvider>
     );
 }

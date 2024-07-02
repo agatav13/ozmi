@@ -58,7 +58,7 @@ export default function SideBar() {
     ];
 
     return (
-        <Sider style={{overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 0, bottom: 0}}>
+        <Sider className='Sider' style={{position: 'fixed'}}>
             <div className="UserProfileContainer">
                 <UserButton afterSignOutUrl={adminPageUrl} />
                 <SignOutButton redirectUrl={adminPageUrl}>
@@ -70,7 +70,6 @@ export default function SideBar() {
             <div className="SideNav">
                 <Menu
                     triggerSubMenuAction="click"
-                    style={{width: 200}}
                     mode="inline"
                     items={items}
                 />

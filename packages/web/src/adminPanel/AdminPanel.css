@@ -34,4 +34,22 @@
     min-height: 100vh;
     height: 100%;
     padding-left: 200px;
+    padding-top: 140px;
+}
+
+.Header {
+    display: flex;
+    align-items: center;
+    height: 130px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    padding-left: 250px;
+}
+
+.Content {
+    display: flex;
+    justify-content: center;
 }
