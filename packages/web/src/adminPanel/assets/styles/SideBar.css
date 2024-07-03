@@ -18,11 +18,15 @@
     gap: 20px;
 }
 
+.SideMenu {
+    padding-bottom: 80px;
+}
+
 .SignOutButtonContainer {
     width: 200px;
     display: flex;
     justify-content: center;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     padding-bottom: 30px;
 }
