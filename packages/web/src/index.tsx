@@ -5,9 +5,9 @@ import './index.css'
 import MainPage from './mainPage/MainPage';
 import AdminPanel from './adminPanel/AdminPanel';
 import ErrorPage from './shared/ErrorPage';
-import AddPost from './adminPanel/components/AddPost';
-import EditPost from './adminPanel/components/EditPost';
-import DeletePost from './adminPanel/components/DeletePost';
+import AddPost from './adminPanel/components/News/AddPost';
+import EditPost from './adminPanel/components/News/EditPost';
+import DeletePost from './adminPanel/components/News/DeletePost';
 import Default from './adminPanel/components/Default';
 import AddCaseStudy from './adminPanel/components/CaseStudies/AddCaseStudy';
 import ViewCaseStudy from './adminPanel/components/CaseStudies/ViewCaseStudy';

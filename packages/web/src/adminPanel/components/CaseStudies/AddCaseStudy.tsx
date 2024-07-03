@@ -2,6 +2,7 @@ import { DeleteFilled, UploadOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Typography, Upload } from "antd";
 import { useState } from "react";
 import { CaseStudyElement } from "types";
+import DateInput from "../DateInput";
 
 export default function AddCaseStudy() {
     const { Title } = Typography;
@@ -46,6 +47,7 @@ export default function AddCaseStudy() {
                 <Form.Item label="Tytuł" name="title" rules={[{ required: true, message: "Pole jest wymagane" }]}>
                     <Input />
                 </Form.Item>
+                <DateInput />
 
                 {elements.map(renderElement)}
 
