@@ -19,27 +19,26 @@ const items: MenuItem[] = [
         key: 'sub2',
         label: 'Case studies',
         children: [
-            {key: '4', label: 'Dodaj post'},
-            {key: '5', label: 'Edytuj post'},
-            {key: '6', label: 'Usuń post'}
+            {key: '4', label: <Link to='/admin/add-case-study'>Dodaj post</Link>},
+            {key: '5', label: <Link to='/admin/view-case-study'>Wyświetl posty</Link>},
         ]
     },
     {
         key: 'sub3',
         label: 'Szkoła Modelowania Matematycznego',
         children: [
-            {key: '7', label: 'Dodaj post'},
-            {key: '8', label: 'Edytuj post'},
-            {key: '9', label: 'Usuń post'}
+            {key: '6', label: 'Dodaj post'},
+            {key: '7', label: 'Edytuj post'},
+            {key: '8', label: 'Usuń post'}
         ]
     },
     {
         key: 'sub4',
         label: 'Pracownia Matematyczna',
         children: [
-            {key: '10', label: 'Dodaj post'},
-            {key: '11', label: 'Edytuj post'},
-            {key: '12', label: 'Usuń post'}
+            {key: '9', label: 'Dodaj post'},
+            {key: '10', label: 'Edytuj post'},
+            {key: '11', label: 'Usuń post'}
         ]
     }
 ];

@@ -12,3 +12,8 @@ export interface LevelKeysProps {
     key?: string;
     children?: LevelKeysProps[];
   }
+
+export interface CaseStudyElement {
+    id: number;
+    type: 'text' | 'photo';
+  }

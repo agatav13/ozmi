@@ -9,6 +9,8 @@ import AddPost from './adminPanel/components/AddPost';
 import EditPost from './adminPanel/components/EditPost';
 import DeletePost from './adminPanel/components/DeletePost';
 import Default from './adminPanel/components/Default';
+import AddCaseStudy from './adminPanel/components/CaseStudies/AddCaseStudy';
+import ViewCaseStudy from './adminPanel/components/CaseStudies/ViewCaseStudy';
 
 const router = createBrowserRouter([
     {
@@ -39,6 +41,16 @@ const router = createBrowserRouter([
             {
                 path: '/admin/delete-post',
                 element: <DeletePost />,
+                errorElement: <ErrorPage />
+            },
+            {
+                path: '/admin/add-case-study',
+                element: <AddCaseStudy />,
+                errorElement: <ErrorPage />
+            },
+            {
+                path: '/admin/view-case-study',
+                element: <ViewCaseStudy />,
                 errorElement: <ErrorPage />
             }
         ]

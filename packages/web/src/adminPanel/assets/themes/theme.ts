@@ -30,8 +30,8 @@ export const dark = {
         colorInfo: '#7091E6',
         colorLink: '#7091E6',
         colorBgLayout: '#232936',  // kolor tła
-        colorBgContainer: '#f5f5f5',  // kolor, który jest w input itp
-        colorBgElevated: '#f5f5f5'  // kolor, który jest po rozwinięciu kategorii lub wyboru daty
+        colorBgContainer: '#e6e6e6',  // kolor, który jest w input itp
+        colorBgElevated: '#e6e6e6'  // kolor, który jest po rozwinięciu kategorii lub wyboru daty
     },
     components: {
         Layout: {
@@ -50,10 +50,10 @@ export const dark = {
             itemSelectedColor: '#EDE8F5'
         },
         Typography: {
-            colorTextHeading: '#f5f5f5',  // kolor nagłówka
+            colorTextHeading: '#e6e6e6',  // kolor nagłówka
         },
         Form: {
-            labelColor: '#f5f5f5'  // kolor tytułów w form
+            labelColor: '#e6e6e6'  // kolor tytułów w form
         }
     }
 };
