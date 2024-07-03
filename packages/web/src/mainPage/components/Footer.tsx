@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-        <div className="footer">
+        <div className="Footer">
             <img src="/ozmi-logo.png" alt="Logo Ośrodka Zastosowań Matematyki i Informatyki" />
             <p>
                 <b>Adres</b><br />

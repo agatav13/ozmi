@@ -1,8 +1,8 @@
 import React, { StrictMode } from 'react';
-import './App.css'
+import './assets/MainPage.css'
 import Footer from './components/Footer';
 
-export default function App() {  
+export default function MainPage() {  
     return (
         <StrictMode>
             <Footer />
