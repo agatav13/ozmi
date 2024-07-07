@@ -1,0 +1,156 @@
+body {
+    background: linear-gradient(#d9d9d9 calc(100% - 360px), #737373);
+    font-family: 'Times New Roman', Times, serif;
+    
+}
+
+.grid-container {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 150px repeat(5, auto) 280px;
+    padding: 0 14vw;
+}
+
+.grid-container a {
+    text-decoration: none;
+    color: black;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+.header-main {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-main img {
+    height: 90px;
+}
+
+.header-nav {
+    font-family: Helvetica, sans-serif;
+    display: flex;
+    gap: 5vw;
+    margin-left: 40px;
+}
+
+.about-us {
+    grid-column: 1;
+    grid-row: 2;
+    font-weight: bold;
+}
+
+.about-us h1 {
+    margin: 0;
+    font-size: 3em;
+}
+
+.about-us h2 {
+    font-size: 1.6em;
+}
+
+.about-us p:first-of-type {
+    text-align: justify;
+}
+
+.news-tiles {
+    aspect-ratio: 2/1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    gap: 10px;
+}
+
+.tile {
+    border-radius: 10px;
+    background-color: #5E617B;
+    height: 100%;
+    width: 100%;
+}
+
+.education {
+    grid-column: 1;
+    grid-row: 4;
+}
+
+.education-tiles {
+    aspect-ratio: 1/1;
+}
+
+.education-row-1 {
+    display: flex;
+    aspect-ratio: 2/1;
+}
+
+.education-tile-1 {
+    background: linear-gradient(#857979, #1f1c1c);
+    aspect-ratio: 1/1;
+}
+
+.education-tile-2 {
+    background: linear-gradient(#ffffff, #857979);
+    aspect-ratio: 1/1;
+}
+
+.education-tile-3 {
+    background: linear-gradient(#64647a, #1f1c1c);
+    aspect-ratio: 2/1;
+}
+
+.partners {
+    grid-column: 1;
+    grid-row: 5;
+}
+
+.case-studies {
+    grid-column: 1;
+    grid-row: 6;
+}
+
+.case-study {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.case-study img {
+    height: 26px;
+}
+
+.case-study h3 {
+    font-size: 1.2em;
+}
+
+.footer {
+    grid-column: 1;
+    grid-row: 7;
+    display: flex;
+    gap: 4vw;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.footer img {
+    height: 160px;
+}
+
+@media only screen and (orientation: portrait) {
+    .grid-container {
+        padding: 0 4vw;
+    }
+}
