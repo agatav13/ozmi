@@ -5,7 +5,12 @@ export default function App() {
   return (
     <>
       <SignedOut>
-        <SignInButton />
+        <div className="SignedOutContainer">
+          <SignInButton>
+            <button className="SignInButton">Zaloguj się</button>
+          </SignInButton>
+          <a className='MainPageLink' href="">Strona główna</a>
+        </div>
       </SignedOut>
       <SignedIn>
         <UserButton />
