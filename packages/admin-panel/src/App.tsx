@@ -1,5 +1,6 @@
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
 import './App.css';
+import Header from './components/Header';
 
 export default function App() {
   return (
@@ -13,7 +14,9 @@ export default function App() {
         </div>
       </SignedOut>
       <SignedIn>
-        <UserButton />
+        <div className='SignedInContainer'>
+          <Header />
+        </div>
       </SignedIn>
     </>
   );

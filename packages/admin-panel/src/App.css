@@ -31,3 +31,7 @@
 .MainPageLink:hover {
     color: #6a6a6a;
 }
+
+.SignedInContainer {
+    margin: 0 10vw;
+}
