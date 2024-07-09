@@ -45,6 +45,10 @@
     height: 40px;
 }
 
+.cl-internal-gpirto {
+    display: none;
+}
+
 .cl-userButtonPopoverCard {
     font-family: "Roboto", sans-serif;
     background-color: #dfdfdf;

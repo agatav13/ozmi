@@ -1,0 +1,18 @@
+.DefaultContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10vw 0;
+}
+
+.DefaultContainer p {
+    font-family: "Playfair Display", serif;
+    font-size: 1.1em;
+    color: rgba(0, 0, 0, 0.6);
+    margin: 0;
+}
+
+.SectionTitle {
+    font-family: "Playfair Display", serif;
+    font-size: 1.6em;
+}
