@@ -1,18 +1,10 @@
-version: "3"
+version: "3.8"
 
 services:
-  postgres: 
-    container_name: postgres
+  db: 
+    container_name: db-postgres
     image: postgres:latest
     ports: 
-    - "8080:8080"
-    volumes:
-    - /data:/data
+    - "5432:5432"
     env_file:
     - docker.env
-    networks:
-    - postgres
- 
-networks:
-  postgres:
-    driver: bridge
