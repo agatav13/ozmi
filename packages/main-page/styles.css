@@ -1,19 +1,33 @@
 * {
     box-sizing: border-box;
+    scrollbar-width: auto;
+    scrollbar-color: #b7b4b4 #d9d9d9;
+}
+
+*::-webkit-scrollbar {
+    width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #d9d9d9;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #b7b4b4;
 }
 
 body {
-    background: linear-gradient(#d9d9d9 calc(100% - 360px), #737373);
-    font-family: 'Times New Roman', Times, serif;
+    background: linear-gradient(#d9d9d9 calc(100% - 400px), #737373);
+    font-family: "Playfair Display", serif;
     
 }
 
 .grid-container {
     display: grid;
     height: 100%;
-    grid-template-columns: 1fr;
-    grid-template-rows: 150px repeat(5, auto) 280px;
-    padding: 0 14vw;
+    width: 90vw;
+    max-width: 1000px;
+    margin: auto;
 }
 
 .grid-container a {
@@ -29,13 +43,20 @@ body {
     text-align: center;
 }
 
+.text-shadow-link {
+    transition-duration: 0.3s;
+}
+
+.text-shadow-link:hover {
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+}
+
 h2 {
     font-size: 2em;
 }
 
 .header-main {
-    grid-column: 1;
-    grid-row: 1;
+    height: 150px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -46,16 +67,10 @@ h2 {
 }
 
 .header-nav {
-    font-family: Helvetica, sans-serif;
+    font-family: "Roboto", sans-serif;
     display: flex;
     gap: 5vw;
     margin-left: 40px;
-}
-
-.about-us {
-    grid-column: 1;
-    grid-row: 2;
-    font-weight: bold;
 }
 
 .about-us h1 {
@@ -68,6 +83,7 @@ h2 {
 }
 
 .about-us p:first-of-type {
+    font-weight: bold;
     text-align: justify;
 }
 
@@ -85,11 +101,6 @@ h2 {
     background-color: #5E617B;
     height: 100%;
     width: 100%;
-}
-
-.education {
-    grid-column: 1;
-    grid-row: 4;
 }
 
 .education-tiles {
@@ -116,16 +127,6 @@ h2 {
     aspect-ratio: 2/1;
 }
 
-.partners {
-    grid-column: 1;
-    grid-row: 5;
-}
-
-.case-studies {
-    grid-column: 1;
-    grid-row: 6;
-}
-
 .case-study {
     display: flex;
     align-items: center;
@@ -134,27 +135,25 @@ h2 {
 
 .case-study img {
     height: 26px;
+    width: 26px;
 }
 
 .case-study h3 {
-    font-size: 1.2em;
+    font-size: 1.4em;
 }
 
 .footer {
-    grid-column: 1;
-    grid-row: 7;
     display: flex;
     gap: 4vw;
     padding-top: 60px;
-    padding-bottom: 60px;
+    padding-bottom: 40px;
 }
 
 .footer img {
     height: 160px;
 }
 
-@media only screen and (orientation: portrait) {
-    .grid-container {
-        padding: 0 4vw;
-    }
+.footer p {
+    overflow: hidden;
+    overflow-wrap: break-word;
 }
