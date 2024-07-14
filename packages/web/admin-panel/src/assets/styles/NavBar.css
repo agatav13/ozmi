@@ -1,0 +1,30 @@
+.NavBarButtonsContainer {
+  padding: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px 40px;
+}
+
+.NavBarButton {
+  background-color: transparent;
+  border: 2px solid black;
+  border-radius: 6px;
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  font-size: 18px;
+  height: 60px;
+  width: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.NavBarButton:hover {
+  background-color: #b7b4b4;
+  box-shadow: 8px 8px 24px -8px rgba(0, 0, 0, 0.5)
+}

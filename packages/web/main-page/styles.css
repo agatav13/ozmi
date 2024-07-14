@@ -1,0 +1,159 @@
+* {
+  box-sizing: border-box;
+  scrollbar-width: auto;
+  scrollbar-color: #b7b4b4 #d9d9d9;
+}
+
+*::-webkit-scrollbar {
+  width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #d9d9d9;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #b7b4b4;
+}
+
+body {
+  background: linear-gradient(#d9d9d9 calc(100% - 400px), #737373);
+  font-family: "Playfair Display", serif;
+    
+}
+
+.grid-container {
+  display: grid;
+  height: 100%;
+  width: 90vw;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.grid-container a {
+  text-decoration: none;
+  color: black;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.text-shadow-link {
+  transition-duration: 0.3s;
+}
+
+.text-shadow-link:hover {
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+h2 {
+  font-size: 2em;
+}
+
+.header-main {
+  height: 150px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-main img {
+  height: 90px;
+}
+
+.header-nav {
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  gap: 5vw;
+  margin-left: 40px;
+}
+
+.about-us h1 {
+  margin: 0;
+  font-size: 3em;
+}
+
+.about-us h2 {
+  font-size: 1.6em;
+}
+
+.about-us p:first-of-type {
+  font-weight: bold;
+  text-align: justify;
+}
+
+.news-tiles {
+  aspect-ratio: 2/1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  gap: 10px;
+}
+
+.tile {
+  border-radius: 10px;
+  background-color: #5E617B;
+  height: 100%;
+  width: 100%;
+}
+
+.education-tiles {
+  aspect-ratio: 1/1;
+}
+
+.education-row-1 {
+  display: flex;
+  aspect-ratio: 2/1;
+}
+
+.education-tile-1 {
+  background: linear-gradient(#857979, #1f1c1c);
+  aspect-ratio: 1/1;
+}
+
+.education-tile-2 {
+  background: linear-gradient(#ffffff, #857979);
+  aspect-ratio: 1/1;
+}
+
+.education-tile-3 {
+  background: linear-gradient(#64647a, #1f1c1c);
+  aspect-ratio: 2/1;
+}
+
+.case-study {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.case-study img {
+  height: 26px;
+  width: 26px;
+}
+
+.case-study h3 {
+  font-size: 1.4em;
+}
+
+.footer {
+  display: flex;
+  gap: 4vw;
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
+.footer img {
+  height: 160px;
+}
+
+.footer p {
+  overflow: hidden;
+  overflow-wrap: break-word;
+}

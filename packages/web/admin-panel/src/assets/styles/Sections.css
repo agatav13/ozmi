@@ -1,0 +1,99 @@
+.DefaultContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10vw 0;
+}
+
+.DefaultContainer p {
+  font-family: "Playfair Display", serif;
+  font-size: 1.1em;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0;
+}
+
+.SectionTitle {
+  font-family: "Playfair Display", serif;
+  font-size: 1.6em;
+}
+
+.AddNewButton {
+  background-color: #111111;
+  color: #d9d9d9;
+  font-family: "Roboto", sans-serif;
+  border-radius: 6px;
+  border: 2px solid #111111;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+.AddNewButton:hover {
+  background-color: #d9d9d9;
+  color: #111111;
+}
+
+.AddNewButton:active {
+  transform: translateY(1px);
+}
+
+.FormTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 20px;
+}
+
+.FormTitle p {
+  font-family: "Playfair Display", serif;
+  font-size: 1.2em;
+  margin: 0;
+}
+
+.DiscardButton {
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.DiscardButton svg {
+  width: 24px;
+	height: 24px;
+  color: rgb(170, 16, 16);
+}
+
+.NewsForm {
+  display: grid;
+}
+
+.NewsForm label {
+  font-family: "Playfair Display", serif;
+	font-weight: 600;
+  padding-top: 14px;
+  padding-bottom: 4px;
+}
+
+input[type=text], input[type=submit], select, textarea {
+  font-family: "Roboto", sans-serif;
+  background-color: #dfdfdf;
+  border: 2px solid black;
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+
+textarea {
+  max-width: 70vw;
+  min-width: 70vw;
+  min-height: 60px;
+  max-height: 600px;
+}
+
+input[type=submit] {
+  margin-top: 20px;
+}

@@ -1,0 +1,95 @@
+.Header {
+  background-color: transparent;
+  font-family: "Playfair Display", serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 40px;
+  padding-top: 25px;
+}
+
+.HeaderText h1 {
+  font-size: 2.4em;
+  margin-top: 0;
+  margin-bottom: 0.2em;
+}
+
+.HeaderText h2 {
+  font-size: 1.8em;
+  margin-top: 0;
+}
+
+.HeaderButtons {
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.HomeButton {
+  background-color: transparent;
+  height: 50px;
+  width: 50px;
+  text-decoration: none;
+  color: black;
+}
+
+.HomeButton svg {
+  width: 50px;
+  height: 50px;
+}
+
+.cl-avatarBox {
+  width: 40px;
+  height: 40px;
+}
+
+.cl-internal-gpirto {
+  display: none;
+}
+
+.cl-userButtonPopoverCard {
+  font-family: "Roboto", sans-serif;
+  background-color: #dfdfdf;
+  border: none;
+  border-radius: 10px;
+}
+
+.cl-userButtonPopoverMain {
+  background-color: transparent;
+}
+
+.cl-userPreviewTextContainer {
+  color: black;
+}
+
+.cl-userButtonPopoverActionButton {
+  color: black;
+}
+
+.cl-userButtonPopoverActionButton:hover {
+  color: black;
+}
+
+.cl-userButtonPopoverFooter {
+  display: none;
+}
+
+.cl-navbar {
+  background: #d9d9d9;
+  font-family: "Roboto", sans-serif;
+}
+
+.cl-internal-lqfubk {
+  display: none;
+}
+
+.cl-pageScrollBox {
+  background-color: #f5f5f5;
+  font-family: "Roboto", sans-serif;
+}
+
+.cl-menuItem {
+  font-family: "Roboto", sans-serif;
+}
