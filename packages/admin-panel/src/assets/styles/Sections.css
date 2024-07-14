@@ -34,12 +34,10 @@
 .AddNewButton:hover {
     background-color: #d9d9d9;
     color: #111111;
-    box-shadow: 4px 4px #b7b4b4;
 }
 
 .AddNewButton:active {
-    box-shadow: 3px 3px #a7a4a4;
-    transform: translateY(2px);
+    transform: translateY(1px);
 }
 
 .FormTitle {
@@ -86,7 +84,13 @@ input[type=text], input[type=submit], select, textarea {
     background-color: #dfdfdf;
     border: 2px solid black;
     border-radius: 6px;
-    padding: 6px 12px;
+    padding: 8px 12px;
+}
+
+textarea {
+    max-width: 70vw;
+    min-width: 70vw;
+    min-height: 60px;
 }
 
 input[type=submit] {

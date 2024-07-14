@@ -31,7 +31,9 @@ export default function NewsSection() {
                         </select>
 
                         <label htmlFor="content">Treść</label>
-                        <textarea name="content" id="content"></textarea>
+                        <textarea name="content" id="content" rows={10}></textarea>
+
+                        <label htmlFor="photos">Zdjęcia</label>
 
                         <input type="submit" value="Dodaj" />
                     </form>

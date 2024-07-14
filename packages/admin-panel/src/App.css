@@ -33,5 +33,6 @@
 }
 
 .SignedInContainer {
-    margin: 0 15vw;
+    width: 70vw;
+    margin: auto;
 }
