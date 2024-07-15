@@ -9,10 +9,11 @@
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.2.7",
+    "antd": "^5.19.1",
+    "dayjs": "^1.11.11",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-icons": "^5.2.1",
-    "react-router-dom": "^6.24.0"
+    "react-icons": "^5.2.1"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

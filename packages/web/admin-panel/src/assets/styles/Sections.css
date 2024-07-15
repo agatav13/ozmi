@@ -79,12 +79,22 @@
   padding-bottom: 4px;
 }
 
-input[type=text], input[type=submit], select, textarea {
+input[type=text], .ant-picker, input[type=submit], select, textarea {
   font-family: "Roboto", sans-serif;
   background-color: #dfdfdf;
   border: 2px solid black;
   border-radius: 6px;
   padding: 8px 12px;
+  transition-duration: 0.3s;
+}
+
+input[type=text]:hover, .ant-picker:hover, input[type=submit]:hover, select:hover, textarea:hover, .ant-upload-wrapper:hover,
+input[type=text]:focus, .ant-picker:focus, input[type=submit]:focus, select:focus, textarea:focus {
+  background-color: #e6e6e6;
+}
+
+.ant-picker:hover, .ant-picker:focus {
+  border: 2px solid black;
 }
 
 textarea {
@@ -92,6 +102,21 @@ textarea {
   min-width: 70vw;
   min-height: 60px;
   max-height: 600px;
+}
+
+.ant-upload p {
+  font-family: "Roboto", sans-serif;
+}
+
+.ant-upload-wrapper .ant-upload-drag {
+  border: none;
+}
+
+.ant-upload-wrapper {
+  background-color: #dfdfdf;
+  border: 2px dashed black;
+  border-radius: 6px;
+  transition-duration: 0.3s;
 }
 
 input[type=submit] {

@@ -2,9 +2,13 @@ import { PiPlusBold } from "react-icons/pi";
 import { CgClose } from "react-icons/cg";
 import FetchData from "../../FetchData";
 import { useState } from "react";
+import DateInput from "../../reusable/DateInput";
+import { Upload } from "antd/lib";
 
 export default function NewsSection() {
   const [showForm, setShowForm] = useState(false);
+
+  const { Dragger } = Upload;
 
   return (
     <>
@@ -23,17 +27,22 @@ export default function NewsSection() {
             <input type="text" name="title" id="title" />
 
             <label htmlFor="date">Data</label>
+            <DateInput />
 
             <label htmlFor="category">Kategoria</label>
           	<select name="category" id="category">
               <option value="szkola-modelowania-matematycznego">Szkoła Modelowania Matematycznego</option>
               <option value="wspolpraca">Współpraca</option>
+              <option value="inne"><p>Inne</p></option>
             </select>
 
             <label htmlFor="content">Treść</label>
             <textarea name="content" id="content" rows={10}></textarea>
 
             <label htmlFor="photos">Zdjęcia</label>
+            <Dragger name="photos" id="photos">
+              <p>Przeciągnij lub wybierz zdjęcia</p>
+            </Dragger>
 
             <input type="submit" value="Dodaj" />
           </form>
