@@ -13,6 +13,7 @@
     "dayjs": "^1.11.11",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-dropzone": "^14.2.3",
     "react-icons": "^5.2.1"
   },
   "devDependencies": {

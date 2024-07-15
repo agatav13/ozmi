@@ -3,12 +3,10 @@ import { CgClose } from "react-icons/cg";
 import FetchData from "../../FetchData";
 import { useState } from "react";
 import DateInput from "../../reusable/DateInput";
-import { Upload } from "antd/lib";
+import DropFiles from "./DropFiles";
 
 export default function NewsSection() {
   const [showForm, setShowForm] = useState(false);
-
-  const { Dragger } = Upload;
 
   return (
     <>
@@ -40,11 +38,9 @@ export default function NewsSection() {
             <textarea name="content" id="content" rows={10}></textarea>
 
             <label htmlFor="photos">Zdjęcia</label>
-            <Dragger name="photos" id="photos">
-              <p>Przeciągnij lub wybierz zdjęcia</p>
-            </Dragger>
+            <DropFiles />
 
-            <input type="submit" value="Dodaj" />
+            <input className="AddNewButton" type="submit" value="Dodaj" />
           </form>
         </>
       )}

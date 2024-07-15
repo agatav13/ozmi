@@ -79,7 +79,7 @@
   padding-bottom: 4px;
 }
 
-input[type=text], .ant-picker, input[type=submit], select, textarea {
+input[type=text], .ant-picker, select, textarea {
   font-family: "Roboto", sans-serif;
   background-color: #dfdfdf;
   border: 2px solid black;
@@ -88,8 +88,8 @@ input[type=text], .ant-picker, input[type=submit], select, textarea {
   transition-duration: 0.3s;
 }
 
-input[type=text]:hover, .ant-picker:hover, input[type=submit]:hover, select:hover, textarea:hover, .ant-upload-wrapper:hover,
-input[type=text]:focus, .ant-picker:focus, input[type=submit]:focus, select:focus, textarea:focus {
+input[type=text]:hover, .ant-picker:hover, select:hover, textarea:hover, .dropzone-container:hover,
+input[type=text]:focus, .ant-picker:focus, select:focus, textarea:focus {
   background-color: #e6e6e6;
 }
 
@@ -104,21 +104,48 @@ textarea {
   max-height: 600px;
 }
 
-.ant-upload p {
-  font-family: "Roboto", sans-serif;
+select, input[type=submit] {
+  cursor: pointer;
 }
 
-.ant-upload-wrapper .ant-upload-drag {
-  border: none;
-}
-
-.ant-upload-wrapper {
+.DropzoneContainer {
   background-color: #dfdfdf;
   border: 2px dashed black;
   border-radius: 6px;
-  transition-duration: 0.3s;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
 }
 
-input[type=submit] {
-  margin-top: 20px;
+.PreviewContainer {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.ImagePreview {
+  position: relative;
+  margin: 6px;
+}
+
+.PreviewImage {
+  height: 100px;
+  object-fit: cover;
+  border-radius: 3px;
+}
+
+.DeleteButton {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background-color: rgb(200, 0, 0);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  cursor: pointer;
 }
