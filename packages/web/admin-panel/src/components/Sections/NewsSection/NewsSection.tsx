@@ -2,8 +2,7 @@ import { PiPlusBold } from "react-icons/pi";
 import { CgClose } from "react-icons/cg";
 import FetchData from "../../FetchData";
 import { useState } from "react";
-import DateInput from "../../reusable/DateInput";
-import DropFiles from "./DropFiles";
+import NewsForm from "./NewsForm";
 
 export default function NewsSection() {
   const [showForm, setShowForm] = useState(false);
@@ -20,28 +19,7 @@ export default function NewsSection() {
           	<button type="button" className="DiscardButton" onClick={() => setShowForm(false)}><CgClose /></button>
               <p><b>Dodaj nową aktualność:</b></p>
           </div>
-          <form className="NewsForm" action="">
-            <label htmlFor="title">Tytuł</label>
-            <input type="text" name="title" id="title" />
-
-            <label htmlFor="date">Data</label>
-            <DateInput />
-
-            <label htmlFor="category">Kategoria</label>
-          	<select name="category" id="category">
-              <option value="szkola-modelowania-matematycznego">Szkoła Modelowania Matematycznego</option>
-              <option value="wspolpraca">Współpraca</option>
-              <option value="inne"><p>Inne</p></option>
-            </select>
-
-            <label htmlFor="content">Treść</label>
-            <textarea name="content" id="content" rows={10}></textarea>
-
-            <label htmlFor="photos">Zdjęcia</label>
-            <DropFiles />
-
-            <input className="AddNewButton" type="submit" value="Dodaj" />
-          </form>
+          <NewsForm updateShowForm={setShowForm} />
         </>
       )}
       <p>Tu się posty wyświetlać będą:</p>

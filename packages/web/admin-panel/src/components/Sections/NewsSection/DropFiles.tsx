@@ -37,7 +37,7 @@ export default function DropFiles() {
   return (
     <div>
       <div {...getRootProps()} className="DropzoneContainer">
-        <input {...getInputProps()} />
+        <input {...getInputProps()} name="photos" id="photos" />
         {isDragActive ? (
           <p>Upuść zdjęcie tutaj...</p>
         ) : (

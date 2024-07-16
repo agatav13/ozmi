@@ -46,10 +46,20 @@ app.get('/workspaces', (_, response) => {
   response.json({ data: workspaces })
 });
 
-app.post('/data', (req, res) => {
-  const title = req.body.title;
-  const content = req.body.content
-  res.send(`Tytuł: ${title} Treść: ${content}`)
+app.post('/news-posts', (req, res) => {
+  const { title, category, content } = req.body;
+
+  if (!title || !category || !content) {
+    return res.status(400).json({ error: 'Wszystkie pola nie są wypełnione' });
+  }
+
+  // Zapisać dane do bazy danych
+  console.log('Nowy post:', { title, category, content });
+
+  res.status(201).json({
+    message: 'Post utworzony',
+    post: { title, category, content }
+  });
 });
 
 app.listen(port, () => console.log(`Listening on http://localhost:${port}`));
