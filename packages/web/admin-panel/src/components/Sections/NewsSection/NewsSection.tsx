@@ -1,11 +1,18 @@
 import { PiPlusBold } from "react-icons/pi";
 import { CgClose } from "react-icons/cg";
-import FetchData from "../../FetchData";
+import FetchNews from "./FetchNews";
 import { useState } from "react";
-import NewsForm from "./NewsForm";
+import FormNews from "./FormNews";
+import { FormDataTypeWithId } from "types";
 
 export default function NewsSection() {
   const [showForm, setShowForm] = useState(false);
+  const [posts, setPosts] = useState<FormDataTypeWithId[]>([]);
+
+  // nowe posty wyświetlają się bez odświeżania
+  const handlePostAdded = (newPost: FormDataTypeWithId) => {
+    setPosts(prevPosts => [...prevPosts, newPost]);
+  };
 
   return (
     <>
@@ -19,11 +26,11 @@ export default function NewsSection() {
           	<button type="button" className="DiscardButton" onClick={() => setShowForm(false)}><CgClose /></button>
               <p><b>Dodaj nową aktualność:</b></p>
           </div>
-          <NewsForm updateShowForm={setShowForm} />
+          <FormNews updateShowForm={setShowForm} onPostAdded={handlePostAdded} />
         </>
       )}
       <p>Tu się posty wyświetlać będą:</p>
-      <FetchData />
+      <FetchNews posts={posts} setPosts={setPosts} />
     </>
   );
 }

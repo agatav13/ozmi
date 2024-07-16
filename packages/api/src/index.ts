@@ -3,7 +3,7 @@ import express from 'express';
 import { Pool } from 'pg';
 require('dotenv').config({ path: '../../.env' });
 
-import { Workspace } from 'types';
+import { FormDataTypeWithId } from 'types';
 
 const app = express();
 const port = 5000;
@@ -37,14 +37,7 @@ app.get('/test-db', async (req, res) => {
   }
 });
 
-app.get('/workspaces', (_, response) => {
-  const workspaces: Workspace[] = [
-    { name: 'api', version: '1.0.0' },
-    { name: 'types', version: '1.0.0' },
-    { name: 'web', version: '1.0.0' },
-  ];
-  response.json({ data: workspaces })
-});
+const posts: FormDataTypeWithId[] = [];  // zastąpic na baze danych
 
 app.post('/news-posts', (req, res) => {
   const { title, category, content } = req.body;
@@ -53,13 +46,25 @@ app.post('/news-posts', (req, res) => {
     return res.status(400).json({ error: 'Wszystkie pola nie są wypełnione' });
   }
 
+  const newPost: FormDataTypeWithId = {
+    id: posts.length + 1,
+    title,
+    category,
+    content
+  };
+
   // Zapisać dane do bazy danych
-  console.log('Nowy post:', { title, category, content });
+  console.log('Nowy post:', newPost);
+  posts.push(newPost);
 
   res.status(201).json({
     message: 'Post utworzony',
-    post: { title, category, content }
+    post: newPost
   });
 });
+
+app.get('/news-posts', (req, res) => {
+  res.json(posts);
+})
 
 app.listen(port, () => console.log(`Listening on http://localhost:${port}`));

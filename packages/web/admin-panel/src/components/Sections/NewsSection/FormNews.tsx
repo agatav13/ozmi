@@ -1,11 +1,17 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import DateInput from "../../reusable/DateInput";
 import DropFiles from "./DropFiles";
-import { FormDataType } from "types";
+import { FormDataTypeWithId, FormDataType } from "types";
 
-export default function NewsForm({ updateShowForm }: { updateShowForm: Dispatch<SetStateAction<boolean>> }) {
+interface NewsFormProps {
+  updateShowForm: React.Dispatch<React.SetStateAction<boolean>>;
+  onPostAdded: (newPost: FormDataTypeWithId) => void;
+}
+
+export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps) {
   type HTMLElementEvent = React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLTextAreaElement>
 
+  // tworzy początkową wersję postu
   const formData: FormDataType = {
     title: "",
     category: "",
@@ -14,6 +20,7 @@ export default function NewsForm({ updateShowForm }: { updateShowForm: Dispatch<
 
   const [responseBody, setResponseBody] = useState<FormDataType>(formData);
 
+  // aktualizuje zawartość pól w poście (zmienia reponseBody)
   const inputChangeHandler = (event: HTMLElementEvent) => {
     const {name, value} = event.target
     setResponseBody({...responseBody, [name]: value})
@@ -35,9 +42,9 @@ export default function NewsForm({ updateShowForm }: { updateShowForm: Dispatch<
       }
 
       const result = await response.json();
-      console.log("Response:", result);
-      setResponseBody(formData);
-      updateShowForm(false);
+      onPostAdded(result.post); // żeby po dodaniu nowego postu wyświetlał się bez odświeżania
+      setResponseBody(formData);  // ustawia wartości, które były w poście jako reponseBody
+      updateShowForm(false);  // ukrywa element dodawania postu po dodaniu
     } catch (error) {
       console.error("Error:", error);
     }
@@ -66,7 +73,6 @@ export default function NewsForm({ updateShowForm }: { updateShowForm: Dispatch<
       {/* <DropFiles /> */}
 
       <input className="AddNewButton" type="submit" value="Dodaj" />
-      {/* <button className="AddNewButton" type="submit">Dodaj</button> */}
     </form>
   );
 }
