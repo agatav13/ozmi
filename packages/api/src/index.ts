@@ -3,8 +3,6 @@ import express from 'express';
 import { Pool } from 'pg';
 require('dotenv').config({ path: '../../.env' });
 
-import { FormDataTypeWithId } from 'types';
-
 const app = express();
 const port = 5000;
 
@@ -22,7 +20,16 @@ app.use(cors({ origin: `http://localhost:3000` }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// postgres
+pool.query(`
+  CREATE TABLE IF NOT EXISTS news_posts (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(1000),
+    category ENUM('szkola-modelowania-matematycznego', 'wspolpraca', 'inne'),
+    content TEXT
+  )
+`);
+
+// postgres, testowanie czy jest podłączony
 app.get('/test-db', async (req, res) => {
   try {
     const result = await pool.query('SELECT NOW()');
@@ -37,34 +44,30 @@ app.get('/test-db', async (req, res) => {
   }
 });
 
-const posts: FormDataTypeWithId[] = [];  // zastąpic na baze danych
-
-app.post('/news-posts', (req, res) => {
+// zapisywanie danych z postu do bazy danych
+app.post('/news-posts', async (req, res) => {  
   const { title, category, content } = req.body;
 
   if (!title || !category || !content) {
     return res.status(400).json({ error: 'Wszystkie pola nie są wypełnione' });
   }
 
-  const newPost: FormDataTypeWithId = {
-    id: posts.length + 1,
-    title,
-    category,
-    content
-  };
+  const query = 'INSERT INTO news_posts (title, category, content) VALUES ($1, $2, $3) RETURNING id';
+  const values = [title, category, content];
+  const result = await pool.query(query, values);
 
-  // Zapisać dane do bazy danych
-  console.log('Nowy post:', newPost);
-  posts.push(newPost);
-
+  console.log('Nowy post:', title, category, content);
+    
   res.status(201).json({
-    message: 'Post utworzony',
-    post: newPost
-  });
+    message: 'Post zapisany',
+    id: result.rows[0].id
+  })
 });
 
-app.get('/news-posts', (req, res) => {
-  res.json(posts);
+// żeby posty były wyświetlane na stronie
+app.get('/news-posts', async (req, res) => {
+  const result = await pool.query('SELECT * FROM news_posts ORDER BY id DESC');
+  res.json(result.rows);
 })
 
 app.listen(port, () => console.log(`Listening on http://localhost:${port}`));

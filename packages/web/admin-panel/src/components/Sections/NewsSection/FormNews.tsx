@@ -26,9 +26,8 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
     setResponseBody({...responseBody, [name]: value})
   };
 
-  const onSubmitHandler =  async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    console.log(responseBody)
+  const handleSubmit =  async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
     try {
       const response = await fetch("http://localhost:5000/news-posts", {
@@ -42,7 +41,7 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
       }
 
       const result = await response.json();
-      onPostAdded(result.post); // żeby po dodaniu nowego postu wyświetlał się bez odświeżania
+      onPostAdded({ ...responseBody, id: result.id }); // żeby po dodaniu nowego postu wyświetlał się bez odświeżania
       setResponseBody(formData);  // ustawia wartości, które były w poście jako reponseBody
       updateShowForm(false);  // ukrywa element dodawania postu po dodaniu
     } catch (error) {
@@ -51,15 +50,15 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
   }
 
   return (
-    <form className="NewsForm" onSubmit={onSubmitHandler}>  {/* action="/news-posts" method="post" */}
+    <form className="NewsForm" onSubmit={handleSubmit}>
       <label htmlFor="title">Tytuł</label>
-      <input type="text" name="title" id="title" onChange={(e)=>inputChangeHandler(e)} value={responseBody.title} />
+      <input type="text" name="title" id="title" required onChange={(e)=>inputChangeHandler(e)} value={responseBody.title} />
 
       <label htmlFor="date">Data</label>
       {/* <DateInput /> */}
 
       <label htmlFor="category">Kategoria</label>
-      <select name="category" id="category" onChange={(e)=>inputChangeHandler(e)} value={responseBody.category}>
+      <select name="category" id="category" required onChange={(e)=>inputChangeHandler(e)} value={responseBody.category}>
         <option value="" disabled selected>Wybierz kategorię</option>
         <option value="szkola-modelowania-matematycznego">Szkoła Modelowania Matematycznego</option>
         <option value="wspolpraca">Współpraca</option>
@@ -67,7 +66,7 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
       </select>
 
       <label htmlFor="content">Treść</label>
-      <textarea name="content" id="content" rows={10} onChange={(e)=>inputChangeHandler(e)} value={responseBody.content}></textarea>
+      <textarea name="content" id="content" required rows={10} onChange={(e)=>inputChangeHandler(e)} value={responseBody.content}></textarea>
 
       <label htmlFor="photos">Zdjęcia</label>
       {/* <DropFiles /> */}

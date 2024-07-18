@@ -11,7 +11,7 @@ export default function NewsSection() {
 
   // nowe posty wyświetlają się bez odświeżania
   const handlePostAdded = (newPost: FormDataTypeWithId) => {
-    setPosts(prevPosts => [...prevPosts, newPost]);
+    setPosts(prevPosts => [newPost, ...prevPosts]);
   };
 
   return (
