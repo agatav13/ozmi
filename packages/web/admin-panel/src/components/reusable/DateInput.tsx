@@ -5,7 +5,7 @@ import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import 'dayjs/locale/pl';
 
-export default function DateInput() {
+export default function DateInput({name, id}: {name: string, id: string}) {
   const dateFormat = 'DD-MM-YYYY';
   dayjs.extend(utc);
   dayjs.extend(timezone);
@@ -25,7 +25,7 @@ export default function DateInput() {
         }
       }
     }}>
-      <DatePicker name="date" id="date" defaultValue={currentDateInPoland} format={dateFormat} />
+      <DatePicker name={name} id={id} defaultValue={currentDateInPoland} format={dateFormat} />
     </ConfigProvider>
   );
 }

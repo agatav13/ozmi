@@ -20,14 +20,35 @@ app.use(cors({ origin: `http://localhost:3000` }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-pool.query(`
-  CREATE TABLE IF NOT EXISTS news_posts (
-    id SERIAL PRIMARY KEY,
-    title VARCHAR(1000),
-    category ENUM('szkola-modelowania-matematycznego', 'wspolpraca', 'inne'),
-    content TEXT
-  )
-`);
+async function initializeDatabase() {
+  const client = await pool.connect();
+  try {
+    await client.query(`
+      CREATE TYPE CATEGORY AS ENUM (
+        'szkola-modelowania-matematycznego', 
+        'wspolpraca', 
+        'inne'
+      )
+    `
+    )
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS news_posts (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(1000),
+        date DATE,
+        category CATEGORY,
+        content TEXT
+      )
+    `);
+    console.log('Table and type created successfully');
+  } catch (error) {
+    console.error('Error creating table or type:', error);
+  } finally {
+    client.release();
+  }
+}
+
+// initializeDatabase();
 
 // postgres, testowanie czy jest podłączony
 app.get('/test-db', async (req, res) => {
@@ -46,17 +67,17 @@ app.get('/test-db', async (req, res) => {
 
 // zapisywanie danych z postu do bazy danych
 app.post('/news-posts', async (req, res) => {  
-  const { title, category, content } = req.body;
+  const { title, date, category, content } = req.body;
 
-  if (!title || !category || !content) {
+  if (!title || !date || !category || !content) {
     return res.status(400).json({ error: 'Wszystkie pola nie są wypełnione' });
   }
 
-  const query = 'INSERT INTO news_posts (title, category, content) VALUES ($1, $2, $3) RETURNING id';
-  const values = [title, category, content];
+  const query = 'INSERT INTO news_posts (title, date, category, content) VALUES ($1, $2, $3, $4) RETURNING id';
+  const values = [title, date, category, content];
   const result = await pool.query(query, values);
 
-  console.log('Nowy post:', title, category, content);
+  console.log('Nowy post:', title, date, category, content);
     
   res.status(201).json({
     message: 'Post zapisany',

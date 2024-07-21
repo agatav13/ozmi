@@ -21,7 +21,7 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
   const [responseBody, setResponseBody] = useState<FormDataType>(formData);
 
   // aktualizuje zawartość pól w poście (zmienia reponseBody)
-  const inputChangeHandler = (event: HTMLElementEvent) => {
+  const handleChange = (event: HTMLElementEvent) => {
     const {name, value} = event.target
     setResponseBody({...responseBody, [name]: value})
   };
@@ -52,13 +52,13 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
   return (
     <form className="NewsForm" onSubmit={handleSubmit}>
       <label htmlFor="title">Tytuł</label>
-      <input type="text" name="title" id="title" required onChange={(e)=>inputChangeHandler(e)} value={responseBody.title} />
+      <input type="text" name="title" id="title" required onChange={(e)=>handleChange(e)} value={responseBody.title} />
 
       <label htmlFor="date">Data</label>
-      {/* <DateInput /> */}
+      {/* <DateInput name="date" id="name" /> */}
 
       <label htmlFor="category">Kategoria</label>
-      <select name="category" id="category" required onChange={(e)=>inputChangeHandler(e)} value={responseBody.category}>
+      <select name="category" id="category" required onChange={(e)=>handleChange(e)} value={responseBody.category}>
         <option value="" disabled selected>Wybierz kategorię</option>
         <option value="szkola-modelowania-matematycznego">Szkoła Modelowania Matematycznego</option>
         <option value="wspolpraca">Współpraca</option>
@@ -66,7 +66,7 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
       </select>
 
       <label htmlFor="content">Treść</label>
-      <textarea name="content" id="content" required rows={10} onChange={(e)=>inputChangeHandler(e)} value={responseBody.content}></textarea>
+      <textarea name="content" id="content" required rows={10} onChange={(e)=>handleChange(e)} value={responseBody.content}></textarea>
 
       <label htmlFor="photos">Zdjęcia</label>
       {/* <DropFiles /> */}
