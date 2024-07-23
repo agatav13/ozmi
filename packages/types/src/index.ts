@@ -4,6 +4,7 @@ export interface FileWithPreview extends File {
 
 export interface FormDataType {
   title: string,
+  date: Date,
   category: string,
   content: string
 }

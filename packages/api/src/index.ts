@@ -24,11 +24,17 @@ async function initializeDatabase() {
   const client = await pool.connect();
   try {
     await client.query(`
-      CREATE TYPE CATEGORY AS ENUM (
-        'szkola-modelowania-matematycznego', 
-        'wspolpraca', 
-        'inne'
-      )
+      DO $$
+      BEGIN
+        IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'category') THEN
+          CREATE TYPE CATEGORY AS ENUM (
+            'szkola-modelowania-matematycznego', 
+            'wspolpraca', 
+            'inne'
+          );
+        END IF;
+      END
+      $$;
     `
     )
     await client.query(`

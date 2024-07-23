@@ -14,6 +14,7 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
   // tworzy początkową wersję postu
   const formData: FormDataType = {
     title: "",
+    date: new Date(),
     category: "",
     content: ""
   };
@@ -28,6 +29,8 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
 
   const handleSubmit =  async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    console.log("Submitting form data:", responseBody);
 
     try {
       const response = await fetch("http://localhost:5000/news-posts", {
@@ -55,7 +58,7 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
       <input type="text" name="title" id="title" required onChange={(e)=>handleChange(e)} value={responseBody.title} />
 
       <label htmlFor="date">Data</label>
-      {/* <DateInput name="date" id="name" /> */}
+      <DateInput name="date" id="name" onChange={(date) => setResponseBody({...responseBody, date})} />
 
       <label htmlFor="category">Kategoria</label>
       <select name="category" id="category" required onChange={(e)=>handleChange(e)} value={responseBody.category}>

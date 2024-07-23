@@ -1,7 +1,7 @@
 {
     "pipeline": {
         "dev": {
-            "cache": false
+            "cache": true
         },
         "type-check": {
             "outputs": []

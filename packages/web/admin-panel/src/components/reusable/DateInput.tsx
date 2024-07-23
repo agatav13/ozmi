@@ -1,31 +1,34 @@
-import { ConfigProvider, DatePicker } from "antd";
-import locale from 'antd/locale/pl_PL';
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
-import 'dayjs/locale/pl';
+import { useState } from "react";
+import DatePicker from "react-datepicker";
+import { FaRegCalendar } from "react-icons/fa6";
+import { registerLocale } from "react-datepicker";
+import { pl } from 'date-fns/locale';
+import "../../assets/styles/Sections.css";
+import "react-datepicker/dist/react-datepicker.css";
 
-export default function DateInput({name, id}: {name: string, id: string}) {
-  const dateFormat = 'DD-MM-YYYY';
-  dayjs.extend(utc);
-  dayjs.extend(timezone);
-  dayjs.locale('pl')
-  const currentDateInPoland = dayjs().tz("Europe/Warsaw");
+export default function DateInput({name, id, onChange}: {name: string, id: string, onChange: (date: Date) => void}) {
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+
+  const handleDateChange = (date: Date | null) => {
+    setSelectedDate(date);
+    if (date) onChange(date);
+  }
+
+  registerLocale("pl", pl);
 
   return (
-    <ConfigProvider locale={locale} theme={{
-      "components": {
-        "DatePicker": {
-          "activeBorderColor": "rgb(0, 0, 0)",
-          "colorPrimary": "#b7b4b4",
-          "activeShadow": "",
-          "colorBgElevated": "#e6e6e6",
-          "activeBg": "#e6e6e6",
-          "fontFamily": "'Roboto', sans-serif"
-        }
-      }
-    }}>
-      <DatePicker name={name} id={id} defaultValue={currentDateInPoland} format={dateFormat} />
-    </ConfigProvider>
+    <DatePicker 
+      className="DatePicker"  
+      name={name} 
+      id={id} 
+      selected={selectedDate} 
+      onChange={handleDateChange} 
+      dateFormat="dd-MM-yyyy" 
+      locale="pl" 
+      todayButton="Dzisiaj"
+      showIcon 
+      icon={<FaRegCalendar />} 
+      popperPlacement="bottom-start"
+    />
   );
 }

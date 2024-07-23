@@ -32,6 +32,7 @@ export default function FetchNews({ posts, setPosts }: FetchDataProps) {
           {posts.map((post) => (
             <div key={post.id}>
               <h3>{post.title}</h3>
+              <p>{new Date(post.date).toLocaleDateString('pl-PL', {day: '2-digit', month: '2-digit', year: 'numeric'})}</p>
               <p><i>{post.category}</i></p>
               <p>{post.content}</p>
               <hr />
