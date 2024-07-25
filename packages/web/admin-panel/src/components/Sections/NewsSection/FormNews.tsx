@@ -58,14 +58,14 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
       <input type="text" name="title" id="title" required onChange={(e)=>handleChange(e)} value={responseBody.title} />
 
       <label htmlFor="date">Data</label>
-      <DateInput name="date" id="name" onChange={(date) => setResponseBody({...responseBody, date})} />
+      <DateInput name="date" id="date" onChange={(date) => setResponseBody({...responseBody, date})} />
 
       <label htmlFor="category">Kategoria</label>
       <select name="category" id="category" required onChange={(e)=>handleChange(e)} value={responseBody.category}>
         <option value="" disabled selected>Wybierz kategorię</option>
         <option value="szkola-modelowania-matematycznego">Szkoła Modelowania Matematycznego</option>
         <option value="wspolpraca">Współpraca</option>
-        <option value="inne"><p>Inne</p></option>
+        <option value="inne">Inne</option>
       </select>
 
       <label htmlFor="content">Treść</label>

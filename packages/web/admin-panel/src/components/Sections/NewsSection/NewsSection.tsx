@@ -29,7 +29,6 @@ export default function NewsSection() {
           <FormNews updateShowForm={setShowForm} onPostAdded={handlePostAdded} />
         </>
       )}
-      <p>Tu się posty wyświetlać będą:</p>
       <FetchNews posts={posts} setPosts={setPosts} />
     </>
   );

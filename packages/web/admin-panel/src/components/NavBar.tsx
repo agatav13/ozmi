@@ -32,10 +32,10 @@ export default function NavBar() {
   return (
   	<>
     	<div className="NavBarButtonsContainer">
-        <button className="NavBarButton" onClick={() => setActiveElement(1)}><MdOutlineNewspaper />Aktualności</button>
-        <button className="NavBarButton" onClick={() => setActiveElement(2)}><IoPersonSharp />O nas</button>
-        <button className="NavBarButton" onClick={() => setActiveElement(3)}><BsFillCalculatorFill />Edukacja</button>
-        <button className="NavBarButton" onClick={() => setActiveElement(4)}><FaMagnifyingGlass />Case studies</button>
+        <button type="button" className="NavBarButton" onClick={() => setActiveElement(1)}><MdOutlineNewspaper />Aktualności</button>
+        <button type="button" className="NavBarButton" onClick={() => setActiveElement(2)}><IoPersonSharp />O nas</button>
+        <button type="button" className="NavBarButton" onClick={() => setActiveElement(3)}><BsFillCalculatorFill />Edukacja</button>
+        <button type="button" className="NavBarButton" onClick={() => setActiveElement(4)}><FaMagnifyingGlass />Case studies</button>
       </div>
       <div>
         {renderElement()}

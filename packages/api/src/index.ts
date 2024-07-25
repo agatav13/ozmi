@@ -54,7 +54,7 @@ async function initializeDatabase() {
   }
 }
 
-// initializeDatabase();
+initializeDatabase();
 
 // postgres, testowanie czy jest podłączony
 app.get('/test-db', async (req, res) => {

@@ -79,7 +79,43 @@
   padding-bottom: 4px;
 }
 
-input[type=text], select, textarea {
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px #dfdfdf inset !important;
+  -moz-box-shadow: 0 0 0 30px #dfdfdf inset !important;
+  -ms-box-shadow: 0 0 0 30px #dfdfdf inset !important;
+  -o-box-shadow: 0 0 0 30px #dfdfdf inset !important;
+  box-shadow: 0 0 0 30px #dfdfdf inset !important;
+}
+
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #e6e6e6 inset !important;
+  -moz-box-shadow: 0 0 0 30px #e6e6e6 inset !important;
+  -ms-box-shadow: 0 0 0 30px #e6e6e6 inset !important;
+  -o-box-shadow: 0 0 0 30px #e6e6e6 inset !important;
+  box-shadow: 0 0 0 30px #e6e6e6 inset !important;
+}
+
+input:autofill {
+  -webkit-box-shadow: 0 0 0 30px #dfdfdf inset !important;
+  -moz-box-shadow: 0 0 0 30px #dfdfdf inset !important;
+  -ms-box-shadow: 0 0 0 30px #dfdfdf inset !important;
+  -o-box-shadow: 0 0 0 30px #dfdfdf inset !important;
+  box-shadow: 0 0 0 30px #dfdfdf inset !important;
+}
+
+input:autofill:hover, 
+input:autofill:focus,
+input:autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #e6e6e6 inset !important;
+  -moz-box-shadow: 0 0 0 30px #e6e6e6 inset !important;
+  -ms-box-shadow: 0 0 0 30px #e6e6e6 inset !important;
+  -o-box-shadow: 0 0 0 30px #e6e6e6 inset !important;
+  box-shadow: 0 0 0 30px #e6e6e6 inset !important;
+}
+
+input[type=text], .ant-picker, select, textarea {
   font-family: "Roboto", sans-serif;
   background-color: #dfdfdf;
   border: 2px solid black;
@@ -89,52 +125,42 @@ input[type=text], select, textarea {
   outline: none;
 }
 
-input[type=text]:hover, select:hover, textarea:hover, .DropzoneContainer:hover,
-input[type=text]:focus, select:focus, textarea:focus {
+.ant-picker {
+  padding: 6px 12px !important;
+}
+
+input[type=text]:hover, .ant-picker:hover, select:hover, textarea:hover, .DropzoneContainer:hover,
+input[type=text]:focus, .ant-picker:focus, select:focus, textarea:focus {
   background-color: #e6e6e6;
 }
 
-input#name {
-  padding: 0.6rem 12px 0.6rem 32px;
+.ant-picker:hover, .ant-picker:focus {
+  border: 2px solid black;
 }
 
-svg.react-datepicker__calendar-icon {
-  padding: 0.6rem !important;
-  height: 1.1em !important;
-  width: 1.1em !important;
+.ant-picker .ant-picker-suffix {
+  color: black;
 }
 
-.react-datepicker {
-  font-family: "Roboto", sans-serif !important;
-  border: 2px solid black !important;
-  border-radius: 6px !important;
-  background-color: #f5f5f5 !important;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+.ant-picker-dropdown .ant-picker-panel-container {
+  border: 1px solid black;
+  border-radius: 6px;
 }
 
-.react-datepicker__header {
-  background-color: #e6e6e6 !important;
-  border-bottom: 2px solid black !important;
+.ant-picker-dropdown .ant-picker-header {
+  border-bottom: 1px solid black;
 }
 
-.react-datepicker__day--selected {
-  background-color: #111111 !important;
+.ant-picker-dropdown .ant-picker-footer {
+  border-top: 1px solid black;
 }
 
-.react-datepicker-popper .react-datepicker__triangle {
-  display: none;
+.ant-picker-dropdown .ant-picker-now-btn {
+  color: black;
 }
 
-.react-datepicker__today-button {
-  background-color: #e6e6e6 !important;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
-  border-top: 2px solid black !important;
-  transition-duration: 0.4s;
-}
-
-.react-datepicker__today-button:hover {
-  background-color: #c6c6c6 !important;
+.ant-picker-dropdown .ant-picker-now-btn:hover {
+  color: #6b6b6b;
 }
 
 textarea {
