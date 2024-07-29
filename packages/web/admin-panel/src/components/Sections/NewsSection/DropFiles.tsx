@@ -2,7 +2,7 @@ import { useState, useCallback } from "react";
 import { useDropzone, FileRejection, DropzoneOptions } from "react-dropzone";
 import { FileWithPreview } from "types/src/index"
 
-export default function DropFiles() {
+export default function DropFiles({name, id}: {name: string, id: string}) {
   const [files, setFiles] = useState<FileWithPreview[]>([]);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -37,7 +37,7 @@ export default function DropFiles() {
   return (
     <div>
       <div {...getRootProps()} className="DropzoneContainer">
-        <input {...getInputProps()} name="photos" id="photos" />
+        <input {...getInputProps()} name={name} id={id} />
         {isDragActive ? (
           <p>Upuść zdjęcie tutaj...</p>
         ) : (

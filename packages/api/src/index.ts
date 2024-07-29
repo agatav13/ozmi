@@ -28,9 +28,9 @@ async function initializeDatabase() {
       BEGIN
         IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'category') THEN
           CREATE TYPE CATEGORY AS ENUM (
-            'szkola-modelowania-matematycznego', 
-            'wspolpraca', 
-            'inne'
+            'Szkoła Modelowania Matematycznego', 
+            'Współpraca', 
+            'Inne'
           );
         END IF;
       END

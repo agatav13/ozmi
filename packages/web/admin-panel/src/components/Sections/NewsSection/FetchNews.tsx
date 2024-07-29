@@ -22,19 +22,31 @@ export default function FetchNews({ posts, setPosts }: FetchDataProps) {
     fetchPosts();
   }, []);
 
+  const formattedDate = (date: Date) => {
+    return new Date(date).toLocaleDateString("pl-Pl", {day: "2-digit", month: "2-digit", year: "numeric"})
+  };
+
+  const formattedContent = (content: string) => {
+    return (content.split("\n").map((line, index) => (
+      <span key={index}>
+        {line}
+        <br />
+      </span>
+    )));
+  };
+
   return (
     <div>
-      <h2>Posty:</h2>
       {posts.length === 0 ? (
         <p>Brak postów</p>
       ) : (
         <div>
           {posts.map((post) => (
-            <div key={post.id}>
-              <h3>{post.title}</h3>
-              <p>{new Date(post.date).toLocaleDateString('pl-PL', {day: '2-digit', month: '2-digit', year: 'numeric'})}</p>
-              <p><i>{post.category}</i></p>
-              <p>{post.content}</p>
+            <div key={post.id} className="PostNews">
+              <h3 className="PostTitle">{post.title}</h3>
+              <p className="PostDate">{formattedDate(post.date)}</p>
+              <p className="PostCategory">{post.category}</p>
+              <p className="PostContent">{formattedContent(post.content)}</p>
               <hr />
             </div>
           ))}

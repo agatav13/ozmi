@@ -115,7 +115,7 @@ input:autofill:active {
   box-shadow: 0 0 0 30px #e6e6e6 inset !important;
 }
 
-input[type=text], .ant-picker, select, textarea {
+input[type=text], .ant-picker, select, textarea, .DropzoneContainer {
   font-family: "Roboto", sans-serif;
   background-color: #dfdfdf;
   border: 2px solid black;
@@ -175,13 +175,10 @@ select, input[type=submit] {
 }
 
 .DropzoneContainer {
-  background-color: #dfdfdf;
-  border: 2px dashed black;
-  border-radius: 6px;
-  padding: 20px;
+  border: 2px dashed black !important;
+  padding: 25px !important;
   text-align: center;
   cursor: pointer;
-  font-family: "Roboto", sans-serif;
   font-size: 14px;
 }
 
@@ -214,4 +211,30 @@ select, input[type=submit] {
   height: 20px;
   font-size: 12px;
   cursor: pointer;
+}
+
+.PostNews {
+  font-family: "Playfair Display", serif;
+}
+
+.PostNews .PostTitle {
+  font-size: 1.25em;
+  font-weight: 500;
+  margin-block-end: 0.5em;
+}
+
+.PostNews .PostDate, .PostNews .PostCategory {
+  font-size: 1.1em;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+}
+
+.PostNews .PostContent {
+  text-align: justify;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+}
+
+.PostNews hr {
+  border: 1px solid #b7b4b4;
 }

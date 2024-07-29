@@ -63,16 +63,16 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
       <label htmlFor="category">Kategoria</label>
       <select name="category" id="category" required onChange={(e)=>handleChange(e)} value={responseBody.category}>
         <option value="" disabled selected>Wybierz kategorię</option>
-        <option value="szkola-modelowania-matematycznego">Szkoła Modelowania Matematycznego</option>
-        <option value="wspolpraca">Współpraca</option>
-        <option value="inne">Inne</option>
+        <option value="Szkoła Modelowania Matematycznego">Szkoła Modelowania Matematycznego</option>
+        <option value="Współpraca">Współpraca</option>
+        <option value="Inne">Inne</option>
       </select>
 
       <label htmlFor="content">Treść</label>
       <textarea name="content" id="content" required rows={10} onChange={(e)=>handleChange(e)} value={responseBody.content}></textarea>
 
       <label htmlFor="photos">Zdjęcia</label>
-      {/* <DropFiles /> */}
+      {/* <DropFiles name="photos" id="photos" /> */}
 
       <input className="AddNewButton" type="submit" value="Dodaj" />
     </form>
