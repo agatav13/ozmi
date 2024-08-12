@@ -98,9 +98,39 @@ h2 {
 
 .tile {
   border-radius: 10px;
-  background-color: #5E617B;
+  background-color: #70738e;
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.tile .date-post {
+  margin: 0;
+  text-align: right;
+}
+
+.tile .photo-post {
+  max-width: 100%;
+  height: 150px;
+  object-fit: cover;
+  margin: 10px 0;
+  flex-grow: 1;
+}
+
+.tile .title-post {
+  margin: 0;
+  font-size: 1.1em;
+  text-align: justify;
+  padding-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tile .see-more {
+  margin: 0;
+  align-self: flex-end;
 }
 
 .education-tiles {
