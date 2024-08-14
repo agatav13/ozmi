@@ -68,11 +68,11 @@
   color: rgb(170, 16, 16);
 }
 
-.NewsForm {
+.Form {
   display: grid;
 }
 
-.NewsForm label {
+.Form label {
   font-family: "Playfair Display", serif;
 	font-weight: 600;
   padding-top: 14px;

@@ -50,6 +50,28 @@ async function initializeDatabase() {
         category CATEGORY,
         content TEXT
       )
+    `)
+    // await client.query(`
+    //   DO $$
+    //   BEGIN
+    //     IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'category') THEN
+    //       CREATE TYPE CATEGORY_CASE_STUDY AS ENUM (
+    //         'Przemysł', 
+    //         'E-commerce', 
+    //         'Inne'
+    //       );
+    //     END IF;
+    //   END
+    //   $$;
+    // `
+    // )
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS case_study_posts (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(1000),
+        date DATE,
+        category VARCHAR(1000)
+      )
     `);
     console.log('Table and type created successfully');
   } catch (error) {
@@ -99,6 +121,30 @@ app.post('/news-posts', async (req, res) => {
 // żeby posty były wyświetlane na stronie
 app.get('/news-posts', async (req, res) => {
   const result = await pool.query('SELECT * FROM news_posts ORDER BY id DESC');
+  res.json(result.rows);
+})
+
+app.post('/case-study-posts', async (req, res) => {  
+  const { title, date, category } = req.body;
+
+  if (!title || !date || !category) {
+    return res.status(400).json({ error: 'Wszystkie pola nie są wypełnione' });
+  }
+
+  const query = 'INSERT INTO case_study_posts (title, date, category) VALUES ($1, $2, $3) RETURNING id';
+  const values = [title, date, category];
+  const result = await pool.query(query, values);
+
+  console.log('Nowy post:', title, date, category);
+    
+  res.status(201).json({
+    message: 'Post zapisany',
+    id: result.rows[0].id
+  })
+});
+
+app.get('/case-study-posts', async (req, res) => {
+  const result = await pool.query('SELECT * FROM case_study_posts ORDER BY id DESC');
   res.json(result.rows);
 })
 

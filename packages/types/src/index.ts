@@ -12,3 +12,13 @@ export interface FormDataType {
 export interface FormDataTypeWithId extends FormDataType {
   id: number
 }
+
+export interface CaseStudyDataType {
+  title: string,
+  date: Date,
+  category: string
+}
+
+export interface CaseStudyDataTypeWithId extends CaseStudyDataType {
+  id: number
+}

@@ -24,7 +24,7 @@ export default function NewsSection() {
         <>
           <div className="FormTitle">
           	<button type="button" className="DiscardButton" onClick={() => setShowForm(false)}><CgClose /></button>
-              <p><b>Dodaj nową aktualność:</b></p>
+              <p><b>Dodaj aktualność:</b></p>
           </div>
           <FormNews updateShowForm={setShowForm} onPostAdded={handlePostAdded} />
         </>

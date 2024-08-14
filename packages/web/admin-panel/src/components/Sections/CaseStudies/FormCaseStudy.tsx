@@ -1,27 +1,23 @@
-import { useState } from "react";
+import { CaseStudyDataType, CaseStudyDataTypeWithId } from "types";
 import DateInput from "../../reusable/DateInput";
-import DropFiles from "./DropFiles";
-import { FormDataTypeWithId, FormDataType } from "types";
+import { useState } from "react";
 
-interface NewsFormProps {
+interface FormCaseStudyProps {
   updateShowForm: React.Dispatch<React.SetStateAction<boolean>>;
-  onPostAdded: (newPost: FormDataTypeWithId) => void;
+  onPostAdded: (newPost: CaseStudyDataTypeWithId) => void;
 }
 
-export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps) {
+export default function FormCaseStudy({ updateShowForm, onPostAdded }: FormCaseStudyProps) {
   type HTMLElementEvent = React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLTextAreaElement>
 
-  // tworzy początkową wersję postu
-  const formData: FormDataType = {
+  const caseStudyData: CaseStudyDataType = {
     title: "",
     date: new Date(),
     category: "",
-    content: ""
   };
 
-  const [responseBody, setResponseBody] = useState<FormDataType>(formData);
+  const [responseBody, setResponseBody] = useState<CaseStudyDataType>(caseStudyData);
 
-  // aktualizuje zawartość pól w poście (zmienia reponseBody)
   const handleChange = (event: HTMLElementEvent) => {
     const {name, value} = event.target
     setResponseBody({...responseBody, [name]: value})
@@ -33,7 +29,7 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
     console.log("Submitting form data:", responseBody);
 
     try {
-      const response = await fetch("http://localhost:5000/news-posts", {
+      const response = await fetch("http://localhost:5000/case-study-posts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(responseBody)
@@ -45,14 +41,14 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
 
       const result = await response.json();
       onPostAdded({ ...responseBody, id: result.id }); // żeby po dodaniu nowego postu wyświetlał się bez odświeżania
-      setResponseBody(formData);  // ustawia wartości, które były w poście jako reponseBody
+      setResponseBody(caseStudyData);  // ustawia wartości, które były w poście jako reponseBody
       updateShowForm(false);  // ukrywa element dodawania postu po dodaniu
     } catch (error) {
       console.error("Error:", error);
     }
   }
 
-  return (
+  return(
     <form className="Form" onSubmit={handleSubmit}>
       <label htmlFor="title">Tytuł</label>
       <input type="text" name="title" id="title" required onChange={(e)=>handleChange(e)} value={responseBody.title} />
@@ -63,18 +59,12 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
       <label htmlFor="category">Kategoria</label>
       <select name="category" id="category" required onChange={(e)=>handleChange(e)} value={responseBody.category}>
         <option value="" disabled selected>Wybierz kategorię</option>
-        <option value="Szkoła Modelowania Matematycznego">Szkoła Modelowania Matematycznego</option>
-        <option value="Współpraca">Współpraca</option>
+        <option value="Przemysł">Przemysł</option>
+        <option value="E-commerce">E-commerce</option>
         <option value="Inne">Inne</option>
       </select>
 
-      <label htmlFor="content">Treść</label>
-      <textarea name="content" id="content" required rows={10} onChange={(e)=>handleChange(e)} value={responseBody.content}></textarea>
-
-      <label htmlFor="photos">Zdjęcia</label>
-      {/* <DropFiles name="photos" id="photos" /> */}
-
-      <input className="AddNewButton" type="submit" value="Dodaj" />
+      <input className="AddNewButton" type="submit" value="Dodaj" style={{marginTop: "16px"}} />
     </form>
   );
 }
