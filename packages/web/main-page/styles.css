@@ -104,6 +104,11 @@ h2 {
   display: flex;
   flex-direction: column;
   padding: 10px;
+  transition-duration: 0.4s;
+}
+
+.tile:hover {
+  transform: translateY(2px);
 }
 
 .tile .date-post {
@@ -137,24 +142,69 @@ h2 {
   aspect-ratio: 1/1;
 }
 
-.education-row-1 {
+.education-row-1, .education-row-2 {
   display: flex;
   aspect-ratio: 2/1;
 }
 
-.education-tile-1 {
-  background: linear-gradient(#857979, #1f1c1c);
-  aspect-ratio: 1/1;
+.education-tile {
+  display: flex;
+  padding: 20px 30px;
+  font-size: 1.6em;
+  font-weight: bold;
+  position: relative;
+  transition-duration: 0.6s;
 }
 
-.education-tile-2 {
+.education-tile:hover {
+  transform: scale(1.025);
+  z-index: 5;
+}
+
+.bottom-text {
+  align-items: end;
+  padding-right: 60px;
+}
+
+.top-text {
+  align-items: start;
+}
+
+#education-tile-1 {
+  background: linear-gradient(#857979, #1f1c1c);
+  aspect-ratio: 1/1;
+  color: white;
+}
+
+#education-tile-2 {
   background: linear-gradient(#ffffff, #857979);
   aspect-ratio: 1/1;
 }
 
-.education-tile-3 {
+#education-tile-3 {
   background: linear-gradient(#64647a, #1f1c1c);
   aspect-ratio: 2/1;
+  color: white;
+}
+
+.education-tile p {
+  margin: 0;
+}
+
+.bottom-text .tile-text {
+  padding-right: 40px;
+}
+
+.right-arrow {
+  border-style: solid;
+  border-width: 0 5px 5px 0;
+  border-radius: 2px;
+  display: inline-block;
+  padding: 20px;
+  transform: rotate(-45deg);
+  position: absolute;
+  bottom: 30px;
+  right: 40px;
 }
 
 .case-study {
