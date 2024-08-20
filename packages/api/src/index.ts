@@ -40,8 +40,8 @@ async function initializeDatabase() {
         END IF;
       END
       $$;
-    `
-    )
+    `);
+
     await client.query(`
       CREATE TABLE IF NOT EXISTS news_posts (
         id SERIAL PRIMARY KEY,
@@ -50,30 +50,32 @@ async function initializeDatabase() {
         category CATEGORY,
         content TEXT
       )
-    `)
-    // await client.query(`
-    //   DO $$
-    //   BEGIN
-    //     IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'category') THEN
-    //       CREATE TYPE CATEGORY_CASE_STUDY AS ENUM (
-    //         'Przemysł', 
-    //         'E-commerce', 
-    //         'Inne'
-    //       );
-    //     END IF;
-    //   END
-    //   $$;
-    // `
-    // )
+    `);
+
+    await client.query(`
+      DO $$
+      BEGIN
+        IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'category_case_study') THEN
+          CREATE TYPE CATEGORY_CASE_STUDY AS ENUM (
+            'Przemysł', 
+            'E-commerce', 
+            'Inne'
+          );
+        END IF;
+      END
+      $$;
+    `);
+
     await client.query(`
       CREATE TABLE IF NOT EXISTS case_study_posts (
         id SERIAL PRIMARY KEY,
         title VARCHAR(1000),
         date DATE,
-        category VARCHAR(1000)
+        category CATEGORY_CASE_STUDY
       )
     `);
-    console.log('Table and type created successfully');
+
+    console.log('Table and types created successfully');
   } catch (error) {
     console.error('Error creating table or type:', error);
   } finally {
@@ -108,19 +110,40 @@ app.post('/news-posts', async (req, res) => {
 
   const query = 'INSERT INTO news_posts (title, date, category, content) VALUES ($1, $2, $3, $4) RETURNING id';
   const values = [title, date, category, content];
-  const result = await pool.query(query, values);
 
-  console.log('Nowy post:', title, date, category, content);
-    
-  res.status(201).json({
-    message: 'Post zapisany',
-    id: result.rows[0].id
-  })
+  try {
+    const result = await pool.query(query, values);
+    console.log('Nowy post:', title, date, category, content);
+    res.status(201).json({ message: 'Post zapisany', id: result.rows[0].id })
+  } catch (error) {
+    console.error('Error posting:', error);
+    res.status(500).json({ error: 'Failed to post' });
+  }
+});
+
+app.post('/edit-news-posts', async (req, res) => {
+  const { title, date, category, content, id } = req.body
+
+  if (!title || !date || !category || !content) {
+    return res.status(400).json({ error: 'Wszystkie pola nie są wypełnione' });
+  }
+
+  const query = 'UPDATE news_posts SET title = $1, date = $2, category = $3, content = $4 WHERE id = $5';
+  const values = [title, date, category, content, id];
+
+  try {
+    const result = await pool.query(query, values);
+    console.log('Zaktualizowano post:', title, date, category, content);
+    res.status(200).json({ message: 'Post updated successfully', result });
+  } catch (error) {
+    console.error('Error updating post:', error);
+    res.status(500).json({ error: 'Failed to update post' });
+  }
 });
 
 // żeby posty były wyświetlane na stronie
 app.get('/news-posts', async (req, res) => {
-  const result = await pool.query('SELECT * FROM news_posts ORDER BY id DESC');
+  const result = await pool.query('SELECT * FROM news_posts ORDER BY date DESC');
   res.json(result.rows);
 })
 
@@ -133,18 +156,19 @@ app.post('/case-study-posts', async (req, res) => {
 
   const query = 'INSERT INTO case_study_posts (title, date, category) VALUES ($1, $2, $3) RETURNING id';
   const values = [title, date, category];
-  const result = await pool.query(query, values);
 
-  console.log('Nowy post:', title, date, category);
-    
-  res.status(201).json({
-    message: 'Post zapisany',
-    id: result.rows[0].id
-  })
+  try {
+    const result = await pool.query(query, values);
+    console.log('Nowy post:', title, date, category);
+    res.status(201).json({ message: 'Post zapisany', id: result.rows[0].id })
+  } catch (error) {
+    console.error('Error posting:', error);
+    res.status(500).json({ error: 'Failed to post' });
+  }
 });
 
 app.get('/case-study-posts', async (req, res) => {
-  const result = await pool.query('SELECT * FROM case_study_posts ORDER BY id DESC');
+  const result = await pool.query('SELECT * FROM case_study_posts ORDER BY date DESC');
   res.json(result.rows);
 })
 

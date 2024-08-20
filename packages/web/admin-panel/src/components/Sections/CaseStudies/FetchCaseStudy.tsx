@@ -38,7 +38,7 @@ export default function FetchNews({ posts, setPosts }: FetchDataProps) {
   return (
     <div>
       {posts.length === 0 ? (
-        <p>Brak postów</p>
+        <p className="NoNews">Brak postów</p>
       ) : (
         <div>
           {posts.map((post) => (

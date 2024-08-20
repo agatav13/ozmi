@@ -7,14 +7,22 @@ import 'dayjs/locale/pl';
 import { useState } from "react";
 import { FiCalendar } from "react-icons/fi";
 
-export default function DateInput({name, id, onChange}: {name: string, id: string, onChange: (date: Date) => void}) {
+interface DateInputProps {
+  name: string;
+  id: string;
+  onChange: (date: Date) => void;
+  value?: Date;
+}
+
+export default function DateInput({name, id, onChange, value}: DateInputProps) {
   dayjs.extend(utc);
   dayjs.extend(timezone);
   dayjs.locale('pl')
 
   const currentDateInPoland = dayjs().tz("Europe/Warsaw");
+  const initialDate = value ? dayjs(value) : currentDateInPoland;
 
-  const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs>(currentDateInPoland);
+  const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs>(initialDate);
 
   const handleDateChange = (date: dayjs.Dayjs | null) => {
     if (date) {

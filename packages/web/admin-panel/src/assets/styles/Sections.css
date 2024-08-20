@@ -1,3 +1,7 @@
+:root {
+  --delete-red: #a00000;
+}
+
 .DefaultContainer {
   display: flex;
   justify-content: center;
@@ -65,7 +69,7 @@
 .DiscardButton svg {
   width: 24px;
 	height: 24px;
-  color: rgb(170, 16, 16);
+  color: var(--delete-red);
 }
 
 .Form {
@@ -77,6 +81,10 @@
 	font-weight: 600;
   padding-top: 14px;
   padding-bottom: 4px;
+}
+
+.Edit label:first-of-type {
+  padding-top: 6px;
 }
 
 input:-webkit-autofill {
@@ -203,7 +211,7 @@ select, input[type=submit] {
   position: absolute;
   top: -6px;
   right: -6px;
-  background-color: rgb(200, 0, 0);
+  background-color: var(--delete-red);
   color: white;
   border: none;
   border-radius: 50%;
@@ -211,6 +219,12 @@ select, input[type=submit] {
   height: 20px;
   font-size: 12px;
   cursor: pointer;
+}
+
+.NoNews {
+  font-family: "Playfair Display", serif;
+  color: rgba(0, 0, 0, 0.6);
+  padding-bottom: 20px;
 }
 
 .PostNews {
@@ -233,6 +247,54 @@ select, input[type=submit] {
   text-align: justify;
   font-family: "Roboto", sans-serif;
   font-weight: 300;
+  margin-block-end: 0.6em;
+}
+
+.PostNews .ButtonContainer {
+  display: flex;
+  gap: 20px;
+  padding-bottom: 10px;
+}
+
+.PostNews .ButtonContainer button, .DiscardChanges {
+  background-color: transparent;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition-duration: 0.3s;
+}
+
+.PostNews .ButtonContainer button:active {
+  transform: translateY(1px);
+}
+
+.PostNews .ButtonContainer button:first-child {
+  color: #000085;
+}
+
+.PostNews .ButtonContainer button:last-child {
+  color: var(--delete-red);
+}
+
+.PostNews .ButtonContainer button:first-child:hover {
+  color: #000060;
+}
+
+.PostNews .ButtonContainer button:last-child:hover {
+  color: #800000;
+}
+
+.DiscardChanges {
+  margin-top: 10px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.DiscardChanges svg {
+  color: var(--delete-red);
 }
 
 .PostNews hr {
