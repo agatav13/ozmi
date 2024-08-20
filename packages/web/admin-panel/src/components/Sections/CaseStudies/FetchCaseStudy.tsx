@@ -9,7 +9,7 @@ interface FetchDataProps {
 // przyjmuje wartości z useState w parent component
 export default function FetchNews({ posts, setPosts }: FetchDataProps) {
   const fetchPosts = async () => {
-    const response = await fetch('http://localhost:5000/case-study-posts');
+    const response = await fetch('http://localhost:5000/get-case-studies');
     if (response.ok) {
       const data = await response.json();
       setPosts(data);

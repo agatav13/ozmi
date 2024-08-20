@@ -12,7 +12,7 @@ export default function FetchNews({ posts, setPosts }: FetchDataProps) {
   const [editingPost, setEditingPost] = useState<FormDataTypeWithId | null>(null);
 
   const fetchPosts = async () => {
-    const response = await fetch('http://localhost:5000/news-posts');
+    const response = await fetch('http://localhost:5000/get-news-posts');
     if (response.ok) {
       const data = await response.json();
       setPosts(data);

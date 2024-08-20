@@ -29,7 +29,7 @@ export default function FormCaseStudy({ updateShowForm, onPostAdded }: FormCaseS
     console.log("Submitting form data:", responseBody);
 
     try {
-      const response = await fetch("http://localhost:5000/case-study-posts", {
+      const response = await fetch("http://localhost:5000/create-case-studies", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(responseBody)

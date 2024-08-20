@@ -1,5 +1,5 @@
 const displayTiles = async () => {
-  const response = await fetch('http://localhost:5000/news-posts');
+  const response = await fetch('http://localhost:5000/get-news-posts');
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }

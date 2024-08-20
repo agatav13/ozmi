@@ -33,7 +33,7 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
     console.log("Submitting form data:", responseBody);
 
     try {
-      const response = await fetch("http://localhost:5000/news-posts", {
+      const response = await fetch("http://localhost:5000/create-news-posts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(responseBody)
