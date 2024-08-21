@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FormDataTypeWithId } from "types";
 import EditNewsPost from "./EditNewsPost";
+import DeleteNewsPost from "./DeleteNewsPost";
 
 interface FetchDataProps {
   posts: FormDataTypeWithId[];
@@ -10,6 +11,7 @@ interface FetchDataProps {
 // przyjmuje wartości z useState w parent component
 export default function FetchNews({ posts, setPosts }: FetchDataProps) {
   const [editingPost, setEditingPost] = useState<FormDataTypeWithId | null>(null);
+  const [deletedPost, setDeletedPost] = useState<FormDataTypeWithId | null>(null);
 
   const fetchPosts = async () => {
     const response = await fetch('http://localhost:5000/get-news-posts');
@@ -29,6 +31,10 @@ export default function FetchNews({ posts, setPosts }: FetchDataProps) {
     setPosts((prevPosts) =>
       prevPosts.map((post) => (post.id === updatedPost.id ? updatedPost : post))
     );
+  };
+
+  const deletePostFromState = (id: number) => {
+    setPosts((prevPosts) => prevPosts.filter((post) => post.id !== id));
   };
 
   const formattedDate = (date: Date) => {
@@ -58,10 +64,13 @@ export default function FetchNews({ posts, setPosts }: FetchDataProps) {
               <p className="PostContent">{formattedContent(post.content)}</p>
               <div className="ButtonContainer">
                 <button type="button" onClick={() => setEditingPost(post)}>Edytuj</button>
-                <button type="button">Usuń</button>
+                <button type="button" onClick={() => setDeletedPost(post)}>Usuń</button>
               </div>
+              {deletedPost && deletedPost.id === post.id && (
+                <DeleteNewsPost post={post} setDeletedPost={setDeletedPost} onPostDeleted={deletePostFromState} />
+              )}
               {editingPost && editingPost.id === post.id && (
-                (<EditNewsPost post={post} setEditingPost={setEditingPost} onPostUpdated={updatePostInState} />)
+                <EditNewsPost post={post} setEditingPost={setEditingPost} onPostUpdated={updatePostInState} />
               )}
               <hr />
             </div>

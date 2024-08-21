@@ -6,7 +6,7 @@ import { CgClose } from "react-icons/cg";
 interface EditNewsPostProps {
   post: FormDataTypeWithId;
   setEditingPost: React.Dispatch<React.SetStateAction<FormDataTypeWithId | null>>;
-  onPostUpdated: (updatedPost: FormDataTypeWithId) => void; // New prop
+  onPostUpdated: (updatedPost: FormDataTypeWithId) => void;
 }
 
 export default function EditNewsPost({ post, setEditingPost, onPostUpdated }: EditNewsPostProps) {

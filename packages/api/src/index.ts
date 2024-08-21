@@ -1,7 +1,7 @@
 import cors from "cors";
 import express from "express";
 import { initializeDatabase, testDb } from "./database/database";
-import { createNewsPosts, editNewsPosts, getNewsPosts } from "./sections/news";
+import { createNewsPosts, deleteNewsPosts, editNewsPosts, getNewsPosts } from "./sections/news";
 import { createCaseStudies, editCaseStudies, getCaseStudies } from "./sections/caseStudies";
 
 const app = express();
@@ -24,6 +24,7 @@ app.get("/test-db", testDb);
 
 app.post("/create-news-posts", createNewsPosts);
 app.post("/edit-news-posts", editNewsPosts);
+app.delete("/delete-news-posts/:id", deleteNewsPosts);
 app.get("/get-news-posts", getNewsPosts);
 
 app.post("/create-case-studies", createCaseStudies);
