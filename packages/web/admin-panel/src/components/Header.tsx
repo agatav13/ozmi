@@ -11,7 +11,7 @@ export default function Header() {
       </div>
       <div className="HeaderButtons">
         <a href="" className="HomeButton"><TiHome /></a>
-          <UserButton />
+        <UserButton />
 			</div>
     </div>
   );

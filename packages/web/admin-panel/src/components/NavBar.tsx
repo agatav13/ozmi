@@ -4,12 +4,13 @@ import { MdOutlineNewspaper } from "react-icons/md";
 import { IoPersonSharp } from "react-icons/io5";
 import { BsFillCalculatorFill } from "react-icons/bs";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import { useState } from "react";
-import NewsSection from "./Sections/NewsSection/NewsSection";
-import AboutUs from "./Sections/AboutUs/AboutUs";
-import Education from "./Sections/Education/Education";
-import CaseStudies from "./Sections/CaseStudies/CaseStudies";
-import Default from "./Sections/Default";
+import { lazy, useState, Suspense } from "react";
+
+const NewsSection = lazy(() => import("./Sections/NewsSection/NewsSection"));
+const AboutUs = lazy(() => import("./Sections/AboutUs/AboutUs"));
+const Education = lazy(() => import("./Sections/Education/Education"));
+const CaseStudies = lazy(() => import("./Sections/CaseStudies/CaseStudies"));
+const Default = lazy(() => import("./Sections/Default"));
 
 export default function NavBar() {
   const [activeElement, setActiveElement] = useState<1 | 2 | 3 | 4 | null>(null);
@@ -38,7 +39,9 @@ export default function NavBar() {
         <button type="button" className="NavBarButton" onClick={() => setActiveElement(4)}><FaMagnifyingGlass />Case studies</button>
       </div>
       <div>
-        {renderElement()}
+        <Suspense fallback={<div className="DefaultContainer"><p>Ładowanie...</p></div>}>
+          {renderElement()}
+        </Suspense>
       </div>
     </>
   );
