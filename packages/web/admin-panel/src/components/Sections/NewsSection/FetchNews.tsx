@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FormDataTypeWithId } from "types";
 import EditNewsPost from "./EditNewsPost";
-import DeleteNewsPost from "./DeleteNewsPost";
+import DeleteNewsPost from "../../reusable/DeletePost";
 
 interface FetchDataProps {
   posts: FormDataTypeWithId[];
@@ -67,7 +67,7 @@ export default function FetchNews({ posts, setPosts }: FetchDataProps) {
                 <button type="button" onClick={() => setDeletedPost(post)}>Usuń</button>
               </div>
               {deletedPost && deletedPost.id === post.id && (
-                <DeleteNewsPost post={post} setDeletedPost={setDeletedPost} onPostDeleted={deletePostFromState} />
+                <DeleteNewsPost deleteFrom="news-posts" post={post} setDeletedPost={setDeletedPost} onPostDeleted={deletePostFromState} />
               )}
               {editingPost && editingPost.id === post.id && (
                 <EditNewsPost post={post} setEditingPost={setEditingPost} onPostUpdated={updatePostInState} />

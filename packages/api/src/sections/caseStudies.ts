@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { pool } from "../database/database";
 
-export const createCaseStudies = async (req: Request, res: Response) => {  
+export const createCaseStudyPosts = async (req: Request, res: Response) => {  
   const { title, date, category } = req.body;
 
   if (!title || !date || !category) {
@@ -21,7 +21,7 @@ export const createCaseStudies = async (req: Request, res: Response) => {
   }
 }
 
-export const editCaseStudies = async (req: Request, res: Response) => {
+export const editCaseStudyPosts = async (req: Request, res: Response) => {
   const { title, date, category, id } = req.body
 
   if (!title || !date || !category) {
@@ -41,7 +41,23 @@ export const editCaseStudies = async (req: Request, res: Response) => {
   }
 }
 
-export const getCaseStudies = async (req: Request, res: Response) => {
+export const deleteCaseStudyPosts = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const query = "DELETE FROM case_study_posts WHERE id = $1";
+  const values = [id];
+
+  try {
+    const result = await pool.query(query, values);
+    console.log("Usunięto post:", id);
+    res.status(200).json({ message: "Post deleted successfully", result });
+  } catch (error) {
+    console.error("Error deleting the post:", error);
+    res.status(500).json({ error: "Failed to delete the post" });
+  }
+}
+
+export const getCaseStudyPosts = async (req: Request, res: Response) => {
   const result = await pool.query("SELECT * FROM case_study_posts ORDER BY date DESC");
   res.json(result.rows);
 }
