@@ -258,12 +258,16 @@ select, input[type=submit] {
 
 .PostNews .ButtonContainer button, .DiscardChanges {
   background-color: transparent;
-  font-family: "Roboto", sans-serif;
-  font-size: 1rem;
   border: none;
   padding: 0;
   cursor: pointer;
   transition-duration: 0.3s;
+}
+
+.PostNews .ButtonContainer button {
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .PostNews .ButtonContainer button:active {
@@ -280,21 +284,88 @@ select, input[type=submit] {
 
 .PostNews .ButtonContainer button:first-child:hover {
   color: #000060;
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
 
 .PostNews .ButtonContainer button:last-child:hover {
   color: #800000;
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
 
 .DiscardChanges {
+  font-family: "Playfair Display", serif;
+  font-size: 0.98rem;
+  font-weight: 500;
   margin-top: 10px;
   display: flex;
   gap: 5px;
   align-items: center;
 }
 
+.DiscardChanges:hover {
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+}
+
 .DiscardChanges svg {
   color: var(--delete-red);
+  font-size: 20px;
+}
+
+.DeletePostContainer {
+  max-width: 360px;
+  background-color: #ecaeb4;
+  border: 3px solid var(--delete-red);
+  border-radius: 12px;
+  padding: 20px 0;
+}
+
+.DeletePostContainer h6 {
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 0;
+}
+
+.DeletePostContainer p {
+  font-size: 0.88rem;
+  font-weight: 400;
+  text-align: center;
+  margin: 0;
+}
+
+.DeletePostContainer div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding-top: 20px;
+}
+
+.DeletePostContainer div button {
+  font-family: "Playfair Display", serif;
+  font-size: 0.95rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition-duration: 0.3s;
+}
+
+.DeletePostContainer div button:first-of-type {
+  font-weight: 400;
+}
+
+.DeletePostContainer div button:first-of-type:hover {
+  text-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4);
+}
+
+.DeletePostContainer div button:last-of-type {
+  font-weight: 600;
+  color: var(--delete-red);
+}
+
+.DeletePostContainer div button:last-of-type:hover {
+  color: #800000;
+  text-shadow: 0px 0px 12px #a00000bf;
 }
 
 .PostNews hr {

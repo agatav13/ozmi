@@ -29,10 +29,13 @@ export default function DeleteNewsPost({ deleteFrom, post, setDeletedPost, onPos
   }
 
   return (
-    <>
-      <p>Czy na pewno chcesz usunąć ten post?</p>
-      <button type="button" onClick={() => setDeletedPost(null)}>Anuluj</button>
-      <button type="button" onClick={() => handleDelete()}>Usuń</button>
-    </>
+    <div className="DeletePostContainer">
+      <h6>Czy na pewno chcesz usunąć ten post?</h6>
+      <p>Czynność nie może być cofnięta.</p>
+      <div>
+        <button type="button" onClick={() => setDeletedPost(null)}>Anuluj</button>
+        <button type="button" onClick={() => handleDelete()}>Tak, usuń</button>
+      </div>
+    </div>
   );
 }
