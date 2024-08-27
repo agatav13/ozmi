@@ -27,7 +27,7 @@ export default function DateInput({name, id, onChange, value}: DateInputProps) {
   const handleDateChange = (date: dayjs.Dayjs | null) => {
     if (date) {
       setSelectedDate(date);
-      onChange(date.toDate());
+      onChange(date.utc(true).toDate());
     }
   }
 

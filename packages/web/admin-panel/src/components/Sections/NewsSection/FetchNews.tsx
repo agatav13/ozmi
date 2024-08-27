@@ -38,7 +38,12 @@ export default function FetchNews({ posts, setPosts }: FetchDataProps) {
   };
 
   const formattedDate = (date: Date) => {
-    return new Date(date).toLocaleDateString("pl-Pl", {day: "2-digit", month: "2-digit", year: "numeric"})
+    return new Date(date).toLocaleDateString("pl-PL", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      timeZone: "Europe/Warsaw"
+    });
   };
 
   const formattedContent = (content: string) => {

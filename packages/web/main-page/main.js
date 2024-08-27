@@ -6,14 +6,18 @@ const displayTiles = async () => {
   const data = await response.json();
 
   // sortuje posty wg daty i wybiera trzy najnowsze
-  const sortedPosts = data.sort((a, b) => new Date(b.date) - new Date(a.date));
-  const newestPosts = sortedPosts.slice(0, 3);
+  const newestPosts = data.slice(0, 3);
 
   const datePosts = document.querySelectorAll('.date-post');
   const titlePosts = document.querySelectorAll('.title-post');
 
   const formattedDate = (date) => {
-    return new Date(date).toLocaleDateString("pl-Pl", {day: "2-digit", month: "2-digit", year: "numeric"})
+    return new Date(date).toLocaleDateString("pl-PL", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      timeZone: "Europe/Warsaw"
+    });
   };
 
   newestPosts.forEach((post, index) => {
