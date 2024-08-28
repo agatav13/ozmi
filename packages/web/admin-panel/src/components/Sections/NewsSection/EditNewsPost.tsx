@@ -2,6 +2,9 @@ import { useState } from "react";
 import DateInput from "../../reusable/DateInput";
 import { FormDataTypeWithId } from "types";
 import { CgClose } from "react-icons/cg";
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 
 interface EditNewsPostProps {
   post: FormDataTypeWithId;
@@ -10,6 +13,9 @@ interface EditNewsPostProps {
 }
 
 export default function EditNewsPost({ post, setEditingPost, onPostUpdated }: EditNewsPostProps) {
+  dayjs.extend(utc);
+  dayjs.extend(timezone);
+
   type HTMLElementEvent = React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLTextAreaElement>
 
   const formData: FormDataTypeWithId = {
@@ -20,7 +26,10 @@ export default function EditNewsPost({ post, setEditingPost, onPostUpdated }: Ed
     id: post.id
   };
 
-  const [responseBody, setResponseBody] = useState<FormDataTypeWithId>(formData);
+  const [responseBody, setResponseBody] = useState<FormDataTypeWithId>({
+    ...formData,
+    date: dayjs(post.date).tz("Europe/Warsaw").toDate()
+  });
 
   const handleChange = (event: HTMLElementEvent) => {
     const {name, value} = event.target
@@ -30,13 +39,18 @@ export default function EditNewsPost({ post, setEditingPost, onPostUpdated }: Ed
   const handleSubmit =  async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log("Submitting form data:", responseBody);
+    const formDataToSend = {
+      ...responseBody,
+      date: dayjs(responseBody.date).tz("Europe/Warsaw").format()
+    };
+
+    console.log("Submitting form data:", formDataToSend);
 
     try {
       const response = await fetch("http://localhost:5000/edit-news-posts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(responseBody)
+        body: JSON.stringify(formDataToSend)
       });
 
       if (!response.ok) {

@@ -8,7 +8,7 @@ export const createCaseStudyPosts = async (req: Request, res: Response) => {
     return res.status(400).json({ error: "Wszystkie pola nie są wypełnione" });
   }
 
-  const query = "INSERT INTO case_study_posts (title, date, category) VALUES ($1, $2, $3) RETURNING id";
+  const query = "INSERT INTO case_study_posts (title, date, category) VALUES ($1, $2::timestamp, $3) RETURNING id";
   const values = [title, date, category];
 
   try {
@@ -28,7 +28,7 @@ export const editCaseStudyPosts = async (req: Request, res: Response) => {
     return res.status(400).json({ error: "Wszystkie pola nie są wypełnione" });
   }
 
-  const query = "UPDATE case_study_posts SET title = $1, date = $2, category = $3 WHERE id = $4";
+  const query = "UPDATE case_study_posts SET title = $1, date = $2::timestamp, category = $3 WHERE id = $4";
   const values = [title, date, category, id];
 
   try {

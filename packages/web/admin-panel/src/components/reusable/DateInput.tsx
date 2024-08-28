@@ -20,7 +20,7 @@ export default function DateInput({name, id, onChange, value}: DateInputProps) {
   dayjs.locale('pl')
 
   const currentDateInPoland = dayjs().tz("Europe/Warsaw");
-  const initialDate = value ? dayjs(value) : currentDateInPoland;
+  const initialDate = value ? dayjs(value).tz("Europe/Warsaw") : currentDateInPoland;
 
   const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs>(initialDate);
 
