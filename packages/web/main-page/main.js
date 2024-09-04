@@ -1,13 +1,3 @@
-async function fetchNewestNewsPosts() {
-  const response = await fetch('http://localhost:5000/get-news-posts');
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
-  }
-  const data = await response.json();
-
-  return data.slice(0, 3);
-}
-
 function formattedDate(date) {
   return new Date(date).toLocaleDateString("pl-PL", {
     day: "2-digit",
@@ -21,7 +11,17 @@ function formattedContent(content) {
   return content.split("\n").map(line => 
     `<span>${line}<br></span>`
   ).join("");
-}
+};
+
+async function fetchNewestNewsPosts() {
+  const response = await fetch("http://localhost:5000/get-news-posts");
+  if (!response.ok) {
+    throw new Error(`Error fetching posts: ${response.status}, ${response.statusText}`);
+  }
+  const data = await response.json();
+
+  return data.slice(0, 3);
+};
 
 async function displayNewsTiles() {
   newestPosts = await fetchNewestNewsPosts();

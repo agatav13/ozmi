@@ -14,104 +14,103 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div class="grid-container">
-      <div class="header-main">
-        <img src="images/ozmi-logo.webp" alt="Logo Ośrodka Zastosowań Matematyki i Informatyki" />
-        <div class="header-nav">
-          <a href="#about-us"><p>O nas</p></a>
-          <a href="#news-section"><p>Aktualności</p></a>
-          <a href="#education"><p>Edukacja</p></a>
-          <a href="#case-studies"><p>Case studies</p></a>
-        </div>
+    <header class="main-page">
+      <img src="images/ozmi-logo.webp" alt="Logo Ośrodka Zastosowań Matematyki i Informatyki" />
+      <div class="main-page-nav">
+        <a href="#about-us"><p>O nas</p></a>
+        <a href="#news-section"><p>Aktualności</p></a>
+        <a href="#education"><p>Edukacja</p></a>
+        <a href="#case-studies"><p>Case studies</p></a>
       </div>
+    </header>
 
-      <div class="about-us" id="about-us">
-        <h1>Ośrodek <br />Zastosowań <br />Matematyki i <br />Informatyki</h1>
-        <h2>Uniwersytet Zielonogórski, Wydział Matematyki, Informatyki i Ekonometrii</h2>
-        <p>Litwo! Ojczyzno moja! ty jesteś jak zdrowie: Ile cię trzeba cenić, ten tylko się dowie, Kto cię stracił. Dziś piękność twą w całej ozdobie Widzę i opisuję, bo tęsknię po tobie. Panno święta, co Jasnej bronisz Częstochowy I w Ostrej świecisz Bramie! Ty, co gród zamkowy Nowogródzki ochraniasz z jego wiernym ludem! Jak mnie dziecko do zdrowia powróciłaś cudem (Gdy od płaczącej matki, pod Twoją opiekę Ofiarowany, martwą podniosłem powiekę; I zaraz mogłem pieszo, do Twych świątyń progu Iść za wrócone życie podziękować Bogu), Tak nas powrócisz cudem na Ojczyzny łono. Tymczasem przenoś moją duszę utęsknioną Do tych pagórków leśnych, do tych łąk zielonych, Szeroko nad błękitnym Niemnem rozciągnionych; Do tych pól malowanych zbożem rozmaitem, Wyzłacanych pszenicą, posrebrzanych żytem; Gdzie bursztynowy świerzop, gryka jak śnieg biała, Gdzie panieńskim rumieńcem dzięcielina pała, A wszystko przepasane jakby wstęgą, miedzą Zieloną, na niej z rzadka ciche grusze siedzą.</p>
-        <p class="text-align-right text-shadow-link"><a href=""><b>Przeczytaj więcej</b></a></p>
-      </div>
+    <div class="about-us" id="about-us">
+      <h1>Ośrodek <br />Zastosowań <br />Matematyki i <br />Informatyki</h1>
+      <h2>Uniwersytet Zielonogórski, Wydział Matematyki, Informatyki i Ekonometrii</h2>
+      <p>Litwo! Ojczyzno moja! ty jesteś jak zdrowie: Ile cię trzeba cenić, ten tylko się dowie, Kto cię stracił. Dziś piękność twą w całej ozdobie Widzę i opisuję, bo tęsknię po tobie. Panno święta, co Jasnej bronisz Częstochowy I w Ostrej świecisz Bramie! Ty, co gród zamkowy Nowogródzki ochraniasz z jego wiernym ludem! Jak mnie dziecko do zdrowia powróciłaś cudem (Gdy od płaczącej matki, pod Twoją opiekę Ofiarowany, martwą podniosłem powiekę; I zaraz mogłem pieszo, do Twych świątyń progu Iść za wrócone życie podziękować Bogu), Tak nas powrócisz cudem na Ojczyzny łono. Tymczasem przenoś moją duszę utęsknioną Do tych pagórków leśnych, do tych łąk zielonych, Szeroko nad błękitnym Niemnem rozciągnionych; Do tych pól malowanych zbożem rozmaitem, Wyzłacanych pszenicą, posrebrzanych żytem; Gdzie bursztynowy świerzop, gryka jak śnieg biała, Gdzie panieńskim rumieńcem dzięcielina pała, A wszystko przepasane jakby wstęgą, miedzą Zieloną, na niej z rzadka ciche grusze siedzą.</p>
+      <p class="text-align-right text-shadow-link"><a href=""><b>Przeczytaj więcej</b></a></p>
+    </div>
             
-      <div class="news-section" id="news-section">
-      	<h2 class="text-align-center">Aktualności</h2>
-        <div id="transform-news-tiles" class="news-tiles">
-          <!-- 'Kafelki' z aktualnościami wyświetlane za pomocą funkcji displayNewsTiles() -->
-        </div>
-        <p class="text-align-right text-shadow-link"><a href=""><b>Przeczytaj więcej</b></a></p>
+    <div class="news-section" id="news-section">
+    	<h2 class="text-align-center">Aktualności</h2>
+      <div id="transform-news-tiles" class="news-tiles">
+        <!-- 'Kafelki' z aktualnościami wyświetlane za pomocą funkcji displayNewsTiles() -->
       </div>
+      <p class="text-align-right text-shadow-link"><a href="newsSection/newsSection.html"><b>Przeczytaj więcej</b></a></p>
+    </div>
 
-      <div class="education" id="education">
-        <h2 class="text-align-center">Edukacja</h2>
-        <div class="education-tiles">
-          <div class="education-row-1">
-            <a id="education-tile-1" class="education-tile bottom-text" href="">
-              <p class="tile-text">Pracownia Matematyczna</p>
-              <p><i class="right-arrow white-arrow"></i></p>
-            </a>
-            <a id="education-tile-2" class="education-tile top-text" href="">
-              <p class="tile-text">Szkoła Modelowania Matematycznego</p>
-              <p><i class="right-arrow black-arrow"></i></p>
-            </a>
-          </div>
-          <div class="education-row-2">
-            <a id="education-tile-3" class="education-tile bottom-text" href="https://mathinsight.xyz/">
-              <p class="tile-text">Koło Naukowe Matematyki Stosowanej Insight.</p>
-              <p><i class="right-arrow white-arrow"></i></p>
-            </a>
-          </div>
+    <div class="education" id="education">
+      <h2 class="text-align-center">Edukacja</h2>
+      <div class="education-tiles">
+        <div class="education-row-1">
+          <a id="education-tile-1" class="education-tile bottom-text" href="">
+            <p class="tile-text">Pracownia Matematyczna</p>
+            <p><i class="right-arrow white-arrow"></i></p>
+          </a>
+          <a id="education-tile-2" class="education-tile top-text" href="">
+            <p class="tile-text">Szkoła Modelowania Matematycznego</p>
+            <p><i class="right-arrow black-arrow"></i></p>
+          </a>
         </div>
-      </div>
-
-      <div class="partners">
-        <h2 class="text-align-center">Z naszych rozwiązań korzystają</h2>
-      </div>
-
-      <div class="case-studies" id="case-studies">
-        <h2 class="text-align-center">Case Studies</h2>
-        <div class="case-studies-container">
-          <div class="case-study">
-            <img src="images/case-study-arrow.png" alt="">
-            <h3>Ciężki problem, fajny opisowy tytuł, klikasz to sie rozwinie. Ekstra?</h3>
-          </div>
-          <div class="case-study">
-            <img src="images/case-study-arrow.png" alt="">
-            <h3>Ciężki problem, fajny opisowy tytuł, klikasz to sie rozwinie. Ekstra?</h3>
-          </div>
-          <div class="case-study">
-          	<img src="images/case-study-arrow.png" alt="">
-            <h3>Ciężki problem, fajny opisowy tytuł, klikasz to sie rozwinie. Ekstra?</h3>
-          </div>
-          <div class="case-study">
-            <img src="images/case-study-arrow.png" alt="">
-            <h3>Ciężki problem, fajny opisowy tytuł, klikasz to sie rozwinie. Ekstra?</h3>
-          </div>
-          <div class="case-study">
-            <img src="images/case-study-arrow.png" alt="">
-            <h3>Ciężki problem, fajny opisowy tytuł, klikasz to sie rozwinie. Ekstra?</h3>
-          </div>
-          <div class="case-study">
-            <img src="images/case-study-arrow.png" alt="">
-            <h3>Ciężki problem, fajny opisowy tytuł, klikasz to sie rozwinie. Ekstra?</h3>
-          </div>
+        <div class="education-row-2">
+          <a id="education-tile-3" class="education-tile bottom-text" href="https://mathinsight.xyz/">
+            <p class="tile-text">Koło Naukowe Matematyki Stosowanej Insight.</p>
+            <p><i class="right-arrow white-arrow"></i></p>
+          </a>
         </div>
-      </div>
-    
-      <div class="footer">
-        <img src="images/ozmi-logo.webp" alt="Logo Ośrodka Zastosowań Matematyki i Informatyki" />
-        <p>
-          <b>Adres</b><br />
-          Uniwersytet Zielonogórski,<br />
-          ul. prof. Zygmunta Szafrana 4A<br />
-          Zielona Góra, 65-516<br />
-          Kapmus A, budynek A-29, pokój 412
-        </p>
-        <p>
-          <b>Kontakt</b><br />
-          ozmi@wmie.uz.zgora.pl<br />
-          +48 123456789
-        </p>
       </div>
     </div>
+
+    <div class="partners">
+      <h2 class="text-align-center">Z naszych rozwiązań korzystają</h2>
+    </div>
+
+    <div class="case-studies" id="case-studies">
+      <h2 class="text-align-center">Case Studies</h2>
+      <div class="case-studies-container">
+        <div class="case-study">
+          <img src="images/case-study-arrow.png" alt="">
+          <h3>Ciężki problem, fajny opisowy tytuł, klikasz to sie rozwinie. Ekstra?</h3>
+        </div>
+        <div class="case-study">
+          <img src="images/case-study-arrow.png" alt="">
+          <h3>Ciężki problem, fajny opisowy tytuł, klikasz to sie rozwinie. Ekstra?</h3>
+        </div>
+        <div class="case-study">
+        	<img src="images/case-study-arrow.png" alt="">
+          <h3>Ciężki problem, fajny opisowy tytuł, klikasz to sie rozwinie. Ekstra?</h3>
+        </div>
+        <div class="case-study">
+          <img src="images/case-study-arrow.png" alt="">
+          <h3>Ciężki problem, fajny opisowy tytuł, klikasz to sie rozwinie. Ekstra?</h3>
+        </div>
+        <div class="case-study">
+          <img src="images/case-study-arrow.png" alt="">
+          <h3>Ciężki problem, fajny opisowy tytuł, klikasz to sie rozwinie. Ekstra?</h3>
+        </div>
+        <div class="case-study">
+          <img src="images/case-study-arrow.png" alt="">
+          <h3>Ciężki problem, fajny opisowy tytuł, klikasz to sie rozwinie. Ekstra?</h3>
+        </div>
+      </div>
+    </div>
+    
+    <footer>
+      <img src="images/ozmi-logo.webp" alt="Logo Ośrodka Zastosowań Matematyki i Informatyki" />
+      <p>
+        <b>Adres</b><br />
+        Uniwersytet Zielonogórski,<br />
+        ul. prof. Zygmunta Szafrana 4A<br />
+        Zielona Góra, 65-516<br />
+        Kapmus A, budynek A-29, pokój 412
+      </p>
+      <p>
+        <b>Kontakt</b><br />
+        ozmi@wmie.uz.zgora.pl<br />
+        +48 123456789
+      </p>
+    <footer>
+
     <script src="main.js"></script>
   </body>
 </html>
