@@ -1,5 +1,9 @@
 import cors from "cors";
 import express from "express";
+import multer from "multer";
+import path from "path";
+import fs from "fs";
+import { v4 as uuidv4 } from "uuid";
 import { initializeDatabase, testDb } from "./database/database";
 import { createNewsPosts, deleteNewsPosts, editNewsPosts, getNewsPosts } from "./sections/news";
 import { createCaseStudyPosts, deleteCaseStudyPosts, editCaseStudyPosts, getCaseStudyPosts } from "./sections/caseStudies";
@@ -15,6 +19,41 @@ app.use(cors({
   ] 
 }));
 
+// sprawdza czy ścieżka istnieje, jeżeli nie to ją tworzy
+const ensureDirectoryExists = (dir: string) => {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+};
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    let dir = "";
+
+    // daje posty z poszczególych sekcji w odpowiednich ścieżkach
+    if (req.url.startsWith("/create-news-posts")) {
+      dir = path.join(__dirname, "uploads/news-posts");
+    } else if (req.url.startsWith("/create-case-study-posts")) {
+      dir = path.join(__dirname, "uploads/case-study-posts");
+    } else {
+      throw new Error("Invalid request URL");
+    }
+
+    ensureDirectoryExists(dir);
+    cb(null, dir);
+  },
+  filename: (req, file, cb) => {
+    // tworzy unikalną nazwe dla zdjęcia
+    const fileExtension = path.extname(file.originalname);
+    const uniqueName = `${uuidv4()}${fileExtension}`;
+    cb(null, uniqueName);
+  }
+});
+
+const upload = multer({ storage });
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -22,7 +61,7 @@ initializeDatabase();
 
 app.get("/test-db", testDb);
 
-app.post("/create-news-posts", createNewsPosts);
+app.post("/create-news-posts", upload.array("images"), createNewsPosts);
 app.post("/edit-news-posts", editNewsPosts);
 app.delete("/delete-news-posts/:id", deleteNewsPosts);
 app.get("/get-news-posts", getNewsPosts);

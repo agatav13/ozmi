@@ -20,6 +20,7 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
   };
 
   const [responseBody, setResponseBody] = useState<FormDataType>(formData);
+  const [images, setImages] = useState<File[]>([]);
 
   // aktualizuje zawartość pól w poście (zmienia reponseBody)
   const handleChange = (event: HTMLElementEvent) => {
@@ -27,16 +28,29 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
     setResponseBody({...responseBody, [name]: value})
   };
 
+  // dodaje nowe zdjęcia do array
+  const handleFilesAdded = (files: File[]) => {
+    setImages(files);
+  };
+
   const handleSubmit =  async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     console.log("Submitting form data:", responseBody);
 
+    const formDataToPost = new FormData();
+    formDataToPost.append("title", responseBody.title);
+    formDataToPost.append("date", responseBody.date.toISOString());
+    formDataToPost.append("category", responseBody.category);
+    formDataToPost.append("content", responseBody.content);
+    images.forEach((image) => {
+      formDataToPost.append("images", image);
+    });
+
     try {
       const response = await fetch("http://localhost:5000/create-news-posts", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(responseBody)
+        body: formDataToPost
       });
 
       if (!response.ok) {
@@ -72,7 +86,7 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
       <textarea name="content" id="content" required rows={10} onChange={(e)=>handleChange(e)} value={responseBody.content}></textarea>
 
       <label htmlFor="photos">Zdjęcia</label>
-      {/* <DropFiles name="photos" id="photos" /> */}
+      <DropFiles name="photos" id="photos" onFilesAdded={handleFilesAdded} />
 
       <input className="AddNewButton" type="submit" value="Dodaj" />
     </form>

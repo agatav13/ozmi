@@ -48,7 +48,8 @@ export async function initializeDatabase() {
         title VARCHAR(1000),
         date DATE,
         category CATEGORY,
-        content TEXT
+        content TEXT,
+        images TEXT[]
       )
     `);
 

@@ -67,6 +67,9 @@ export default function FetchNews({ posts, setPosts }: FetchDataProps) {
               <p className="PostDate">{formattedDate(post.date)}</p>
               <p className="PostCategory">{post.category}</p>
               <p className="PostContent">{formattedContent(post.content)}</p>
+              {post.images && post.images.map((image, index) => (
+                <img key={index} src={`http://localhost:5000/uploads/news-posts/${image}`} alt={`Zdjęcie ${index}`} />
+              ))}
               <div className="ButtonContainer">
                 <button type="button" onClick={() => setEditingPost(post)}>Edytuj</button>
                 <button type="button" onClick={() => setDeletedPost(post)}>Usuń</button>

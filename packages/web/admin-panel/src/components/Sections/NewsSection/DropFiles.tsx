@@ -2,19 +2,25 @@ import { useState, useCallback } from "react";
 import { useDropzone, FileRejection, DropzoneOptions } from "react-dropzone";
 import { FileWithPreview } from "types/src/index"
 
-export default function DropFiles({name, id}: {name: string, id: string}) {
+interface DropFilesProps {
+  name: string,
+  id: string,
+  onFilesAdded: (files: FileWithPreview[]) => void
+}
+
+export default function DropFiles({name, id, onFilesAdded}: DropFilesProps) {
   const [files, setFiles] = useState<FileWithPreview[]>([]);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    setFiles((prevFiles) => [
-      ...prevFiles,
-      ...acceptedFiles.map((file) => 
-        Object.assign(file, {
-          preview: URL.createObjectURL(file)
-        })
-      ) as FileWithPreview[]
-    ]);
-  }, []);
+    const newFiles = acceptedFiles.map((file) =>
+      Object.assign(file, {
+        preview: URL.createObjectURL(file),
+      })
+    ) as FileWithPreview[];
+
+    setFiles((prevFiles) => [...prevFiles, ...newFiles]);
+    onFilesAdded(newFiles);
+  }, [onFilesAdded]);
 
   const onDropRejected = useCallback((fileRejections: FileRejection[]) => {
     console.log('Rejected files:', fileRejections);
@@ -32,6 +38,7 @@ export default function DropFiles({name, id}: {name: string, id: string}) {
     const newFiles = [...files];
     newFiles.splice(newFiles.indexOf(file), 1);
     setFiles(newFiles);
+    onFilesAdded(newFiles);
   };
 
   return (
@@ -53,12 +60,7 @@ export default function DropFiles({name, id}: {name: string, id: string}) {
               className="PreviewImage"
               onLoad={() => { URL.revokeObjectURL(file.preview) }}
             />
-            <button
-              onClick={() => removeFile(file)}
-              className="DeleteButton"
-            >
-              ×
-            </button>
+            <button onClick={() => removeFile(file)} className="DeleteButton">×</button>
           </div>
         ))}
       </div>

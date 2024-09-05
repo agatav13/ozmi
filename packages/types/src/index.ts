@@ -6,7 +6,8 @@ export interface FormDataType {
   title: string,
   date: Date,
   category: string,
-  content: string
+  content: string,
+  images?: string[]
 }
 
 export interface FormDataTypeWithId extends FormDataType {

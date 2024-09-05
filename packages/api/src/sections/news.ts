@@ -3,13 +3,15 @@ import { pool } from "../database/database";
 
 export const createNewsPosts = async (req: Request, res: Response) => {  
   const { title, date, category, content } = req.body;
+  const images = req.files as Express.Multer.File[];
+  const imageNames = images.map(image => image.filename);
 
   if (!title || !date || !category || !content) {
     return res.status(400).json({ error: "Wszystkie pola nie są wypełnione" });
   }
 
-  const query = "INSERT INTO news_posts (title, date, category, content) VALUES ($1, $2::timestamp, $3, $4) RETURNING id";
-  const values = [title, date, category, content];
+  const query = "INSERT INTO news_posts (title, date, category, content, images) VALUES ($1, $2::timestamp, $3, $4, $5) RETURNING id";
+  const values = [title, date, category, content, imageNames];
 
   try {
     const result = await pool.query(query, values);
