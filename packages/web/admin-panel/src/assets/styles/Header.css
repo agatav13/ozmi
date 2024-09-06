@@ -73,16 +73,12 @@
 }
 
 .cl-userButtonPopoverFooter {
-  display: none;
+  background: #dfdfdf;
 }
 
 .cl-navbar {
   background: #d9d9d9;
   font-family: "Roboto", sans-serif;
-}
-
-.cl-internal-lqfubk {
-  display: none;
 }
 
 .cl-pageScrollBox {

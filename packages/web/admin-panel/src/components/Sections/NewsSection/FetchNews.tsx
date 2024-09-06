@@ -6,10 +6,11 @@ import DeleteNewsPost from "../../reusable/DeletePost";
 interface FetchDataProps {
   posts: FormDataTypeWithId[];
   setPosts: React.Dispatch<React.SetStateAction<FormDataTypeWithId[]>>;
+  refresh: boolean;
 }
 
 // przyjmuje wartości z useState w parent component
-export default function FetchNews({ posts, setPosts }: FetchDataProps) {
+export default function FetchNews({ posts, setPosts, refresh }: FetchDataProps) {
   const [editingPost, setEditingPost] = useState<FormDataTypeWithId | null>(null);
   const [deletedPost, setDeletedPost] = useState<FormDataTypeWithId | null>(null);
 
@@ -25,7 +26,7 @@ export default function FetchNews({ posts, setPosts }: FetchDataProps) {
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [refresh]);
 
   const updatePostInState = (updatedPost: FormDataTypeWithId) => {
     setPosts((prevPosts) =>
@@ -69,7 +70,7 @@ export default function FetchNews({ posts, setPosts }: FetchDataProps) {
               <p className="PostContent">{formattedContent(post.content)}</p>
               <div className="PhotoGallery">
                 {post.images && post.images.map((image, index) => (
-                  <img key={index} src={`http://localhost:5000/uploads/news-posts/${image}`} alt={`Zdjęcie ${index}`} />
+                  <img loading="lazy" key={index} src={`http://localhost:5000/uploads/news-posts/${image}`} alt={`Zdjęcie ${index}`} />
                 ))}
               </div>
               <div className="ButtonContainer">

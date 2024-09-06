@@ -8,10 +8,11 @@ import { FormDataTypeWithId } from "types";
 export default function NewsSection() {
   const [showForm, setShowForm] = useState(false);
   const [posts, setPosts] = useState<FormDataTypeWithId[]>([]);
+  const [refresh, setRefresh] = useState(false);
 
   // nowe posty wyświetlają się bez odświeżania
-  const handlePostAdded = (newPost: FormDataTypeWithId) => {
-    setPosts(prevPosts => [newPost, ...prevPosts]);
+  const handlePostAdded = () => {
+    setRefresh(prev => !prev);
   };
 
   return (
@@ -29,7 +30,7 @@ export default function NewsSection() {
           <FormNews updateShowForm={setShowForm} onPostAdded={handlePostAdded} />
         </>
       )}
-      <FetchNews posts={posts} setPosts={setPosts} />
+      <FetchNews posts={posts} setPosts={setPosts} refresh={refresh} />
     </>
   );
 }

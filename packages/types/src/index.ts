@@ -3,23 +3,23 @@ export interface FileWithPreview extends File {
 }
 
 export interface FormDataType {
-  title: string,
-  date: Date,
-  category: string,
-  content: string,
-  images?: string[]
+  title: string;
+  date: Date;
+  category: string;
+  content: string;
+  images?: string[];
 }
 
 export interface FormDataTypeWithId extends FormDataType {
-  id: number
+  id: number;
 }
 
 export interface CaseStudyDataType {
-  title: string,
-  date: Date,
-  category: string
+  title: string;
+  date: Date;
+  category: string;
 }
 
 export interface CaseStudyDataTypeWithId extends CaseStudyDataType {
-  id: number
+  id: number;
 }
