@@ -250,6 +250,21 @@ select, input[type=submit] {
   margin-block-end: 0.6em;
 }
 
+.PostNews .PhotoGallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.PostNews .PhotoGallery img {
+  height: 200px;
+  object-fit: cover;
+}
+
+.PostNews .PhotoGallery img:last-of-type {
+  margin-bottom: 10px;
+}
+
 .PostNews .ButtonContainer {
   display: flex;
   gap: 20px;

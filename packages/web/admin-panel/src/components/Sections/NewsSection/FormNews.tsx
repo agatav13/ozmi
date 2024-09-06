@@ -30,7 +30,7 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
 
   // dodaje nowe zdjęcia do array
   const handleFilesAdded = (files: File[]) => {
-    setImages(files);
+    setImages([...images, ...files]);
   };
 
   const handleSubmit =  async (event: React.FormEvent<HTMLFormElement>) => {
