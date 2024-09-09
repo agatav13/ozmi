@@ -31,7 +31,7 @@ const storage = multer.diskStorage({
     let dir = "";
 
     // daje posty z poszczególych sekcji w odpowiednich ścieżkach
-    if (req.url.startsWith("/create-news-posts")) {
+    if (req.url.startsWith("/create-news-posts") || req.url.startsWith("/edit-news-posts")) {
       dir = path.join(__dirname, "uploads/news-posts");
     } else if (req.url.startsWith("/create-case-study-posts")) {
       dir = path.join(__dirname, "uploads/case-study-posts");
@@ -62,7 +62,7 @@ initializeDatabase();
 app.get("/test-db", testDb);
 
 app.post("/create-news-posts", upload.array("images"), createNewsPosts);
-app.post("/edit-news-posts", editNewsPosts);
+app.post("/edit-news-posts", upload.array("newImages"), editNewsPosts);
 app.delete("/delete-news-posts/:id", deleteNewsPosts);
 app.get("/get-news-posts", getNewsPosts);
 

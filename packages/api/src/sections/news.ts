@@ -1,14 +1,17 @@
 import { Request, Response } from "express";
 import { pool } from "../database/database";
+import fs from "fs";
+import path from "path";
 
 export const createNewsPosts = async (req: Request, res: Response) => {  
   const { title, date, category, content } = req.body;
   const images = req.files as Express.Multer.File[];
-  const imageNames = images.map(image => image.filename);
 
   if (!title || !date || !category || !content) {
     return res.status(400).json({ error: "Wszystkie pola nie są wypełnione" });
   }
+
+  const imageNames = images.map(image => image.filename);
 
   const query = "INSERT INTO news_posts (title, date, category, content, images) VALUES ($1, $2::timestamp, $3, $4, $5) RETURNING id";
   const values = [title, date, category, content, imageNames];
@@ -24,18 +27,39 @@ export const createNewsPosts = async (req: Request, res: Response) => {
 }
 
 export const editNewsPosts = async (req: Request, res: Response) => {
-  const { title, date, category, content, id } = req.body;
+  const { id, title, date, category, content, existingImages } = req.body;
+  const newImages = req.files as Express.Multer.File[];
 
-  if (!title || !date || !category || !content) {
+  if (!id || !title || !date || !category || !content) {
     return res.status(400).json({ error: "Wszystkie pola nie są wypełnione" });
   }
 
-  const query = "UPDATE news_posts SET title = $1, date = $2::timestamp, category = $3, content = $4 WHERE id = $5";
-  const values = [title, date, category, content, id];
+  // dołącza nowo dodane zdjęcia do tych, które już były w poście
+  const existingImagesArray = JSON.parse(existingImages);
+  const newImageNames = newImages ? newImages.map(image => image.filename) : [];
+  const allImages = [...existingImagesArray, ...newImageNames];
+
+  const query = "UPDATE news_posts SET title = $1, date = $2::timestamp, category = $3, content = $4, images = $5 WHERE id = $6";
+  const values = [title, date, category, content, allImages, id];
 
   try {
+    // bierze zdjęcia ze starej wersji postu
+    const oldPost = await pool.query("SELECT images FROM news_posts WHERE id = $1", [id]);
+    const oldImages = oldPost.rows[0].images;
+    
     const result = await pool.query(query, values);
-    console.log("Zaktualizowano post:", title, date, category, content);
+    
+    // usuwa odpowiednie zdjęcia z foldera w którym są przechowywane
+    const imagesToDelete = oldImages.filter((img: string) => !existingImages.includes(img));
+
+    imagesToDelete.forEach((img: string) => {
+      const imagePath = path.join(__dirname, "../uploads/news-posts", img);
+      fs.unlink(imagePath, (err) => {
+        if (err) console.error(`Failed to delete image: ${img}`, err);
+      });
+    });
+
+    console.log("Zaktualizowano post:", result.rows[0]);
     res.status(200).json({ message: "Post updated successfully", result });
   } catch (error) {
     console.error("Error updating the post:", error);

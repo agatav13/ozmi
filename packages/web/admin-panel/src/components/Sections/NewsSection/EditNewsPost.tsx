@@ -1,56 +1,62 @@
 import { useState } from "react";
 import DateInput from "../../reusable/DateInput";
-import { FormDataTypeWithId } from "types";
+import { FileWithPreview, FormDataTypeWithId } from "types";
 import { CgClose } from "react-icons/cg";
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
+import DropFiles from "./DropFiles";
 
 interface EditNewsPostProps {
   post: FormDataTypeWithId;
   setEditingPost: React.Dispatch<React.SetStateAction<FormDataTypeWithId | null>>;
-  onPostUpdated: (updatedPost: FormDataTypeWithId) => void;
+  onPostUpdated: () => void;
 }
 
 export default function EditNewsPost({ post, setEditingPost, onPostUpdated }: EditNewsPostProps) {
   dayjs.extend(utc);
   dayjs.extend(timezone);
 
-  type HTMLElementEvent = React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLTextAreaElement>
-
-  const formData: FormDataTypeWithId = {
-    title: post.title,
-    date: post.date,
-    category: post.category,
-    content: post.content,
-    id: post.id
-  };
-
   const [responseBody, setResponseBody] = useState<FormDataTypeWithId>({
-    ...formData,
+    ...post,
     date: dayjs(post.date).tz("Europe/Warsaw").toDate()
   });
+  const [existingImages, setExistingImages] = useState<string[]>(post.images || []);
+  const [newImages, setNewImages] = useState<FileWithPreview[]>([]);
 
-  const handleChange = (event: HTMLElementEvent) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const {name, value} = event.target
     setResponseBody({...responseBody, [name]: value})
+  };
+
+  const handleFilesAdded = (files: FileWithPreview[]) => {
+    setNewImages([...newImages, ...files]);
+  };
+
+  const handleRemoveExistingImage = (imageToRemove: string) => {
+    setExistingImages(existingImages.filter(img => img !==imageToRemove));
   };
 
   const handleSubmit =  async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const formDataToSend = {
-      ...responseBody,
-      date: dayjs(responseBody.date).tz("Europe/Warsaw").format()
-    };
+    console.log("Submitting form data:", responseBody);
 
-    console.log("Submitting form data:", formDataToSend);
+    const formDataToPost = new FormData();
+    formDataToPost.append("id", responseBody.id.toString());
+    formDataToPost.append("title", responseBody.title);
+    formDataToPost.append("date", dayjs(responseBody.date).tz("Europe/Warsaw").format());
+    formDataToPost.append("category", responseBody.category);
+    formDataToPost.append("content", responseBody.content);
+    formDataToPost.append("existingImages", JSON.stringify(existingImages));
+    newImages.forEach((image) => {
+      formDataToPost.append("newImages", image);
+    });
 
     try {
       const response = await fetch("http://localhost:5000/edit-news-posts", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formDataToSend)
+        body: formDataToPost
       });
 
       if (!response.ok) {
@@ -59,8 +65,7 @@ export default function EditNewsPost({ post, setEditingPost, onPostUpdated }: Ed
 
       const result = await response.json();
       console.log("Update result:", result);
-      onPostUpdated({ ...responseBody, id: post.id }); // żeby po zaktualizowaniu postu wyświetlał się bez odświeżania
-      setResponseBody(formData);  // ustawia wartości, które były w poście jako reponseBody
+      onPostUpdated(); // żeby po zaktualizowaniu postu wyświetlał się bez odświeżania
       setEditingPost(null); // zamyka element po zapisaniu
     } catch (error) {
       console.error("Error:", error);
@@ -89,7 +94,17 @@ export default function EditNewsPost({ post, setEditingPost, onPostUpdated }: Ed
         <textarea name="content" id="content" required rows={10} onChange={(e)=>handleChange(e)} value={responseBody.content}></textarea>
 
         <label htmlFor="photos">Zdjęcia</label>
-        {/* <DropFiles name="photos" id="photos" /> */}
+        <DropFiles name="photos" id="photos" onFilesAdded={handleFilesAdded} />
+
+        <p>Istniejące zdjęcia</p>
+        <div className="PreviewContainer">
+          {existingImages.map((image, index) => (
+            <div key={index} className="ImagePreview">
+              <img src={`http://localhost:5000/uploads/news-posts/${image}`} alt={`Zdjęcie ${index}`} className="PreviewImage" />
+              <button type="button" onClick={() => handleRemoveExistingImage(image)} className="DeleteButton">×</button>
+            </div>
+          ))}
+        </div>
 
         <input className="AddNewButton" type="submit" value="Zapisz" />
       </form>

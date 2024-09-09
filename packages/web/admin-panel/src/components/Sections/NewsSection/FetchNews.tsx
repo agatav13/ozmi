@@ -13,6 +13,7 @@ interface FetchDataProps {
 export default function FetchNews({ posts, setPosts, refresh }: FetchDataProps) {
   const [editingPost, setEditingPost] = useState<FormDataTypeWithId | null>(null);
   const [deletedPost, setDeletedPost] = useState<FormDataTypeWithId | null>(null);
+  const [refreshAfterEdit, setRefreshAfterEdit] = useState(false);
 
   const fetchPosts = async () => {
     const response = await fetch('http://localhost:5000/get-news-posts');
@@ -26,12 +27,10 @@ export default function FetchNews({ posts, setPosts, refresh }: FetchDataProps) 
 
   useEffect(() => {
     fetchPosts();
-  }, [refresh]);
+  }, [refresh, refreshAfterEdit]);
 
-  const updatePostInState = (updatedPost: FormDataTypeWithId) => {
-    setPosts((prevPosts) =>
-      prevPosts.map((post) => (post.id === updatedPost.id ? updatedPost : post))
-    );
+  const handlePostUpdated = () => {
+    setRefreshAfterEdit(prev => !prev);
   };
 
   const deletePostFromState = (id: number) => {
@@ -81,7 +80,7 @@ export default function FetchNews({ posts, setPosts, refresh }: FetchDataProps) 
                 <DeleteNewsPost deleteFrom="news-posts" post={post} setDeletedPost={setDeletedPost} onPostDeleted={deletePostFromState} />
               )}
               {editingPost && editingPost.id === post.id && (
-                <EditNewsPost post={post} setEditingPost={setEditingPost} onPostUpdated={updatePostInState} />
+                <EditNewsPost post={post} setEditingPost={setEditingPost} onPostUpdated={handlePostUpdated} />
               )}
               <hr />
             </div>
