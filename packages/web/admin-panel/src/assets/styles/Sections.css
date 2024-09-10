@@ -188,12 +188,12 @@ select, input[type=submit] {
   text-align: center;
   cursor: pointer;
   font-size: 14px;
+  margin-bottom: 16px;
 }
 
 .PreviewContainer {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 16px;
 }
 
 .ImagePreview {
