@@ -1,7 +1,7 @@
 import { useState } from "react";
 import DateInput from "../../reusable/DateInput";
 import DropFiles from "./DropFiles";
-import { FormDataTypeWithId, FormDataType } from "types";
+import { FormDataType, FileWithPreview } from "types";
 
 interface NewsFormProps {
   updateShowForm: React.Dispatch<React.SetStateAction<boolean>>;
@@ -9,8 +9,6 @@ interface NewsFormProps {
 }
 
 export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps) {
-  type HTMLElementEvent = React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLTextAreaElement>
-
   // tworzy początkową wersję postu
   const formData: FormDataType = {
     title: "",
@@ -20,17 +18,21 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
   };
 
   const [responseBody, setResponseBody] = useState<FormDataType>(formData);
-  const [images, setImages] = useState<File[]>([]);
+  const [images, setImages] = useState<FileWithPreview[]>([]);
 
   // aktualizuje zawartość pól w poście (zmienia reponseBody)
-  const handleChange = (event: HTMLElementEvent) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const {name, value} = event.target
     setResponseBody({...responseBody, [name]: value})
   };
 
   // dodaje nowe zdjęcia do array
-  const handleFilesAdded = (files: File[]) => {
+  const handleFilesAdded = (files: FileWithPreview[]) => {
     setImages([...images, ...files]);
+  };
+
+  const handleFileRemoved = (fileToRemove: FileWithPreview) => {
+    setImages(newImages => newImages.filter(file => file !== fileToRemove));
   };
 
   const handleSubmit =  async (event: React.FormEvent<HTMLFormElement>) => {
@@ -85,7 +87,13 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
       <textarea name="content" id="content" required rows={10} onChange={(e)=>handleChange(e)} value={responseBody.content}></textarea>
 
       <label htmlFor="photos">Zdjęcia</label>
-      <DropFiles name="photos" id="photos" onFilesAdded={handleFilesAdded} />
+      <DropFiles
+        name="photos"
+        id="photos" 
+        onFilesAdded={handleFilesAdded}
+        onFileRemoved={handleFileRemoved}
+        newImages={images}
+      />
 
       <input className="AddNewButton" type="submit" value="Dodaj" />
     </form>

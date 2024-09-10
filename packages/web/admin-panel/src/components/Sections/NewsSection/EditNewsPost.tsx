@@ -33,6 +33,10 @@ export default function EditNewsPost({ post, setEditingPost, onPostUpdated }: Ed
     setNewImages([...newImages, ...files]);
   };
 
+  const handleFileRemoved = (fileToRemove: FileWithPreview) => {
+    setNewImages(newImages => newImages.filter(file => file !== fileToRemove));
+  };
+
   const handleRemoveExistingImage = (imageToRemove: string) => {
     setExistingImages(existingImages.filter(img => img !==imageToRemove));
   };
@@ -94,17 +98,15 @@ export default function EditNewsPost({ post, setEditingPost, onPostUpdated }: Ed
         <textarea name="content" id="content" required rows={10} onChange={(e)=>handleChange(e)} value={responseBody.content}></textarea>
 
         <label htmlFor="photos">Zdjęcia</label>
-        <DropFiles name="photos" id="photos" onFilesAdded={handleFilesAdded} />
-
-        <p>Istniejące zdjęcia</p>
-        <div className="PreviewContainer">
-          {existingImages.map((image, index) => (
-            <div key={index} className="ImagePreview">
-              <img src={`http://localhost:5000/uploads/news-posts/${image}`} alt={`Zdjęcie ${index}`} className="PreviewImage" />
-              <button type="button" onClick={() => handleRemoveExistingImage(image)} className="DeleteButton">×</button>
-            </div>
-          ))}
-        </div>
+        <DropFiles
+          name="photos"
+          id="photos"
+          onFilesAdded={handleFilesAdded}
+          onFileRemoved={handleFileRemoved}
+          newImages={newImages}
+          existingImages={existingImages}
+          handleRemoveExistingImage={handleRemoveExistingImage}
+        />
 
         <input className="AddNewButton" type="submit" value="Zapisz" />
       </form>

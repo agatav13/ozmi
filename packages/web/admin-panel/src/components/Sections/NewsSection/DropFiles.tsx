@@ -1,16 +1,18 @@
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import { useDropzone, FileRejection, DropzoneOptions } from "react-dropzone";
 import { FileWithPreview } from "types/src/index"
 
 interface DropFilesProps {
-  name: string,
-  id: string,
-  onFilesAdded: (files: FileWithPreview[]) => void
+  name: string;
+  id: string;
+  onFilesAdded: (files: FileWithPreview[]) => void;
+  onFileRemoved: (file: FileWithPreview) => void;
+  newImages: FileWithPreview[];
+  existingImages?: string[];
+  handleRemoveExistingImage?: (imageToRemowe: string) => void;
 }
 
-export default function DropFiles({name, id, onFilesAdded}: DropFilesProps) {
-  const [files, setFiles] = useState<FileWithPreview[]>([]);
-
+export default function DropFiles({name, id, onFilesAdded, onFileRemoved, newImages, existingImages, handleRemoveExistingImage}: DropFilesProps) {
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const newFiles = acceptedFiles.map((file) =>
       Object.assign(file, {
@@ -18,7 +20,6 @@ export default function DropFiles({name, id, onFilesAdded}: DropFilesProps) {
       })
     ) as FileWithPreview[];
 
-    setFiles((prevFiles) => [...prevFiles, ...newFiles]);
     onFilesAdded(newFiles);
   }, [onFilesAdded]);
 
@@ -35,10 +36,7 @@ export default function DropFiles({name, id, onFilesAdded}: DropFilesProps) {
   const { getRootProps, getInputProps, isDragActive } = useDropzone(dropzoneOptions);
 
   const removeFile = (file: FileWithPreview) => {
-    const newFiles = [...files];
-    newFiles.splice(newFiles.indexOf(file), 1);
-    setFiles(newFiles);
-    onFilesAdded(newFiles);
+    onFileRemoved(file);
   };
 
   return (
@@ -51,8 +49,18 @@ export default function DropFiles({name, id, onFilesAdded}: DropFilesProps) {
           <p>Przeciągnij lub wybierz zdjęcia</p>
         )}
       </div>
+
       <div className="PreviewContainer">
-        {files.map((file) => (
+        {existingImages && handleRemoveExistingImage && existingImages.map((image, index) => (
+          <div key={index} className="ImagePreview">
+            <img src={`http://localhost:5000/uploads/news-posts/${image}`} alt={`Zdjęcie ${index}`} className="PreviewImage" />
+            <button type="button" onClick={() => handleRemoveExistingImage(image)} className="DeleteButton">×</button>
+          </div>
+        ))}
+      </div>
+
+      <div className="PreviewContainer">
+        {newImages.map((file) => (
           <div key={file.name} className="ImagePreview">
             <img
               src={file.preview}
