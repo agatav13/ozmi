@@ -1,10 +1,10 @@
 version: "3.8"
 
 services:
-  db: 
+  db:
     container_name: db-postgres
     image: postgres:latest
-    ports: 
-    - "5432:5432"
+    ports:
+      - "5432:5432"
     env_file:
-    - docker.env
+      - docker.env

@@ -1,14 +1,14 @@
 {
-    "pipeline": {
-        "dev": {
-            "cache": true
-        },
-        "type-check": {
-            "outputs": []
-        },
-        "build": {
-            "dependsOn": ["type-check"],
-            "outputs": ["dist/**"]
-        }
+  "pipeline": {
+    "dev": {
+      "cache": true
+    },
+    "type-check": {
+      "outputs": []
+    },
+    "build": {
+      "dependsOn": ["type-check"],
+      "outputs": ["dist/**"]
     }
+  }
 }
