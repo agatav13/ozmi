@@ -31,7 +31,8 @@ a {
   color: black;
 }
 
-button, a {
+button,
+a {
   cursor: pointer;
 }
 
@@ -104,7 +105,8 @@ header.main-page .main-page-nav a:hover {
   gap: 10px;
 }
 
-.tile, .expanded-tile {
+.tile,
+.expanded-tile {
   border-radius: 10px;
   background-color: #70738e;
   width: 100%;
@@ -122,7 +124,8 @@ header.main-page .main-page-nav a:hover {
   transform: translateY(2px);
 }
 
-.tile .date-post, .expanded-tile .date-post {
+.tile .date-post,
+.expanded-tile .date-post {
   margin: 0;
   text-align: right;
 }
@@ -140,13 +143,15 @@ header.main-page .main-page-nav a:hover {
   font-size: 1.1rem;
 }
 
-.tile .title-post, .expanded-tile .title-post {
+.tile .title-post,
+.expanded-tile .title-post {
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.tile .see-more, .expanded-tile .see-more {
+.tile .see-more,
+.expanded-tile .see-more {
   margin: 0;
   align-self: flex-end;
   background-color: transparent;
@@ -188,7 +193,8 @@ header.main-page .main-page-nav a:hover {
   aspect-ratio: 1/1;
 }
 
-.education-row-1, .education-row-2 {
+.education-row-1,
+.education-row-2 {
   display: flex;
   aspect-ratio: 2/1;
 }

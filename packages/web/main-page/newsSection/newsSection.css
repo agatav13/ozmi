@@ -38,7 +38,8 @@ header.news-page div h2 {
   padding-top: 4px;
 }
 
-.news-post h3, .news-post p {
+.news-post h3,
+.news-post p {
   margin: 0;
 }
 

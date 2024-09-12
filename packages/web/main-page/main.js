@@ -3,40 +3,52 @@ function formattedDate(date) {
     day: "2-digit",
     month: "2-digit",
     year: "numeric",
-    timeZone: "Europe/Warsaw"
+    timeZone: "Europe/Warsaw",
   });
-};
+}
 
 function formattedContent(content) {
-  return content.split("\n").map(line => 
-    `<span>${line}<br></span>`
-  ).join("");
-};
+  return content
+    .split("\n")
+    .map((line) => `<span>${line}<br></span>`)
+    .join("");
+}
 
 async function fetchNewestNewsPosts() {
   const response = await fetch("http://localhost:5000/get-news-posts");
   if (!response.ok) {
-    throw new Error(`Error fetching posts: ${response.status}, ${response.statusText}`);
+    throw new Error(
+      `Error fetching posts: ${response.status}, ${response.statusText}`
+    );
   }
   const data = await response.json();
 
   return data.slice(0, 3);
-};
+}
 
 async function displayNewsTiles() {
   newestPosts = await fetchNewestNewsPosts();
 
   const newsTilesContainer = document.getElementById("transform-news-tiles");
 
-  newsTilesContainer.innerHTML = newestPosts.map((post, index) => `
+  // wyświetla pierwsze zdjęcie w poście, jeżeli nie ma żadnych to inne defaultowe zdjęcie jest podlinkowane
+  newsTilesContainer.innerHTML = newestPosts
+    .map(
+      (post, index) => `
     <div class="tile">
       <p class="date-post">${formattedDate(post.date)}</p>
-      <img src="/packages/web/main-page/images/testowe3.jpg" alt="Zdjęcie postu" class="photo-post">
+      <img src="${
+        post.images.length > 0
+          ? `http://localhost:5000/uploads/news-posts/${post.images[0]}`
+          : "images/testowe3.jpg"
+      }" alt="Zdjęcie postu" class="photo-post">
       <h3 class="title-post">${post.title}</h3>
       <button type="button" onclick="expandTile(${index})" class="see-more text-align-right text-shadow-link">Zobacz więcej...</button>
     </div>
-  `).join("");
-};
+  `
+    )
+    .join("");
+}
 
 async function expandTile(index) {
   newestPosts = await fetchNewestNewsPosts();
@@ -44,18 +56,24 @@ async function expandTile(index) {
   const post = newestPosts[index];
   const newsTilesContainer = document.getElementById("transform-news-tiles");
 
+  const hasImage = post.images && post.images.length > 0;
+
   newsTilesContainer.innerHTML = `
    <div class="expanded-tile">
       <p class="date-post">${formattedDate(post.date)}</p>
-      <img src="/packages/web/main-page/images/testowe2.jpg" alt="Zdjęcie postu" class="photo-post">
+      ${
+        hasImage
+          ? `<img src="http://localhost:5000/uploads/news-posts/${post.images[0]}" alt="Zdjęcie postu" class="photo-post">`
+          : ""
+      }
       <h3 class="title-post">${post.title}</h3>
       <p class="category-post"><i>${post.category}</i></p>
       <p class="content-post">${formattedContent(post.content)}</p>
       <button type="button" onclick="displayNewsTiles()" class="see-more text-align-right text-shadow-link">Pokaż mniej</button>
     </div>
   `;
-};
+}
 
 window.onload = function () {
   displayNewsTiles();
-}
+};
