@@ -7,13 +7,6 @@ function formattedDate(date) {
   });
 }
 
-function formattedContent(content) {
-  return content
-    .split("\n")
-    .map((line) => `<span>${line}<br></span>`)
-    .join("");
-}
-
 async function fetchNewsPosts() {
   const response = await fetch("http://localhost:5000/get-news-posts");
   if (!response.ok) {
@@ -32,7 +25,7 @@ async function fetchNewsPosts() {
       <h3 class="title">${post.title}</h3>
       <p>${formattedDate(post.date)}</p>
       <p><i>${post.category}</i></p>
-      <p class="content">${formattedContent(post.content)}</p>
+      <div class="content">${marked(post.content)}</div>
       <hr />
     </div>
   `

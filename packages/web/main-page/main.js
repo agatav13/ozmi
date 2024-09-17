@@ -7,13 +7,6 @@ function formattedDate(date) {
   });
 }
 
-function formattedContent(content) {
-  return content
-    .split("\n")
-    .map((line) => `<span>${line}<br></span>`)
-    .join("");
-}
-
 async function fetchNewestNewsPosts() {
   const response = await fetch("http://localhost:5000/get-news-posts");
   if (!response.ok) {
@@ -68,7 +61,7 @@ async function expandTile(index) {
       }
       <h3 class="title-post">${post.title}</h3>
       <p class="category-post"><i>${post.category}</i></p>
-      <p class="content-post">${formattedContent(post.content)}</p>
+      <p class="content-post">${marked(post.content)}</p>
       <button type="button" onclick="displayNewsTiles()" class="see-more text-align-right text-shadow-link">Pokaż mniej</button>
     </div>
   `;

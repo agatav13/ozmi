@@ -52,7 +52,7 @@ a {
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
 }
 
-h2 {
+h2.section-title {
   font-size: 2em;
 }
 
