@@ -123,7 +123,7 @@ input:autofill:active {
   box-shadow: 0 0 0 30px #e6e6e6 inset !important;
 }
 
-input[type=text], .ant-picker, select, textarea, .DropzoneContainer {
+input[type=text], .ant-picker, .ant-select, textarea, .DropzoneContainer {
   font-family: "Roboto", sans-serif;
   background-color: #dfdfdf;
   border: 2px solid black;
@@ -137,9 +137,31 @@ input[type=text], .ant-picker, select, textarea, .DropzoneContainer {
   padding: 6px 12px !important;
 }
 
-input[type=text]:hover, .ant-picker:hover, select:hover, textarea:hover, .DropzoneContainer:hover,
-input[type=text]:focus, .ant-picker:focus, select:focus, textarea:focus {
-  background-color: #e6e6e6;
+.ant-select {
+  padding: 0 !important;
+  height: 36px;
+}
+
+.ant-select-selector {
+  background-color: #dfdfdf !important;
+}
+
+.ant-select-arrow {
+  color: black !important;
+  padding-right: 1px !important;
+}
+
+.DropDownSelect {
+  background-color: #dfdfdf;
+}
+
+.ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background-color: #bfbfbf;
+}
+
+input[type=text]:hover, .ant-picker:hover, .ant-select-selector:hover, textarea:hover, .DropzoneContainer:hover,
+input[type=text]:focus, .ant-picker:focus, .ant-select-selector:focus, textarea:focus {
+  background: #e6e6e6 !important;
 }
 
 .ant-picker:hover,
@@ -179,7 +201,6 @@ textarea {
   max-height: 600px;
 }
 
-select,
 input[type="submit"] {
   cursor: pointer;
 }

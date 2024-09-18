@@ -1,6 +1,7 @@
 import { CaseStudyDataType, CaseStudyDataTypeWithId } from "types";
 import DateInput from "../../reusable/DateInput";
 import { useState } from "react";
+import SelectInput from "../../reusable/SelectInput";
 
 interface FormCaseStudyProps {
   updateShowForm: React.Dispatch<React.SetStateAction<boolean>>;
@@ -51,18 +52,18 @@ export default function FormCaseStudy({ updateShowForm, onPostAdded }: FormCaseS
   return(
     <form className="Form" onSubmit={handleSubmit}>
       <label htmlFor="title">Tytuł</label>
-      <input type="text" name="title" id="title" required onChange={(e)=>handleChange(e)} value={responseBody.title} />
+      <input type="text" name="title" id="title" required onChange={(e)=>handleChange(e)} />
 
       <label htmlFor="date">Data</label>
       <DateInput name="date" id="date" onChange={(date) => setResponseBody({...responseBody, date})} />
 
       <label htmlFor="category">Kategoria</label>
-      <select name="category" id="category" required onChange={(e)=>handleChange(e)} value={responseBody.category}>
-        <option value="" disabled selected>Wybierz kategorię</option>
-        <option value="Przemysł">Przemysł</option>
-        <option value="E-commerce">E-commerce</option>
-        <option value="Inne">Inne</option>
-      </select>
+      <SelectInput 
+        name="category" 
+        id="category" 
+        options={["Przemysł", "E-commerce", "Inne"]} 
+        onChange={handleChange} 
+      />
 
       <input className="AddNewButton" type="submit" value="Dodaj" style={{marginTop: "16px"}} />
     </form>

@@ -2,10 +2,11 @@ import { useState } from "react";
 import DateInput from "../../reusable/DateInput";
 import { FileWithPreview, FormDataTypeWithId } from "types";
 import { CgClose } from "react-icons/cg";
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 import DropFiles from "./DropFiles";
+import SelectInput from "../../reusable/SelectInput";
 
 interface EditNewsPostProps {
   post: FormDataTypeWithId;
@@ -19,7 +20,7 @@ export default function EditNewsPost({ post, setEditingPost, onPostUpdated }: Ed
 
   const [responseBody, setResponseBody] = useState<FormDataTypeWithId>({
     ...post,
-    date: dayjs(post.date).tz("Europe/Warsaw").toDate()
+    date: dayjs(post.date).tz("Europe/Warsaw").toDate(),
   });
   const [existingImages, setExistingImages] = useState<string[]>(post.images || []);
   const [newImages, setNewImages] = useState<FileWithPreview[]>([]);
@@ -34,14 +35,16 @@ export default function EditNewsPost({ post, setEditingPost, onPostUpdated }: Ed
   };
 
   const handleFileRemoved = (fileToRemove: FileWithPreview) => {
-    setNewImages(newImages => newImages.filter(file => file !== fileToRemove));
+    setNewImages((newImages) =>
+      newImages.filter((file) => file !== fileToRemove)
+    );
   };
 
   const handleRemoveExistingImage = (imageToRemove: string) => {
-    setExistingImages(existingImages.filter(img => img !==imageToRemove));
+    setExistingImages(existingImages.filter((img) => img !== imageToRemove));
   };
 
-  const handleSubmit =  async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     console.log("Submitting form data:", responseBody);
@@ -60,7 +63,7 @@ export default function EditNewsPost({ post, setEditingPost, onPostUpdated }: Ed
     try {
       const response = await fetch("http://localhost:5000/edit-news-posts", {
         method: "POST",
-        body: formDataToPost
+        body: formDataToPost,
       });
 
       if (!response.ok) {
@@ -74,28 +77,36 @@ export default function EditNewsPost({ post, setEditingPost, onPostUpdated }: Ed
     } catch (error) {
       console.error("Error:", error);
     }
-  }
+  };
 
   return (
     <>
-      <button className="DiscardChanges" type="button" onClick={() => setEditingPost(null)}><CgClose /> Anuluj zmiany</button>
+      <button className="DiscardChanges" type="button" onClick={() => setEditingPost(null)}>
+        <CgClose /> Anuluj zmiany
+      </button>
       <form className="Form Edit" onSubmit={handleSubmit}>
         <label htmlFor="title">Tytuł</label>
         <input type="text" name="title" id="title" required onChange={(e)=>handleChange(e)} value={responseBody.title} />
 
         <label htmlFor="date">Data</label>
-        <DateInput name="date" id="date" onChange={(date) => setResponseBody({...responseBody, date})} value={responseBody.date} />
+        <DateInput
+          name="date"
+          id="date"
+          onChange={(date) => setResponseBody({ ...responseBody, date })}
+          value={responseBody.date}
+        />
 
         <label htmlFor="category">Kategoria</label>
-        <select name="category" id="category" required onChange={(e)=>handleChange(e)} value={responseBody.category}>
-          <option value="" disabled selected>Wybierz kategorię</option>
-          <option value="Szkoła Modelowania Matematycznego">Szkoła Modelowania Matematycznego</option>
-          <option value="Współpraca">Współpraca</option>
-          <option value="Inne">Inne</option>
-        </select>
+        <SelectInput
+          name="category"
+          id="category"
+          options={["Szkoła Modelowania Matematycznego", "Współpraca", "Inne"]}
+          onChange={handleChange}
+          value={responseBody.category}
+        />
 
         <label htmlFor="content">Treść</label>
-        <textarea name="content" id="content" required rows={10} onChange={(e)=>handleChange(e)} value={responseBody.content}></textarea>
+        <textarea name="content" id="content" required rows={10} onChange={handleChange} value={responseBody.content}></textarea>
 
         <label htmlFor="photos">Zdjęcia</label>
         <DropFiles

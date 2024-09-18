@@ -2,6 +2,7 @@ import { useState } from "react";
 import DateInput from "../../reusable/DateInput";
 import DropFiles from "./DropFiles";
 import { FormDataType, FileWithPreview } from "types";
+import SelectInput from "../../reusable/SelectInput";
 
 interface NewsFormProps {
   updateShowForm: React.Dispatch<React.SetStateAction<boolean>>;
@@ -9,7 +10,6 @@ interface NewsFormProps {
 }
 
 export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps) {
-  // tworzy początkową wersję postu
   const formData: FormDataType = {
     title: "",
     date: new Date(),
@@ -26,7 +26,6 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
     setResponseBody({...responseBody, [name]: value})
   };
 
-  // dodaje nowe zdjęcia do array
   const handleFilesAdded = (files: FileWithPreview[]) => {
     setImages([...images, ...files]);
   };
@@ -60,7 +59,6 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
       }
 
       onPostAdded(); // żeby po dodaniu nowego postu wyświetlał się bez odświeżania
-      setResponseBody(formData);  // ustawia wartości, które były w poście jako reponseBody
       updateShowForm(false);  // ukrywa element dodawania postu po dodaniu
     } catch (error) {
       console.error("Error:", error);
@@ -70,21 +68,25 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
   return (
     <form className="Form" onSubmit={handleSubmit}>
       <label htmlFor="title">Tytuł</label>
-      <input type="text" name="title" id="title" required onChange={(e)=>handleChange(e)} value={responseBody.title} />
+      <input type="text" name="title" id="title" required onChange={handleChange} />
 
       <label htmlFor="date">Data</label>
-      <DateInput name="date" id="date" onChange={(date) => setResponseBody({...responseBody, date})} />
+      <DateInput 
+        name="date" 
+        id="date" 
+        onChange={(date) => setResponseBody({...responseBody, date})} 
+      />
 
       <label htmlFor="category">Kategoria</label>
-      <select name="category" id="category" required onChange={(e)=>handleChange(e)} value={responseBody.category}>
-        <option value="" disabled selected>Wybierz kategorię</option>
-        <option value="Szkoła Modelowania Matematycznego">Szkoła Modelowania Matematycznego</option>
-        <option value="Współpraca">Współpraca</option>
-        <option value="Inne">Inne</option>
-      </select>
+      <SelectInput 
+        name="category" 
+        id="category" 
+        options={["Szkoła Modelowania Matematycznego", "Współpraca", "Inne"]} 
+        onChange={handleChange} 
+      />
 
       <label htmlFor="content">Treść</label>
-      <textarea name="content" id="content" required rows={10} onChange={(e)=>handleChange(e)} value={responseBody.content}></textarea>
+      <textarea name="content" id="content" required rows={10} onChange={handleChange}></textarea>
 
       <label htmlFor="photos">Zdjęcia</label>
       <DropFiles
