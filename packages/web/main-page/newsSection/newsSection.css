@@ -24,6 +24,10 @@ header.news-page div h2 {
   font-size: 1.8rem;
 }
 
+main {
+  padding-bottom: 60px;
+}
+
 .main-page-link {
   max-width: max-content;
   display: flex;
@@ -52,8 +56,6 @@ header.news-page div h2 {
 }
 
 .news-post hr {
-  border: none;
-  height: 1px;
-  background-color: black;
-  margin: 30px 0px 15px;
+  border: 1px solid #b7b4b4;
+  margin: 35px 0px 20px;
 }

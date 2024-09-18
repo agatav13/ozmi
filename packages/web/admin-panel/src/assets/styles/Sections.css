@@ -68,7 +68,7 @@
 
 .DiscardButton svg {
   width: 24px;
-	height: 24px;
+  height: 24px;
   color: var(--delete-red);
 }
 
@@ -78,7 +78,7 @@
 
 .Form label {
   font-family: "Playfair Display", serif;
-	font-weight: 600;
+  font-weight: 600;
   padding-top: 14px;
   padding-bottom: 4px;
 }
@@ -95,7 +95,7 @@ input:-webkit-autofill {
   box-shadow: 0 0 0 30px #dfdfdf inset !important;
 }
 
-input:-webkit-autofill:hover, 
+input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px #e6e6e6 inset !important;
@@ -113,7 +113,7 @@ input:autofill {
   box-shadow: 0 0 0 30px #dfdfdf inset !important;
 }
 
-input:autofill:hover, 
+input:autofill:hover,
 input:autofill:focus,
 input:autofill:active {
   -webkit-box-shadow: 0 0 0 30px #e6e6e6 inset !important;
@@ -142,7 +142,8 @@ input[type=text]:focus, .ant-picker:focus, select:focus, textarea:focus {
   background-color: #e6e6e6;
 }
 
-.ant-picker:hover, .ant-picker:focus {
+.ant-picker:hover,
+.ant-picker:focus {
   border: 2px solid black;
 }
 
@@ -178,7 +179,8 @@ textarea {
   max-height: 600px;
 }
 
-select, input[type=submit] {
+select,
+input[type="submit"] {
   cursor: pointer;
 }
 
@@ -237,7 +239,8 @@ select, input[type=submit] {
   margin-block-end: 0.5em;
 }
 
-.PostNews .PostDate, .PostNews .PostCategory {
+.PostNews .PostDate,
+.PostNews .PostCategory {
   font-size: 1.1em;
   margin-block-start: 0.5em;
   margin-block-end: 0.5em;
@@ -271,7 +274,8 @@ select, input[type=submit] {
   padding-bottom: 10px;
 }
 
-.PostNews .ButtonContainer button, .DiscardChanges {
+.PostNews .ButtonContainer button,
+.DiscardChanges {
   background-color: transparent;
   border: none;
   padding: 0;
