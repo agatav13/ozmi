@@ -3,12 +3,12 @@ import ReactMarkdown from "react-markdown";
 import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
 import remarkMath from "remark-math";
-import { InlineMath, BlockMath } from 'react-katex';
-import 'katex/dist/katex.min.css';
-import { Components } from 'react-markdown';
+import { InlineMath, BlockMath } from "react-katex";
+import "katex/dist/katex.min.css";
+import { Components } from "react-markdown";
 import { FormDataTypeWithId } from "types";
 import EditNewsPost from "./EditNewsPost";
-import DeleteNewsPost from "../../reusable/DeletePost";
+import DeletePost from "../../reusable/DeletePost";
 
 interface FetchNewsProps {
   posts: FormDataTypeWithId[];
@@ -19,6 +19,7 @@ interface FetchNewsProps {
 export default function FetchNews({ posts, setPosts, refresh }: FetchNewsProps) {
   const [editingPost, setEditingPost] = useState<FormDataTypeWithId | null>(null);
   const [deletedPost, setDeletedPost] = useState<FormDataTypeWithId | null>(null);
+  const [openModal, setOpenModal] = useState(false);
   const [refreshAfterEdit, setRefreshAfterEdit] = useState(false);
 
   const fetchPosts = async () => {
@@ -52,10 +53,9 @@ export default function FetchNews({ posts, setPosts, refresh }: FetchNewsProps) 
     });
   };
 
-  // Custom components for react-markdown
-  const components: Components & { 
-    inlineMath: React.ComponentType<{ node: { value: string } }>,
-    math: React.ComponentType<{ node: { value: string } }> 
+  const components: Components & {
+    inlineMath: React.ComponentType<{ node: { value: string } }>;
+    math: React.ComponentType<{ node: { value: string } }>;
   } = {
     inlineMath: ({ node }) => <InlineMath math={node.value} />,
     math: ({ node }) => <BlockMath math={node.value} />,
@@ -73,9 +73,9 @@ export default function FetchNews({ posts, setPosts, refresh }: FetchNewsProps) 
               <p className="PostDate">{formattedDate(post.date)}</p>
               <p className="PostCategory">{post.category}</p>
               <div className="PostContent">
-                <ReactMarkdown 
+                <ReactMarkdown
                   components={components}
-                  remarkPlugins={[remarkMath]} 
+                  remarkPlugins={[remarkMath]}
                   rehypePlugins={[rehypeKatex, rehypeRaw]}
                 >
                   {post.content}
@@ -84,7 +84,12 @@ export default function FetchNews({ posts, setPosts, refresh }: FetchNewsProps) 
               <div className="PhotoGallery">
                 {post.images &&
                   post.images.map((image, index) => (
-                    <img loading="lazy" key={index} src={`http://localhost:5000/uploads/news-posts/${image}`} alt={`Zdjęcie ${index}`} />
+                    <img
+                      loading="lazy"
+                      key={index}
+                      src={`http://localhost:5000/uploads/news-posts/${image}`}
+                      alt={`Zdjęcie ${index}`}
+                    />
                   ))}
               </div>
 
@@ -92,17 +97,31 @@ export default function FetchNews({ posts, setPosts, refresh }: FetchNewsProps) 
                 <button type="button" onClick={() => setEditingPost(post)}>
                   Edytuj
                 </button>
-                <button type="button" onClick={() => setDeletedPost(post)}>
+                <button type="button" onClick={() => {
+                  setDeletedPost(post);
+                  setOpenModal(true);
+                }}>
                   Usuń
                 </button>
               </div>
 
               {deletedPost && deletedPost.id === post.id && (
-                <DeleteNewsPost deleteFrom="news-posts" post={post} setDeletedPost={setDeletedPost} onPostDeleted={deletePostFromState} />
+                <DeletePost
+                  deleteFrom="news-posts"
+                  post={post}
+                  setDeletedPost={setDeletedPost}
+                  onPostDeleted={deletePostFromState}
+                  openModal={openModal}
+                  setOpenModal={setOpenModal}
+                />
               )}
 
               {editingPost && editingPost.id === post.id && (
-                <EditNewsPost post={post} setEditingPost={setEditingPost} onPostUpdated={handlePostUpdated} />
+                <EditNewsPost
+                  post={post}
+                  setEditingPost={setEditingPost}
+                  onPostUpdated={handlePostUpdated}
+                />
               )}
               <hr />
             </div>

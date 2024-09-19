@@ -152,7 +152,7 @@ input[type=text], .ant-picker, .ant-select, textarea, .DropzoneContainer {
 }
 
 .DropDownSelect {
-  background-color: #dfdfdf;
+  background-color: #e6e6e6;
 }
 
 .ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
@@ -351,61 +351,68 @@ input[type="submit"] {
   font-size: 20px;
 }
 
-.DeletePostContainer {
-  max-width: 360px;
-  background-color: #ecaeb4;
+.ant-modal {
+  font-family: "Playfair Display", serif;
+  text-align: center !important;
   border: 3px solid var(--delete-red);
-  border-radius: 12px;
-  padding: 20px 0;
+  border-radius: 10px;
 }
 
-.DeletePostContainer h6 {
-  font-size: 1rem;
+.ant-modal-content {
+  background-color: #ecaeb4 !important;
+}
+
+.ant-modal-body p:first-of-type {
+  font-size: 1.05rem;
   font-weight: 700;
-  text-align: center;
-  margin: 0;
+  margin-bottom: 8px;
 }
 
-.DeletePostContainer p {
-  font-size: 0.88rem;
+.ant-modal-body p:last-of-type {
+  font-size: 0.95rem;
   font-weight: 400;
-  text-align: center;
-  margin: 0;
+  margin-top: 8px;
 }
 
-.DeletePostContainer div {
+.ant-modal-footer {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 30px;
-  padding-top: 20px;
+  margin-top: 20px !important;
+  margin-bottom: 6px;
 }
 
-.DeletePostContainer div button {
+.ant-modal-footer button {
   font-family: "Playfair Display", serif;
-  font-size: 0.95rem;
+  font-size: 1rem;
   background-color: transparent;
   border: none;
   cursor: pointer;
   transition-duration: 0.3s;
+  box-shadow: none;
 }
 
-.DeletePostContainer div button:first-of-type {
+.ant-modal-footer button:first-of-type {
   font-weight: 400;
 }
 
-.DeletePostContainer div button:first-of-type:hover {
+.ant-modal-footer button:first-of-type:hover {
   text-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4);
+  color: black !important;
+  background-color: transparent !important;
 }
 
-.DeletePostContainer div button:last-of-type {
+.ant-modal-footer button:last-of-type {
   font-weight: 600;
   color: var(--delete-red);
+  margin: 0 !important;
 }
 
-.DeletePostContainer div button:last-of-type:hover {
-  color: #800000;
+.ant-modal-footer button:last-of-type:hover {
+  color: #800000 !important;
   text-shadow: 0px 0px 12px #a00000bf;
+  background-color: transparent !important;
 }
 
 .PostNews hr {
