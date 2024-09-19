@@ -10,7 +10,7 @@ export default function Header() {
         <h2>Panel Administratora</h2>
       </div>
       <div className="HeaderButtons">
-        <a href="" className="HomeButton"><TiHome /></a>
+        <a href="" className="HomeButton" aria-label="Strona główna"><TiHome /></a>
         <UserButton />
 			</div>
     </div>

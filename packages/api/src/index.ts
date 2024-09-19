@@ -11,6 +11,11 @@ import { createCaseStudyPosts, deleteCaseStudyPosts, editCaseStudyPosts, getCase
 const app = express();
 const port = 5000;
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 // pozwala na requesty z frontendu
 app.use(cors({ 
   origin: [
@@ -47,15 +52,10 @@ const storage = multer.diskStorage({
     const fileExtension = path.extname(file.originalname);
     const uniqueName = `${uuidv4()}${fileExtension}`;
     cb(null, uniqueName);
-  }
+  },
 });
 
 const upload = multer({ storage });
-
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 initializeDatabase();
 
