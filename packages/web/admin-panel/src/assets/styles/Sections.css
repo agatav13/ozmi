@@ -246,6 +246,25 @@ input[type="submit"] {
   cursor: pointer;
 }
 
+/* do usuwania inputs w case studies */
+.LabelCaseStudy {
+  display: flex;
+  gap: 6px;
+}
+
+.LabelCaseStudy button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  padding: 18px 0 0 0;
+  height: 15px;
+}
+
+.LabelCaseStudy button svg {
+  font-size: 15px;
+  color: var(--delete-red);
+}
+
 /* przyciski w Case Studies do dodowania tekstu lub zdjęć */
 .CaseStudiesButtons {
   display: flex;

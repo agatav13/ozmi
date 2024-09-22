@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { HiOutlinePhoto } from "react-icons/hi2";
 import { IoTextOutline } from "react-icons/io5";
+import { FaTrash } from "react-icons/fa";
 
 export default function InputsCaseStudies() {
   const [formElements, setFormElements] = useState<any[]>([]);
@@ -25,13 +26,23 @@ export default function InputsCaseStudies() {
     setFormElements(newElements);
   };
 
+  const deleteElement = (index: number) => {
+    const newElements = formElements.filter((_, i) => i !== index);
+    setFormElements(newElements);
+  };
+
   return (
     <>
       {formElements.map((element, index) => (
         <div className="CaseStudyInputs" key={index}>
           {element.type === "text" ? (
             <>
-              <label htmlFor="content">Treść</label>
+              <div className="LabelCaseStudy">
+                <label htmlFor="content">Treść</label>
+                <button type="button" onClick={() => deleteElement(index)}>
+                  <FaTrash />
+                </button>
+              </div>
               <textarea
                 name="content"
                 id="content"
@@ -42,7 +53,12 @@ export default function InputsCaseStudies() {
             </>
           ) : (
             <>
-              <label htmlFor="photos">Zdjęcia</label>
+              <div className="LabelCaseStudy">
+                <label htmlFor="photos">Zdjęcia</label>
+                <button type="button" onClick={() => deleteElement(index)}>
+                  <FaTrash />
+                </button>
+              </div>
               <input
                 type="file"
                 onChange={(e) => handleFileChange(index, e.target.files)}
