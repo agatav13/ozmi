@@ -1,4 +1,5 @@
 :root {
+  --default-bg: #d9d9d9;
   --delete-red: #a00000;
 }
 
@@ -23,7 +24,7 @@
 
 .AddNewButton {
   background-color: #111111;
-  color: #d9d9d9;
+  color: var(--default-bg);
   font-family: "Roboto", sans-serif;
   border-radius: 6px;
   border: 2px solid #111111;
@@ -36,7 +37,7 @@
 }
 
 .AddNewButton:hover {
-  background-color: #d9d9d9;
+  background-color: var(--default-bg);
   color: #111111;
 }
 
@@ -88,11 +89,11 @@
 }
 
 input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 30px #dfdfdf inset !important;
-  -moz-box-shadow: 0 0 0 30px #dfdfdf inset !important;
-  -ms-box-shadow: 0 0 0 30px #dfdfdf inset !important;
-  -o-box-shadow: 0 0 0 30px #dfdfdf inset !important;
-  box-shadow: 0 0 0 30px #dfdfdf inset !important;
+  -webkit-box-shadow: 0 0 0 30px var(--default-bg) inset !important;
+  -moz-box-shadow: 0 0 0 30px var(--default-bg) inset !important;
+  -ms-box-shadow: 0 0 0 30px var(--default-bg) inset !important;
+  -o-box-shadow: 0 0 0 30px var(--default-bg) inset !important;
+  box-shadow: 0 0 0 30px var(--default-bg) inset !important;
 }
 
 input:-webkit-autofill:hover,
@@ -106,11 +107,11 @@ input:-webkit-autofill:active {
 }
 
 input:autofill {
-  -webkit-box-shadow: 0 0 0 30px #dfdfdf inset !important;
-  -moz-box-shadow: 0 0 0 30px #dfdfdf inset !important;
-  -ms-box-shadow: 0 0 0 30px #dfdfdf inset !important;
-  -o-box-shadow: 0 0 0 30px #dfdfdf inset !important;
-  box-shadow: 0 0 0 30px #dfdfdf inset !important;
+  -webkit-box-shadow: 0 0 0 30px var(--default-bg) inset !important;
+  -moz-box-shadow: 0 0 0 30px var(--default-bg) inset !important;
+  -ms-box-shadow: 0 0 0 30px var(--default-bg) inset !important;
+  -o-box-shadow: 0 0 0 30px var(--default-bg) inset !important;
+  box-shadow: 0 0 0 30px var(--default-bg) inset !important;
 }
 
 input:autofill:hover,
@@ -125,7 +126,7 @@ input:autofill:active {
 
 input[type=text], .ant-picker, .ant-select, textarea, .DropzoneContainer {
   font-family: "Roboto", sans-serif;
-  background-color: #dfdfdf;
+  background-color: var(--default-bg);
   border: 2px solid black;
   border-radius: 6px;
   padding: 8px 12px;
@@ -143,7 +144,7 @@ input[type=text], .ant-picker, .ant-select, textarea, .DropzoneContainer {
 }
 
 .ant-select-selector {
-  background-color: #dfdfdf !important;
+  background-color: var(--default-bg) !important;
 }
 
 .ant-select-arrow {
@@ -242,6 +243,39 @@ input[type="submit"] {
   height: 20px;
   font-size: 12px;
   cursor: pointer;
+}
+
+/* przyciski w Case Studies do dodowania tekstu lub zdjęć */
+.CaseStudiesButtons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding: 24px 0 16px;
+}
+
+.CaseStudiesButtons button {
+  font-family: "Roboto", sans-serif;
+  padding: 8px 16px;
+  background-color: #e6e6e6;
+  border-radius: 6px;
+  border: 2px dashed #111111;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+.CaseStudiesButtons button svg {
+  font-size: 15px;
+}
+
+.CaseStudiesButtons button:hover {
+  background-color: #bfbfbf;
+}
+
+.CaseStudiesButtons button:active {
+  transform: translateY(1px);
 }
 
 .NoNews {
