@@ -35,18 +35,18 @@ export default function DeletePost({ deleteFrom, post, setDeletedPost, onPostDel
   };
 
   return (
-    <Modal 
-      centered 
+    <Modal
+      centered
       open={openModal}
       cancelText="Anuluj"
       onCancel={() => {
         setDeletedPost(null);
-        setOpenModal(false)}
-      }
+        setOpenModal(false);
+      }}
       okText="Usuń"
       onOk={() => handleDelete()}
     >
-      <p>Czy na pewno chcesz usunąć ten post?</p>
+      <p>Czy na pewno chcesz usunąć post "{post.title}"?</p>
       <p>Czynność nie może być cofnięta.</p>
     </Modal>
   );
