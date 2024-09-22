@@ -86,7 +86,7 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
       />
 
       <label htmlFor="content">Treść</label>
-      <textarea name="content" id="content" required rows={10} onChange={handleChange}></textarea>
+      <textarea name="content" id="content" required rows={10} onChange={handleChange} />
 
       <label htmlFor="photos">Zdjęcia</label>
       <DropFiles

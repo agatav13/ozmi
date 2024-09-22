@@ -73,7 +73,8 @@
   color: var(--delete-red);
 }
 
-.Form {
+.Form,
+.CaseStudyInputs {
   display: grid;
 }
 

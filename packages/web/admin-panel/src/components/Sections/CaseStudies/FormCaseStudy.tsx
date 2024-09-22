@@ -2,8 +2,7 @@ import { CaseStudyDataType, CaseStudyDataTypeWithId } from "types";
 import DateInput from "../../reusable/DateInput";
 import { useState } from "react";
 import SelectInput from "../../reusable/SelectInput";
-import { IoTextOutline } from "react-icons/io5";
-import { HiOutlinePhoto } from "react-icons/hi2";
+import InputsCaseStudies from "./InputsCaseStudies";
 
 interface FormCaseStudyProps {
   updateShowForm: React.Dispatch<React.SetStateAction<boolean>>;
@@ -72,10 +71,7 @@ export default function FormCaseStudy({ updateShowForm, onPostAdded }: FormCaseS
         onChange={handleChange}
       />
 
-      <div className="CaseStudiesButtons">
-        <button><IoTextOutline /> Dodaj tekst</button>
-        <button><HiOutlinePhoto />Dodaj zdjęcie</button>
-      </div>
+      <InputsCaseStudies />
 
       <input className="AddNewButton" type="submit" value="Dodaj" />
     </form>
