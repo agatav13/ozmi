@@ -8,9 +8,11 @@ import FetchCaseStudy from "./FetchCaseStudy";
 export default function CaseStudies() {
   const [showCaseStudyForm, setShowCaseStudyForm] = useState(false)
   const [posts, setPosts] = useState<CaseStudyDataTypeWithId[]>([]);
+  const [refresh, setRefresh] = useState(false);
 
-  const handlePostAdded = (newPost: CaseStudyDataTypeWithId) => {
-    setPosts(prevPosts => [newPost, ...prevPosts]);
+  // nowe posty wyświetlają się bez odświeżania
+  const handlePostAdded = () => {
+    setRefresh(prev => !prev);
   };
 
   return (
@@ -28,7 +30,7 @@ export default function CaseStudies() {
           <FormCaseStudy updateShowForm={setShowCaseStudyForm} onPostAdded={handlePostAdded} />
         </>
       )}
-      <FetchCaseStudy posts={posts} setPosts={setPosts} />
+      <FetchCaseStudy posts={posts} setPosts={setPosts} refresh={refresh} />
     </>
   );
 }

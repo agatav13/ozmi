@@ -5,12 +5,14 @@ import DeletePost from "../../reusable/DeletePost";
 interface FetchDataProps {
   posts: CaseStudyDataTypeWithId[];
   setPosts: React.Dispatch<React.SetStateAction<CaseStudyDataTypeWithId[]>>;
+  refresh: boolean;
 }
 
-export default function FetchNews({ posts, setPosts }: FetchDataProps) {
+export default function FetchNews({ posts, setPosts, refresh }: FetchDataProps) {
   const [editingPost, setEditingPost] = useState<CaseStudyDataTypeWithId | null>(null);
   const [deletedPost, setDeletedPost] = useState<CaseStudyDataTypeWithId | null>(null);
   const [openModal, setOpenModal] = useState(false);
+  const [refreshAfterEdit, setRefreshAfterEdit] = useState(false);
 
   const fetchPosts = async () => {
     const response = await fetch("http://localhost:5000/get-case-study-posts");
@@ -24,7 +26,12 @@ export default function FetchNews({ posts, setPosts }: FetchDataProps) {
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [refresh, refreshAfterEdit]);
+
+  // dodac po utworzeniu EditCaseStudy.tsx do onPostUpdated
+  const handlePostUpdated = () => {
+    setRefreshAfterEdit((prev) => !prev);
+  };
 
   const deletePostFromState = (id: number) => {
     setPosts((prevPosts) => prevPosts.filter((post) => post.id !== id));

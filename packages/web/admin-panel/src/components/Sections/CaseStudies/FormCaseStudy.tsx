@@ -6,7 +6,7 @@ import InputsCaseStudies from "./InputsCaseStudies";
 
 interface FormCaseStudyProps {
   updateShowForm: React.Dispatch<React.SetStateAction<boolean>>;
-  onPostAdded: (newPost: CaseStudyDataTypeWithId) => void;
+  onPostAdded: () => void;
 }
 
 export default function FormCaseStudy({ updateShowForm, onPostAdded }: FormCaseStudyProps) {
@@ -42,8 +42,7 @@ export default function FormCaseStudy({ updateShowForm, onPostAdded }: FormCaseS
         throw new Error(`HTTP error status: ${response.status}`);
       }
 
-      const result = await response.json();
-      onPostAdded({ ...responseBody, id: result.id }); // żeby po dodaniu nowego postu wyświetlał się bez odświeżania
+      onPostAdded(); // żeby po dodaniu nowego postu wyświetlał się bez odświeżania
       setResponseBody(caseStudyData); // ustawia wartości, które były w poście jako reponseBody
       updateShowForm(false); // ukrywa element dodawania postu po dodaniu
     } catch (error) {
