@@ -8,22 +8,24 @@ export const pool = new Pool({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-})
+});
 
 // testowanie czy baza danych jest podłączona
 export const testDb = async (req: Request, res: Response) => {
   try {
     const result = await pool.query("SELECT NOW()");
     console.log("Database connected successfully:", result.rows[0].now);
-    res.json({ 
+    res.json({
       message: "Database connected successfully",
-      currentTime: result.rows[0].now 
+      currentTime: result.rows[0].now,
     });
   } catch (err: any) {
     console.error("Database connection error:", err);
-    res.status(500).json({ error: "Internal server error", details: err.message });
+    res
+      .status(500)
+      .json({ error: "Internal server error", details: err.message });
   }
-}
+};
 
 export async function initializeDatabase() {
   const client = await pool.connect();
@@ -73,6 +75,17 @@ export async function initializeDatabase() {
         title VARCHAR(1000),
         date DATE,
         category CATEGORY_CASE_STUDY
+      )
+    `);
+
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS case_study_posts_content (
+        id SERIAL PRIMARY KEY,
+        post_id INT REFERENCES case_study_posts(id) ON DELETE CASCADE,
+        position_number INT NOT NULL,
+        content_type VARCHAR(50) NOT NULL CHECK (content_type IN ('text', 'photo')),
+        content TEXT NOT NULL,
+        UNIQUE(post_id, position_number)
       )
     `);
 
