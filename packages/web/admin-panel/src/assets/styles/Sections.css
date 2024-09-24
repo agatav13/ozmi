@@ -1,8 +1,3 @@
-:root {
-  --default-bg: #d9d9d9;
-  --delete-red: #a00000;
-}
-
 .DefaultContainer {
   display: flex;
   justify-content: center;
@@ -24,7 +19,7 @@
 
 .AddNewButton {
   background-color: #111111;
-  color: var(--default-bg);
+  color: var(--background-color);
   font-family: "Roboto", sans-serif;
   border-radius: 6px;
   border: 2px solid #111111;
@@ -37,7 +32,7 @@
 }
 
 .AddNewButton:hover {
-  background-color: var(--default-bg);
+  background-color: var(--background-color);
   color: #111111;
 }
 
@@ -73,6 +68,7 @@
   color: var(--delete-red);
 }
 
+/* formularz do tworzenia postów */
 .Form,
 .CaseStudyInputs {
   display: grid;
@@ -90,11 +86,11 @@
 }
 
 input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 30px var(--default-bg) inset !important;
-  -moz-box-shadow: 0 0 0 30px var(--default-bg) inset !important;
-  -ms-box-shadow: 0 0 0 30px var(--default-bg) inset !important;
-  -o-box-shadow: 0 0 0 30px var(--default-bg) inset !important;
-  box-shadow: 0 0 0 30px var(--default-bg) inset !important;
+  -webkit-box-shadow: 0 0 0 30px var(--background-color) inset !important;
+  -moz-box-shadow: 0 0 0 30px var(--background-color) inset !important;
+  -ms-box-shadow: 0 0 0 30px var(--background-color) inset !important;
+  -o-box-shadow: 0 0 0 30px var(--background-color) inset !important;
+  box-shadow: 0 0 0 30px var(--background-color) inset !important;
 }
 
 input:-webkit-autofill:hover,
@@ -108,11 +104,11 @@ input:-webkit-autofill:active {
 }
 
 input:autofill {
-  -webkit-box-shadow: 0 0 0 30px var(--default-bg) inset !important;
-  -moz-box-shadow: 0 0 0 30px var(--default-bg) inset !important;
-  -ms-box-shadow: 0 0 0 30px var(--default-bg) inset !important;
-  -o-box-shadow: 0 0 0 30px var(--default-bg) inset !important;
-  box-shadow: 0 0 0 30px var(--default-bg) inset !important;
+  -webkit-box-shadow: 0 0 0 30px var(--background-color) inset !important;
+  -moz-box-shadow: 0 0 0 30px var(--background-color) inset !important;
+  -ms-box-shadow: 0 0 0 30px var(--background-color) inset !important;
+  -o-box-shadow: 0 0 0 30px var(--background-color) inset !important;
+  box-shadow: 0 0 0 30px var(--background-color) inset !important;
 }
 
 input:autofill:hover,
@@ -127,7 +123,7 @@ input:autofill:active {
 
 input[type=text], .ant-picker, .ant-select, textarea, .DropzoneContainer {
   font-family: "Roboto", sans-serif;
-  background-color: var(--default-bg);
+  background-color: var(--background-color);
   border: 2px solid black;
   border-radius: 6px;
   padding: 8px 12px;
@@ -145,7 +141,7 @@ input[type=text], .ant-picker, .ant-select, textarea, .DropzoneContainer {
 }
 
 .ant-select-selector {
-  background-color: var(--default-bg) !important;
+  background-color: var(--background-color) !important;
 }
 
 .ant-select-arrow {
@@ -304,6 +300,7 @@ input[type="submit"] {
   padding-bottom: 20px;
 }
 
+/* do wyświetlania postów */
 .PostNews {
   font-family: "Playfair Display", serif;
 }
@@ -343,6 +340,7 @@ input[type="submit"] {
   margin-bottom: 10px;
 }
 
+/* przyciski do edytowania i usuwania postów */
 .PostNews .ButtonContainer {
   display: flex;
   gap: 20px;

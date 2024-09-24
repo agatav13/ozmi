@@ -1,5 +1,5 @@
 .SignedOutContainer {
-  background-color: #d9d9d9;
+  background-color: var(--background-color);
   height: 100%;
   display: flex;
   justify-content: center;
@@ -39,4 +39,10 @@
 .SignedInContainer {
   width: 70vw;
   margin: auto;
+}
+
+@media only screen and (orientation: portrait) {
+  .SignedInContainer {
+    width: 90vw;
+  }
 }

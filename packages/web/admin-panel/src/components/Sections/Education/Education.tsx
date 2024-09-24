@@ -1,7 +1,7 @@
 export default function Education() {
   return (
-    <>
-			<h2 className="SectionTitle">Edukacja</h2>
-    </>
+    <section>
+      <h2 className="SectionTitle">Edukacja</h2>
+    </section>
   );
 }

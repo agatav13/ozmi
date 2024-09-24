@@ -12,25 +12,30 @@ export default function CaseStudies() {
 
   // nowe posty wyświetlają się bez odświeżania
   const handlePostAdded = () => {
-    setRefresh(prev => !prev);
+    setRefresh((prev )=> !prev);
   };
 
   return (
-    <>
+    <section>
       <h2 className="SectionTitle">Case studies</h2>
-      <button type="button" className="AddNewButton" onClick={() => setShowCaseStudyForm(true)}><PiPlusBold />Dodaj nowy post</button>
-      {!showCaseStudyForm && (<></>)}
+      <button type="button" className="AddNewButton" onClick={() => setShowCaseStudyForm(true)} aria-label="Dodaj nowy post">
+        <PiPlusBold />
+        Dodaj nowy post
+      </button>
 
       {showCaseStudyForm && (
         <>
           <div className="FormTitle">
-            <button type="button" className="DiscardButton" onClick={() => setShowCaseStudyForm(false)}><CgClose /></button>
+            <button type="button" className="DiscardButton" onClick={() => setShowCaseStudyForm(false)} aria-label="Anuluj dodawanie posta">
+              <CgClose />
+            </button>
             <p><b>Dodaj case study:</b></p>
           </div>
           <FormCaseStudy updateShowForm={setShowCaseStudyForm} onPostAdded={handlePostAdded} />
         </>
       )}
+
       <FetchCaseStudy posts={posts} setPosts={setPosts} refresh={refresh} />
-    </>
+    </section>
   );
 }

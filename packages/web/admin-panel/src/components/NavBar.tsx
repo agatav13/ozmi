@@ -5,6 +5,7 @@ import { IoPersonSharp } from "react-icons/io5";
 import { BsFillCalculatorFill } from "react-icons/bs";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { lazy, useState, Suspense } from "react";
+import { IconType } from "react-icons";
 
 const NewsSection = lazy(() => import("./Sections/NewsSection/NewsSection"));
 const AboutUs = lazy(() => import("./Sections/AboutUs/AboutUs"));
@@ -13,36 +14,54 @@ const CaseStudies = lazy(() => import("./Sections/CaseStudies/CaseStudies"));
 const Default = lazy(() => import("./Sections/Default"));
 
 export default function NavBar() {
-  const [activeElement, setActiveElement] = useState<1 | 2 | 3 | 4 | null>(null);
+  type SectionNames = "Aktualności" | "O nas" | "Edukacja" | "Case Studies";
 
-  const renderElement = () => {
-    switch (activeElement) {
-      case 1:
+  const [activeSection, setActiveSection] = useState<SectionNames | null>(null);
+
+  const renderSection = () => {
+    switch (activeSection) {
+      case "Aktualności":
         return <NewsSection />;
-      case 2:
+      case "O nas":
         return <AboutUs />;
-      case 3:
+      case "Edukacja":
         return <Education />;
-      case 4:
+      case "Case Studies":
         return <CaseStudies />;
       default:
         return <Default />;
     }
   };
 
+  const NavBarButton = ({ label, Icon }: { label: SectionNames, Icon: IconType }) => {
+    return (
+      <button type="button" className="NavBarButton" onClick={() => setActiveSection(label)} aria-label={label}>
+        <Icon />
+        {label}
+      </button>
+    );
+  };
+
   return (
-  	<>
-    	<div className="NavBarButtonsContainer">
-        <button type="button" className="NavBarButton" onClick={() => setActiveElement(1)}><MdOutlineNewspaper />Aktualności</button>
-        <button type="button" className="NavBarButton" onClick={() => setActiveElement(2)}><IoPersonSharp />O nas</button>
-        <button type="button" className="NavBarButton" onClick={() => setActiveElement(3)}><BsFillCalculatorFill />Edukacja</button>
-        <button type="button" className="NavBarButton" onClick={() => setActiveElement(4)}><FaMagnifyingGlass />Case studies</button>
-      </div>
-      <div>
-        <Suspense fallback={<div className="DefaultContainer"><p>Ładowanie...</p></div>}>
-          {renderElement()}
+    <>
+      <nav className="NavBarButtonsContainer">
+        <NavBarButton label="Aktualności" Icon={MdOutlineNewspaper} />
+        <NavBarButton label="O nas" Icon={IoPersonSharp} />
+        <NavBarButton label="Edukacja" Icon={BsFillCalculatorFill} />
+        <NavBarButton label="Case Studies" Icon={FaMagnifyingGlass} />
+      </nav>
+
+      <main>
+        <Suspense
+          fallback={
+            <div className="DefaultContainer">
+              <p>Ładowanie...</p>
+            </div>
+          }
+        >
+          {renderSection()}
         </Suspense>
-      </div>
+      </main>
     </>
   );
 }

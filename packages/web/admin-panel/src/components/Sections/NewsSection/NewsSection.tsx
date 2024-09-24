@@ -12,25 +12,30 @@ export default function NewsSection() {
 
   // nowe posty wyświetlają się bez odświeżania
   const handlePostAdded = () => {
-    setRefresh(prev => !prev);
+    setRefresh((prev) => !prev);
   };
 
   return (
-    <>
-    	<h2 className="SectionTitle">Aktualności</h2>
-      <button type="button" className="AddNewButton" onClick={() => setShowForm(true)}><PiPlusBold />Dodaj nowy post</button>
-      {!showForm && (<></>)}
-
+    <section>
+      <h2 className="SectionTitle">Aktualności</h2>
+      <button type="button" className="AddNewButton" onClick={() => setShowForm(true)} aria-label="Dodaj nowy post">
+        <PiPlusBold />
+        Dodaj nowy post
+      </button>
+      
       {showForm && (
         <>
           <div className="FormTitle">
-          	<button type="button" className="DiscardButton" onClick={() => setShowForm(false)}><CgClose /></button>
-              <p><b>Dodaj aktualność:</b></p>
+          	<button type="button" className="DiscardButton" onClick={() => setShowForm(false)} aria-label="Anuluj dodawanie posta">
+              <CgClose />
+            </button>
+            <p><b>Dodaj aktualność:</b></p>
           </div>
           <FormNews updateShowForm={setShowForm} onPostAdded={handlePostAdded} />
         </>
       )}
+
       <FetchNews posts={posts} setPosts={setPosts} refresh={refresh} />
-    </>
+    </section>
   );
 }
