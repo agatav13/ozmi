@@ -3,9 +3,7 @@ import ReactMarkdown from "react-markdown";
 import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
 import remarkMath from "remark-math";
-import { InlineMath, BlockMath } from "react-katex";
 import "katex/dist/katex.min.css";
-import { Components } from "react-markdown";
 
 export default function FormattedNews({ post }: { post: FormDataTypeWithId }) {
   const formattedDate = (date: Date) => {
@@ -17,14 +15,6 @@ export default function FormattedNews({ post }: { post: FormDataTypeWithId }) {
     });
   };
 
-  const components: Components & {
-    inlineMath: React.ComponentType<{ node: { value: string } }>;
-    math: React.ComponentType<{ node: { value: string } }>;
-  } = {
-    inlineMath: ({ node }) => <InlineMath math={node.value} />,
-    math: ({ node }) => <BlockMath math={node.value} />,
-  };
-
   return (
     <>
       <h3 className="PostTitle">{post.title}</h3>
@@ -32,7 +22,6 @@ export default function FormattedNews({ post }: { post: FormDataTypeWithId }) {
       <p className="PostCategory">{post.category}</p>
       <div className="PostContent">
         <ReactMarkdown
-          components={components}
           remarkPlugins={[remarkMath]}
           rehypePlugins={[rehypeKatex, rehypeRaw]}
         >
