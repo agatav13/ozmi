@@ -66,7 +66,7 @@ app.post("/edit-news-posts", upload.array("newImages"), editNewsPosts);
 app.delete("/delete-news-posts/:id", deleteNewsPosts);
 app.get("/get-news-posts", getNewsPosts);
 
-app.post("/create-case-study-posts", createCaseStudyPosts);
+app.post("/create-case-study-posts", upload.array("images"), createCaseStudyPosts);
 app.post("/edit-case-study-posts", editCaseStudyPosts);
 app.delete("/delete-case-study-posts/:id", deleteCaseStudyPosts);
 app.get("/get-case-study-posts", getCaseStudyPosts);

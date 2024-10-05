@@ -2,33 +2,60 @@ import { useState } from "react";
 import { HiOutlinePhoto } from "react-icons/hi2";
 import { IoTextOutline } from "react-icons/io5";
 import { FaTrash } from "react-icons/fa";
+import { LuUpload } from "react-icons/lu";
+import type { UploadProps } from "antd";
+import { Button, Upload } from "antd";
+import { CaseStudyInputType } from "types";
 
-export default function InputsCaseStudies() {
-  const [formElements, setFormElements] = useState<any[]>([]);
+export default function InputsCaseStudies({ onFormDataChange }: { onFormDataChange: (data: CaseStudyInputType[]) => void }) {
+  const [formElements, setFormElements] = useState<CaseStudyInputType[]>([]);
 
   const addTextArea = () => {
-    setFormElements([...formElements, { type: "text", content: "" }]);
+    const newElements: CaseStudyInputType[] = [...formElements, { type: "text", content: "" }]
+    setFormElements(newElements);
+    onFormDataChange(newElements);
   };
 
   const addFileInput = () => {
-    setFormElements([...formElements, { type: "file", content: "" }]);
+    const newElements: CaseStudyInputType[] = [...formElements, { type: "file", content: null }]
+    setFormElements(newElements);
+    onFormDataChange(newElements);
   };
 
   const handleTextChange = (index: number, value: string) => {
     const newElements = [...formElements];
     newElements[index].content = value;
     setFormElements(newElements);
+    onFormDataChange(newElements);
   };
 
-  const handleFileChange = (index: number, files: any) => {
+  const handleFileChange = (index: number, file: any) => {
     const newElements = [...formElements];
-    newElements[index].content = files[0];
+    newElements[index].content = file;
     setFormElements(newElements);
+    onFormDataChange(newElements);
   };
 
   const deleteElement = (index: number) => {
     const newElements = formElements.filter((_, i) => i !== index);
     setFormElements(newElements);
+  };
+
+  const props: UploadProps = {
+    name: "image",
+    accept: "image/*",
+    beforeUpload: (file) => {
+      return false;
+    },
+    onChange(info) {
+      const { file } = info;
+      const index = formElements.findIndex(
+        (element) => element.type === "file" && element.content === null
+      );
+      if (index > -1) {
+        handleFileChange(index, file);
+      }
+    },
   };
 
   return (
@@ -54,15 +81,14 @@ export default function InputsCaseStudies() {
           ) : (
             <>
               <div className="LabelCaseStudy">
-                <label htmlFor="photos">Zdjęcia</label>
+                <label htmlFor="image">Zdjęcie</label>
                 <button type="button" onClick={() => deleteElement(index)}>
                   <FaTrash />
                 </button>
               </div>
-              <input
-                type="file"
-                onChange={(e) => handleFileChange(index, e.target.files)}
-              />
+              <Upload {...props}>
+                <Button icon={<LuUpload size={16} />}>Dodaj zdjęcie</Button>
+              </Upload>
             </>
           )}
         </div>

@@ -1,28 +1,62 @@
 import { Request, Response } from "express";
 import { pool } from "../database/database";
 
-export const createCaseStudyPosts = async (req: Request, res: Response) => {  
-  const { title, date, category } = req.body;
+export const createCaseStudyPosts = async (req: Request, res: Response) => {
+  const { title, date, category, contentData } = req.body;
+  const images = req.files as Express.Multer.File[];
 
   if (!title || !date || !category) {
     return res.status(400).json({ error: "Wszystkie pola nie są wypełnione" });
   }
 
-  const query = "INSERT INTO case_study_posts (title, date, category) VALUES ($1, $2::timestamp, $3) RETURNING id";
-  const values = [title, date, category];
-
   try {
+    const query = "INSERT INTO case_study_posts (title, date, category) VALUES ($1, $2::timestamp, $3) RETURNING id";
+    const values = [title, date, category];
+
+    // dodaje tytuł, date i kategoria do tabelki i przechowuje id tego posta
     const result = await pool.query(query, values);
+    const postId = result.rows[0].id;
+
+    const contentArray = JSON.parse(contentData);
+    const contentInserts = [];
+
+    // przechodzi po wszystkich elementach sprawdzając ich typ i dodaje odpowiednie SQL query razem z wartościami
+    for (let i = 0; i < contentArray.length; i++) {
+      const element = contentArray[i];
+
+      if (element.type === "text") {
+        contentInserts.push({
+          query: "INSERT INTO case_study_posts_content (post_id, position_number, content_type, content) VALUES ($1, $2, 'text', $3)",
+          values: [postId, i + 1, element.content],
+        });
+      } else {
+        const image = images.find(
+          (image) => image.originalname === element.content
+        );
+        if (image) {
+          contentInserts.push({
+            query: "INSERT INTO case_study_posts_content (post_id, position_number, content_type, content) VALUES ($1, $2, 'photo', $3)",
+            values: [postId, i + 1, image.filename],
+          });
+        }
+      }
+    }
+
+    // wykonuje wszystkie SQL queries
+    for (const contentInsert of contentInserts) {
+      await pool.query(contentInsert.query, contentInsert.values);
+    }
+
     console.log("Nowy post:", title, date, category);
-    res.status(201).json({ message: "Post zapisany", id: result.rows[0].id })
+    res.status(201).json({ message: "Post zapisany", id: postId });
   } catch (error) {
     console.error("Error posting:", error);
     res.status(500).json({ error: "Failed to post" });
   }
-}
+};
 
 export const editCaseStudyPosts = async (req: Request, res: Response) => {
-  const { title, date, category, id } = req.body
+  const { title, date, category, id } = req.body;
 
   if (!title || !date || !category) {
     return res.status(400).json({ error: "Wszystkie pola nie są wypełnione" });
@@ -39,7 +73,7 @@ export const editCaseStudyPosts = async (req: Request, res: Response) => {
     console.error("Error updating post:", error);
     res.status(500).json({ error: "Failed to update post" });
   }
-}
+};
 
 export const deleteCaseStudyPosts = async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -55,9 +89,11 @@ export const deleteCaseStudyPosts = async (req: Request, res: Response) => {
     console.error("Error deleting the post:", error);
     res.status(500).json({ error: "Failed to delete the post" });
   }
-}
+};
 
 export const getCaseStudyPosts = async (req: Request, res: Response) => {
-  const result = await pool.query("SELECT * FROM case_study_posts ORDER BY date DESC");
+  const result = await pool.query(
+    "SELECT * FROM case_study_posts ORDER BY date DESC"
+  );
   res.json(result.rows);
-}
+};

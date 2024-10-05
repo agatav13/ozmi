@@ -23,3 +23,8 @@ export interface CaseStudyDataType {
 export interface CaseStudyDataTypeWithId extends CaseStudyDataType {
   id: number;
 }
+
+export type CaseStudyInputType = {
+  type: "text" | "file";
+  content: string | File | null;
+};
