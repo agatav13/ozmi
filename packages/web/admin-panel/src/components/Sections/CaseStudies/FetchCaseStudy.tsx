@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CaseStudyDataTypeWithId } from "types";
+import { CaseStudyDataTypeWithId, CaseStudyPostsContentType } from "types";
 import DeletePost from "../../reusable/DeletePost";
 
 interface FetchDataProps {
@@ -18,7 +18,34 @@ export default function FetchNews({ posts, setPosts, refresh }: FetchDataProps) 
     const response = await fetch("http://localhost:5000/get-case-study-posts");
     if (response.ok) {
       const data = await response.json();
-      setPosts(data);
+
+      // grupuje contents do odpowiednij postów po post_id
+      const groupedPosts = data.reduce((acc: any, curr: any) => {
+        const postId = curr.post_id;
+
+        let post = acc.find((p: any) => p.id === postId);
+        if (!post) {
+          post = {
+            id: postId,
+            title: curr.title,
+            date: curr.date,
+            category: curr.category,
+            content: [],
+          };
+          acc.push(post);
+        }
+
+        post.content.push({
+          post_id: curr.post_id,
+          position_number: curr.position_number,
+          content_type: curr.content_type,
+          content: curr.content,
+        });
+
+        return acc;
+      }, []);
+
+      setPosts(groupedPosts);
     } else {
       console.error("Error");
     }
@@ -45,6 +72,23 @@ export default function FetchNews({ posts, setPosts, refresh }: FetchDataProps) 
     });
   };
 
+  const renderContent = (content: CaseStudyPostsContentType[]) => {
+    if (!content) return null;
+
+    return content.map((item, index) => (
+      <div key={index}>
+        {item.content_type === "text" && <p>{item.content}</p>}
+        {item.content_type === "photo" && (
+          <img
+            loading="lazy"
+            src={`http://localhost:5000/uploads/case-study-posts/${item.content}`}
+            alt={`Element ${index}`}
+          />
+        )}
+      </div>
+    ));
+  };
+
   return (
     <div>
       {posts.length === 0 ? (
@@ -56,6 +100,9 @@ export default function FetchNews({ posts, setPosts, refresh }: FetchDataProps) 
               <h3 className="PostTitle">{post.title}</h3>
               <p className="PostDate">{formattedDate(post.date)}</p>
               <p className="PostCategory">{post.category}</p>
+
+              {post.content && renderContent(post.content)}
+
               <div className="ButtonContainer">
                 {/* <button type="button" onClick={() => setEditingPost(post)}>Edytuj</button> */}
                 <button type="button" onClick={() => {

@@ -10,41 +10,54 @@ export const createCaseStudyPosts = async (req: Request, res: Response) => {
   }
 
   try {
-    const query = "INSERT INTO case_study_posts (title, date, category) VALUES ($1, $2::timestamp, $3) RETURNING id";
+    const query = `
+      INSERT INTO case_study_posts (title, date, category) 
+      VALUES ($1, $2::timestamp, $3) 
+      RETURNING id
+    `;
     const values = [title, date, category];
 
     // dodaje tytuł, date i kategoria do tabelki i przechowuje id tego posta
     const result = await pool.query(query, values);
     const postId = result.rows[0].id;
 
-    const contentArray = JSON.parse(contentData);
-    const contentInserts = [];
+    // dodaje pola teksowe i zdjęcia
+    if (contentData) {
+      const contentArray = JSON.parse(contentData);
+      const contentInserts = [];
 
-    // przechodzi po wszystkich elementach sprawdzając ich typ i dodaje odpowiednie SQL query razem z wartościami
-    for (let i = 0; i < contentArray.length; i++) {
-      const element = contentArray[i];
+      // przechodzi po wszystkich elementach sprawdzając ich typ i dodaje odpowiednie SQL query razem z wartościami
+      for (let i = 0; i < contentArray.length; i++) {
+        const element = contentArray[i];
 
-      if (element.type === "text") {
-        contentInserts.push({
-          query: "INSERT INTO case_study_posts_content (post_id, position_number, content_type, content) VALUES ($1, $2, 'text', $3)",
-          values: [postId, i + 1, element.content],
-        });
-      } else {
-        const image = images.find(
-          (image) => image.originalname === element.content
-        );
-        if (image) {
+        if (element.type === "text") {
           contentInserts.push({
-            query: "INSERT INTO case_study_posts_content (post_id, position_number, content_type, content) VALUES ($1, $2, 'photo', $3)",
-            values: [postId, i + 1, image.filename],
+            query: `
+              INSERT INTO case_study_posts_content (post_id, position_number, content_type, content) 
+              VALUES ($1, $2, 'text', $3) 
+              RETURNING id
+            `,
+            values: [postId, i + 1, element.content],
           });
+        } else {
+          const image = images[i];
+          if (image) {
+            contentInserts.push({
+              query: `
+                INSERT INTO case_study_posts_content (post_id, position_number, content_type, content) 
+                VALUES ($1, $2, 'photo', $3)
+                RETURNING id
+              `,
+              values: [postId, i + 1, image.filename],
+            });
+          }
         }
       }
-    }
 
-    // wykonuje wszystkie SQL queries
-    for (const contentInsert of contentInserts) {
-      await pool.query(contentInsert.query, contentInsert.values);
+      // wykonuje wszystkie SQL queries
+      for (const contentInsert of contentInserts) {
+        await pool.query(contentInsert.query, contentInsert.values);
+      }
     }
 
     console.log("Nowy post:", title, date, category);
@@ -62,7 +75,11 @@ export const editCaseStudyPosts = async (req: Request, res: Response) => {
     return res.status(400).json({ error: "Wszystkie pola nie są wypełnione" });
   }
 
-  const query = "UPDATE case_study_posts SET title = $1, date = $2::timestamp, category = $3 WHERE id = $4";
+  const query = `
+    UPDATE case_study_posts 
+    SET title = $1, date = $2::timestamp, category = $3 
+    WHERE id = $4
+  `;
   const values = [title, date, category, id];
 
   try {
@@ -78,7 +95,10 @@ export const editCaseStudyPosts = async (req: Request, res: Response) => {
 export const deleteCaseStudyPosts = async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const query = "DELETE FROM case_study_posts WHERE id = $1";
+  const query = `
+    DELETE FROM case_study_posts 
+    WHERE id = $1
+  `;
   const values = [id];
 
   try {
@@ -92,8 +112,13 @@ export const deleteCaseStudyPosts = async (req: Request, res: Response) => {
 };
 
 export const getCaseStudyPosts = async (req: Request, res: Response) => {
-  const result = await pool.query(
-    "SELECT * FROM case_study_posts ORDER BY date DESC"
-  );
+  // p - case_study_posts
+  // c - case_study_posts_content
+  const result = await pool.query(`
+    SELECT p.id AS post_id, p.title, p.date, p.category, c.position_number, c.content_type, c.content
+    FROM case_study_posts p
+    LEFT JOIN case_study_posts_content c ON p.id = c.post_id
+    ORDER BY p.date DESC, p.id, c.position_number ASC;
+  `);
   res.json(result.rows);
 };
