@@ -4,7 +4,7 @@ import { IoTextOutline } from "react-icons/io5";
 import { FaTrash } from "react-icons/fa";
 import { LuUpload } from "react-icons/lu";
 import type { UploadProps } from "antd";
-import { Button, Upload } from "antd";
+import { Upload } from "antd";
 import { CaseStudyInputType } from "types";
 
 export default function InputsCaseStudies({ onFormDataChange }: { onFormDataChange: (data: CaseStudyInputType[]) => void }) {
@@ -87,7 +87,7 @@ export default function InputsCaseStudies({ onFormDataChange }: { onFormDataChan
                 </button>
               </div>
               <Upload {...props}>
-                <Button icon={<LuUpload size={16} />}>Dodaj zdjęcie</Button>
+                <button type="button" className="CaseStudyUploadBtn"><LuUpload />Dodaj zdjęcie</button>
               </Upload>
             </>
           )}

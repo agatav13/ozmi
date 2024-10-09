@@ -83,6 +83,7 @@ export default function FetchNews({ posts, setPosts, refresh }: FetchDataProps) 
             loading="lazy"
             src={`http://localhost:5000/uploads/case-study-posts/${item.content}`}
             alt={`Element ${index}`}
+            width={"100%"}
           />
         )}
       </div>

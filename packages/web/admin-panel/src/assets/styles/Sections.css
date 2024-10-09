@@ -269,38 +269,47 @@ input[type="submit"] {
   padding: 24px 0 16px;
 }
 
-.CaseStudiesButtons button {
+.CaseStudiesButtons button,
+.CaseStudyUploadBtn {
   font-family: "Roboto", sans-serif;
   padding: 8px 16px;
-  background-color: #e6e6e6;
+  background-color: transparent;
   border-radius: 6px;
   border: 2px dashed #111111;
   display: flex;
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  transition-duration: 0.4s;
+  transition-duration: 0.3s;
 }
 
-.CaseStudiesButtons button svg {
+.CaseStudiesButtons button svg,
+.CaseStudyUploadBtn svg {
   font-size: 15px;
 }
 
-.CaseStudiesButtons button:hover {
-  background-color: #bfbfbf;
+.CaseStudiesButtons button:hover,
+.CaseStudyUploadBtn:hover {
+  background-color: #e6e6e6;
 }
 
-.CaseStudiesButtons button:active {
+.CaseStudiesButtons button:active,
+.CaseStudyUploadBtn:active {
   transform: translateY(1px);
 }
 
+.CaseStudyUploadBtn {
+  border: 2px solid #111111 !important;
+  margin-top: 2px;
+}
+
+/* do wyświetlania postów */
 .NoNews {
   font-family: "Playfair Display", serif;
   color: rgba(0, 0, 0, 0.6);
   padding-bottom: 20px;
 }
 
-/* do wyświetlania postów */
 .PostNews {
   font-family: "Playfair Display", serif;
 }
