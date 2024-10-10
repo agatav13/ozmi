@@ -76,14 +76,13 @@ export default function FetchNews({ posts, setPosts, refresh }: FetchDataProps) 
     if (!content) return null;
 
     return content.map((item, index) => (
-      <div key={index}>
+      <div key={index} className="CaseStudyContent">
         {item.content_type === "text" && <p>{item.content}</p>}
         {item.content_type === "photo" && (
           <img
             loading="lazy"
             src={`http://localhost:5000/uploads/case-study-posts/${item.content}`}
             alt={`Element ${index}`}
-            width={"100%"}
           />
         )}
       </div>
