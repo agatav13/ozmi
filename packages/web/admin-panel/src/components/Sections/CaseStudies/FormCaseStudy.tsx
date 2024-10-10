@@ -42,7 +42,7 @@ export default function FormCaseStudy({ updateShowForm, onPostAdded }: FormCaseS
     formDataToPost.append("contentData", JSON.stringify(formElements));
 
     // dodaje zdjęcia
-    formElements.forEach((element, index) => {
+    formElements.forEach((element) => {
       if (element.type === "file" && element.content) {
         formDataToPost.append("images", element.content);
       }

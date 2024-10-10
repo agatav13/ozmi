@@ -26,6 +26,9 @@ export const createCaseStudyPosts = async (req: Request, res: Response) => {
       const contentArray = JSON.parse(contentData);
       const contentInserts = [];
 
+      // do śledzenia indexu zdjęcia
+      let imageIndex = 0;
+
       // przechodzi po wszystkich elementach sprawdzając ich typ i dodaje odpowiednie SQL query razem z wartościami
       for (let i = 0; i < contentArray.length; i++) {
         const element = contentArray[i];
@@ -40,7 +43,7 @@ export const createCaseStudyPosts = async (req: Request, res: Response) => {
             values: [postId, i + 1, element.content],
           });
         } else {
-          const image = images[i];
+          const image = images[imageIndex];
           if (image) {
             contentInserts.push({
               query: `
@@ -50,6 +53,7 @@ export const createCaseStudyPosts = async (req: Request, res: Response) => {
               `,
               values: [postId, i + 1, image.filename],
             });
+            imageIndex++;
           }
         }
       }
