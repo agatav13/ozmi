@@ -24,6 +24,11 @@ export default function InputsCaseStudies({ onFormDataChange }: { onFormDataChan
 
   const handleContentChange = (index: number, value: any) => {
     const newElements = [...formElements];
+
+    if (newElements[index].type === "file") {
+      newElements[index].content = null;
+    }
+
     newElements[index].content = value;
     setFormElements(newElements);
     onFormDataChange(newElements);
@@ -37,13 +42,11 @@ export default function InputsCaseStudies({ onFormDataChange }: { onFormDataChan
   const props: UploadProps = {
     name: "image",
     accept: "image/*",
-    beforeUpload: (file) => {
-      return false;
-    },
+    beforeUpload: (file) => false,
     onChange(info) {
       const { file } = info;
       const index = formElements.findIndex(
-        (element) => element.type === "file" && element.content === null
+        (element) => element.type === "file" && (element.content === null || element.content)
       );
       if (index > -1) {
         handleContentChange(index, file);
