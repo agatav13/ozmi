@@ -22,16 +22,9 @@ export default function InputsCaseStudies({ onFormDataChange }: { onFormDataChan
     onFormDataChange(newElements);
   };
 
-  const handleTextChange = (index: number, value: string) => {
+  const handleContentChange = (index: number, value: any) => {
     const newElements = [...formElements];
     newElements[index].content = value;
-    setFormElements(newElements);
-    onFormDataChange(newElements);
-  };
-
-  const handleFileChange = (index: number, file: any) => {
-    const newElements = [...formElements];
-    newElements[index].content = file;
     setFormElements(newElements);
     onFormDataChange(newElements);
   };
@@ -53,7 +46,7 @@ export default function InputsCaseStudies({ onFormDataChange }: { onFormDataChan
         (element) => element.type === "file" && element.content === null
       );
       if (index > -1) {
-        handleFileChange(index, file);
+        handleContentChange(index, file);
       }
     },
   };
@@ -75,7 +68,7 @@ export default function InputsCaseStudies({ onFormDataChange }: { onFormDataChan
                 id="content"
                 required
                 rows={8}
-                onChange={(e) => handleTextChange(index, e.target.value)}
+                onChange={(e) => handleContentChange(index, e.target.value)}
               />
             </>
           ) : (

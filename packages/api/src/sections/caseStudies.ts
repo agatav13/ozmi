@@ -122,7 +122,7 @@ export const getCaseStudyPosts = async (req: Request, res: Response) => {
     SELECT p.id AS post_id, p.title, p.date, p.category, c.position_number, c.content_type, c.content
     FROM case_study_posts p
     LEFT JOIN case_study_posts_content c ON p.id = c.post_id
-    ORDER BY p.date DESC, p.id, c.position_number ASC;
+    ORDER BY p.date DESC, p.id DESC, c.position_number ASC;
   `);
   res.json(result.rows);
 };
