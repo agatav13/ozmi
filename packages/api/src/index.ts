@@ -4,7 +4,7 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 import { v4 as uuidv4 } from "uuid";
-import { initializeDatabase, testDb } from "./database/database";
+import { testConnection } from "./database/database";
 import { createNewsPosts, deleteNewsPosts, editNewsPosts, getNewsPosts } from "./sections/news";
 import { createCaseStudyPosts, deleteCaseStudyPosts, editCaseStudyPosts, getCaseStudyPosts } from "./sections/caseStudies";
 
@@ -57,9 +57,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-initializeDatabase();
-
-app.get("/test-db", testDb);
+testConnection();
 
 app.post("/create-news-posts", upload.array("images"), createNewsPosts);
 app.post("/edit-news-posts", upload.array("newImages"), editNewsPosts);
