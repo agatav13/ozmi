@@ -70,13 +70,16 @@ export const editNewsPosts = async (req: Request, res: Response) => {
 export const deleteNewsPosts = async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const query = "DELETE FROM news_posts WHERE id = ?;";
+  const query = `
+    DELETE FROM news_posts 
+    WHERE id = ?;
+  `;
   const values = [id];
 
   try {
-    const result = await pool.query(query, values);
+    await pool.query(query, values);
     console.log("Usunięto post:", id);
-    res.status(200).json({ message: "Post deleted successfully", result });
+    res.status(200).json({ message: "Post deleted successfully" });
   } catch (error) {
     console.error("Error deleting the post:", error);
     res.status(500).json({ error: "Failed to delete the post" });
