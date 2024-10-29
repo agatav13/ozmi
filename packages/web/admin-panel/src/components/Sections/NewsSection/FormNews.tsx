@@ -41,7 +41,10 @@ export default function FormNews({ updateShowForm, onPostAdded }: NewsFormProps)
 
     const formDataToPost = new FormData();
     formDataToPost.append("title", responseBody.title);
-    formDataToPost.append("date", responseBody.date.toISOString());
+
+    const formattedDate = new Date(responseBody.date).toISOString().split('T')[0];  // YYYY-MM-DD
+    formDataToPost.append("date", formattedDate);
+
     formDataToPost.append("category", responseBody.category);
     formDataToPost.append("content", responseBody.content);
     images.forEach((image) => {

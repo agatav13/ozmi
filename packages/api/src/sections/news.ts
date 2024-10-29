@@ -11,15 +11,15 @@ export const createNewsPosts = async (req: Request, res: Response) => {
     return res.status(400).json({ error: "Wszystkie pola nie są wypełnione" });
   }
 
-  const imageNames = images.map(image => image.filename);
+  const imageNames = JSON.stringify(images.map(image => image.filename));
 
-  const query = "INSERT INTO news_posts (title, date, category, content, images) VALUES ($1, $2::timestamp, $3, $4, $5) RETURNING id";
-  const values = [title, date, category, content, imageNames];
+  const query = "INSERT INTO news_posts (user_id, title, date, category, content, images) VALUES (?, ?, ?, ?, ?, ?);";
+  const values = [1, title, date, category, content, imageNames];
 
   try {
     const result = await pool.query(query, values);
     console.log("Nowy post:", title, date, category, content);
-    res.status(201).json({ message: "Post zapisany", id: result.rows[0].id })
+    res.status(201).json({ message: "Post zapisany", id: result.id });
   } catch (error) {
     console.error("Error posting:", error);
     res.status(500).json({ error: "Failed to post" });
@@ -37,14 +37,14 @@ export const editNewsPosts = async (req: Request, res: Response) => {
   // dołącza nowo dodane zdjęcia do tych, które już były w poście
   const existingImagesArray = JSON.parse(existingImages);
   const newImageNames = newImages ? newImages.map(image => image.filename) : [];
-  const allImages = [...existingImagesArray, ...newImageNames];
+  const allImages = JSON.stringify([...existingImagesArray, ...newImageNames]);
 
-  const query = "UPDATE news_posts SET title = $1, date = $2::timestamp, category = $3, content = $4, images = $5 WHERE id = $6";
+  const query = "UPDATE news_posts SET title = ?, date = ?, category = ?, content = ?, images = ? WHERE id = ?;";
   const values = [title, date, category, content, allImages, id];
 
   try {
     // bierze zdjęcia ze starej wersji postu
-    const oldPost = await pool.query("SELECT images FROM news_posts WHERE id = $1", [id]);
+    const oldPost = await pool.query("SELECT images FROM news_posts WHERE id = ?;", [id]);
     const oldImages = oldPost.rows[0].images;
     
     const result = await pool.query(query, values);
@@ -70,7 +70,7 @@ export const editNewsPosts = async (req: Request, res: Response) => {
 export const deleteNewsPosts = async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const query = "DELETE FROM news_posts WHERE id = $1";
+  const query = "DELETE FROM news_posts WHERE id = ?;";
   const values = [id];
 
   try {
@@ -84,6 +84,6 @@ export const deleteNewsPosts = async (req: Request, res: Response) => {
 }
 
 export const getNewsPosts = async (req: Request, res: Response) => {
-  const result = await pool.query("SELECT * FROM news_posts ORDER BY date DESC");
-  res.json(result.rows);
+  const result = await pool.query("SELECT * FROM news_posts ORDER BY date DESC, id DESC;");
+  res.json(result);
 }

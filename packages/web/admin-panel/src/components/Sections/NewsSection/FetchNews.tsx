@@ -18,12 +18,13 @@ export default function FetchNews({ posts, setPosts, refresh }: FetchNewsProps) 
 
   const fetchPosts = async () => {
     const response = await fetch("http://localhost:5000/get-news-posts");
-    if (response.ok) {
-      const data = await response.json();
-      setPosts(data);
-    } else {
-      console.error("Error fetching posts");
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Error fetching posts:", errorText);
+      return;
     }
+    const data = await response.json();
+    setPosts(data);
   };
 
   useEffect(() => {
