@@ -11,15 +11,15 @@ export const createCaseStudyPosts = async (req: Request, res: Response) => {
 
   try {
     const query = `
-      INSERT INTO case_study_posts (title, date, category) 
-      VALUES ($1, $2::timestamp, $3) 
-      RETURNING id
+      INSERT INTO case_study_posts (user_id, title, date, category) 
+      VALUES (?, ?, ?, ?) 
+      RETURNING id;
     `;
-    const values = [title, date, category];
+    const values = [1, title, date, category];
 
     // dodaje tytuł, date i kategoria do tabelki i przechowuje id tego posta
     const result = await pool.query(query, values);
-    const postId = result.rows[0].id;
+    const postId = result[0].id;
 
     // dodaje pola teksowe i zdjęcia
     if (contentData) {
@@ -37,8 +37,8 @@ export const createCaseStudyPosts = async (req: Request, res: Response) => {
           contentInserts.push({
             query: `
               INSERT INTO case_study_posts_content (post_id, position_number, content_type, content) 
-              VALUES ($1, $2, 'text', $3) 
-              RETURNING id
+              VALUES (?, ?, 'text', ?) 
+              RETURNING id;
             `,
             values: [postId, i + 1, element.content],
           });
@@ -48,8 +48,8 @@ export const createCaseStudyPosts = async (req: Request, res: Response) => {
             contentInserts.push({
               query: `
                 INSERT INTO case_study_posts_content (post_id, position_number, content_type, content) 
-                VALUES ($1, $2, 'photo', $3)
-                RETURNING id
+                VALUES (?, ?, 'photo', ?)
+                RETURNING id;
               `,
               values: [postId, i + 1, image.filename],
             });
@@ -81,8 +81,8 @@ export const editCaseStudyPosts = async (req: Request, res: Response) => {
 
   const query = `
     UPDATE case_study_posts 
-    SET title = $1, date = $2::timestamp, category = $3 
-    WHERE id = $4
+    SET title = ?, date = ?, category = ?
+    WHERE id = ?;
   `;
   const values = [title, date, category, id];
 
@@ -101,14 +101,14 @@ export const deleteCaseStudyPosts = async (req: Request, res: Response) => {
 
   const query = `
     DELETE FROM case_study_posts 
-    WHERE id = $1
+    WHERE id = ?;
   `;
   const values = [id];
 
   try {
-    const result = await pool.query(query, values);
+    await pool.query(query, values);
     console.log("Usunięto post:", id);
-    res.status(200).json({ message: "Post deleted successfully", result });
+    res.status(200).json({ message: "Post deleted successfully" });
   } catch (error) {
     console.error("Error deleting the post:", error);
     res.status(500).json({ error: "Failed to delete the post" });
@@ -124,5 +124,5 @@ export const getCaseStudyPosts = async (req: Request, res: Response) => {
     LEFT JOIN case_study_posts_content c ON p.id = c.post_id
     ORDER BY p.date DESC, p.id DESC, c.position_number ASC;
   `);
-  res.json(result.rows);
+  res.json(result);
 };
