@@ -1,0 +1,48 @@
+.SignedOutContainer {
+  background-color: var(--background-color);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.SignInButton {
+  background-color: transparent;
+  color: black;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-family: "Playfair Display", serif;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition-duration: 0.3s;
+}
+
+.SignInButton:hover {
+  background-color: #b7b4b4;
+}
+
+.MainPageLink {
+  color: black;
+  font-family: "Playfair Display", serif;
+  font-size: 1.15rem;
+  text-decoration: none;
+  transition-duration: 0.3s;
+}
+
+.MainPageLink:hover {
+  text-shadow: 0px 0px 12px rgba(0, 0, 0, 0.5);
+}
+
+.SignedInContainer {
+  width: 70vw;
+  margin: auto;
+}
+
+@media only screen and (orientation: portrait) {
+  .SignedInContainer {
+    width: 90vw;
+  }
+}
