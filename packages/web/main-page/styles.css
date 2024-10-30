@@ -1,0 +1,291 @@
+* {
+  box-sizing: border-box;
+  scrollbar-width: auto;
+  scrollbar-color: #b7b4b4 #d9d9d9;
+}
+
+*::-webkit-scrollbar {
+  width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #d9d9d9;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #b7b4b4;
+}
+
+body {
+  background: linear-gradient(#d9d9d9 calc(100% - 400px), #737373);
+  font-family: "Playfair Display", serif;
+  display: grid;
+  height: 100%;
+  width: 90vw;
+  max-width: 1000px;
+  margin: auto;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+button,
+a {
+  cursor: pointer;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.text-shadow-link {
+  transition-duration: 0.3s;
+}
+
+.text-shadow-link:hover {
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+h2.section-title {
+  font-size: 2em;
+}
+
+header.main-page {
+  height: 150px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header.main-page img {
+  height: 90px;
+}
+
+header.main-page .main-page-nav {
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  gap: 5vw;
+  margin-left: 40px;
+}
+
+header.main-page .main-page-nav a {
+  transition-duration: 0.3s;
+}
+
+header.main-page .main-page-nav a:hover {
+  text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
+}
+
+.about-us h1 {
+  margin: 0;
+  font-size: 3rem;
+}
+
+.about-us h2 {
+  font-size: 1.6rem;
+}
+
+.about-us p:first-of-type {
+  font-weight: bold;
+  text-align: justify;
+}
+
+.news-tiles {
+  aspect-ratio: 2/1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  gap: 10px;
+}
+
+.tile,
+.expanded-tile {
+  border-radius: 10px;
+  background-color: #70738e;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  transition-duration: 0.4s;
+}
+
+.tile {
+  height: 100%;
+  padding: 10px;
+}
+
+.tile:hover {
+  transform: translateY(2px);
+}
+
+.tile .date-post,
+.expanded-tile .date-post {
+  margin: 0;
+  text-align: right;
+}
+
+.tile .photo-post {
+  max-width: 100%;
+  height: 150px;
+  object-fit: cover;
+  margin: 10px 0;
+  flex-grow: 1;
+}
+
+.tile .title-post {
+  padding-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.tile .title-post,
+.expanded-tile .title-post {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tile .see-more,
+.expanded-tile .see-more {
+  margin: 0;
+  align-self: flex-end;
+  background-color: transparent;
+  border: none;
+  font-family: "Playfair Display", serif;
+  font-size: 1rem;
+  padding: 0;
+}
+
+.expanded-tile {
+  padding: 10px 20px;
+}
+
+.expanded-tile .photo-post {
+  max-width: 100%;
+  max-height: 400px;
+  align-self: center;
+  margin: 12px 0;
+}
+
+.expanded-tile .title-post {
+  font-size: 1.5rem;
+  padding-bottom: 4px;
+}
+
+.expanded-tile .category-post {
+  margin: 0;
+  font-weight: 500;
+  padding-bottom: 12px;
+}
+
+.expanded-tile .content-post {
+  text-align: justify;
+  margin: 0;
+  padding-bottom: 10px;
+}
+
+.education-tiles {
+  aspect-ratio: 1/1;
+}
+
+.education-row-1,
+.education-row-2 {
+  display: flex;
+  aspect-ratio: 2/1;
+}
+
+.education-tile {
+  display: flex;
+  padding: 20px 30px;
+  font-size: 1.6em;
+  font-weight: bold;
+  position: relative;
+  transition-duration: 0.6s;
+}
+
+.education-tile:hover {
+  transform: scale(1.025);
+  z-index: 5;
+}
+
+.bottom-text {
+  align-items: end;
+  padding-right: 60px;
+}
+
+.top-text {
+  align-items: start;
+}
+
+#education-tile-1 {
+  background: linear-gradient(#857979, #1f1c1c);
+  aspect-ratio: 1/1;
+  color: white;
+}
+
+#education-tile-2 {
+  background: linear-gradient(#ffffff, #857979);
+  aspect-ratio: 1/1;
+}
+
+#education-tile-3 {
+  background: linear-gradient(#64647a, #1f1c1c);
+  aspect-ratio: 2/1;
+  color: white;
+}
+
+.education-tile p {
+  margin: 0;
+}
+
+.bottom-text .tile-text {
+  padding-right: 40px;
+}
+
+.right-arrow {
+  border-style: solid;
+  border-width: 0 5px 5px 0;
+  border-radius: 2px;
+  display: inline-block;
+  padding: 20px;
+  transform: rotate(-45deg);
+  position: absolute;
+  bottom: 30px;
+  right: 40px;
+}
+
+.case-study {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.case-study img {
+  height: 26px;
+  width: 26px;
+}
+
+.case-study h3 {
+  font-size: 1.4em;
+}
+
+footer {
+  display: flex;
+  gap: 4vw;
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
+footer img {
+  height: 160px;
+}
+
+footer p {
+  overflow: hidden;
+  overflow-wrap: break-word;
+}
