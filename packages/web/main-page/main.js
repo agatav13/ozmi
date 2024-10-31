@@ -49,7 +49,7 @@ async function displayNewsTiles() {
       <img src="${
         post.images.length > 0
           ? `http://localhost:5000/uploads/news-posts/${post.images[0]}`
-          : "images/testowe3.jpg"
+          : "images/uz-1.png"
       }" alt="Zdjęcie postu" class="photo-post">
       <h3 class="title-post">${post.title}</h3>
       <button type="button" onclick="expandTile(${index})" class="see-more text-align-right text-shadow-link">Zobacz więcej...</button>

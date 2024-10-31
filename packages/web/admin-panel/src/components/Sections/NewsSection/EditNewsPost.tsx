@@ -52,7 +52,10 @@ export default function EditNewsPost({ post, setEditingPost, onPostUpdated }: Ed
     const formDataToPost = new FormData();
     formDataToPost.append("id", responseBody.id.toString());
     formDataToPost.append("title", responseBody.title);
-    formDataToPost.append("date", dayjs(responseBody.date).tz("Europe/Warsaw").format());
+
+    const formattedDate = new Date(responseBody.date).toISOString().split('T')[0];  // YYYY-MM-DD
+    formDataToPost.append("date", formattedDate)
+
     formDataToPost.append("category", responseBody.category);
     formDataToPost.append("content", responseBody.content);
     formDataToPost.append("existingImages", JSON.stringify(existingImages));

@@ -4,7 +4,7 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 import { v4 as uuidv4 } from "uuid";
-import { testConnection } from "./database/database";
+import { pool, testConnection } from "./database/database";
 import { createNewsPosts, deleteNewsPosts, editNewsPosts, getNewsPosts } from "./sections/news";
 import { createCaseStudyPosts, deleteCaseStudyPosts, editCaseStudyPosts, getCaseStudyPosts } from "./sections/caseStudies";
 
@@ -68,5 +68,10 @@ app.post("/create-case-study-posts", upload.array("images"), createCaseStudyPost
 app.post("/edit-case-study-posts", editCaseStudyPosts);
 app.delete("/delete-case-study-posts/:id", deleteCaseStudyPosts);
 app.get("/get-case-study-posts", getCaseStudyPosts);
+
+app.get("/about-us", async (req, res) => {
+  const result = await pool.query("SELECT content FROM about_us WHERE user_id=2;");
+  res.json(result);
+});
 
 app.listen(port, () => console.log(`Listening on http://localhost:${port}`));
