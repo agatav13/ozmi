@@ -45,7 +45,7 @@ export const editNewsPosts = async (req: Request, res: Response) => {
   try {
     // bierze zdjęcia ze starej wersji postu
     const oldPost = await pool.query("SELECT images FROM news_posts WHERE id = ?;", [id]);
-    const oldImages = oldPost.rows[0].images;
+    const oldImages = oldPost[0].images;
     
     const result = await pool.query(query, values);
     
@@ -59,8 +59,8 @@ export const editNewsPosts = async (req: Request, res: Response) => {
       });
     });
 
-    console.log("Zaktualizowano post:", result.rows[0]);
-    res.status(200).json({ message: "Post updated successfully", result });
+    console.log("Zaktualizowano post:", id);
+    res.status(200).json({ message: "Post updated successfully" });
   } catch (error) {
     console.error("Error updating the post:", error);
     res.status(500).json({ error: "Failed to update the post" });

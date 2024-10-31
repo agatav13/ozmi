@@ -1,5 +1,5 @@
 import mariadb from "mariadb";
-require("dotenv").config({ path: ".env" });
+require("dotenv").config({ path: "../../.env" });
 
 export const pool = mariadb.createPool({
   host: process.env.DB_HOST,
