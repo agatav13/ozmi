@@ -64,7 +64,7 @@ importers:
         specifier: ^5.4.5
         version: 5.6.3
 
-  packages/web/admin-panel:
+  packages/web:
     dependencies:
       '@clerk/clerk-react':
         specifier: ^5.2.7
@@ -117,7 +117,7 @@ importers:
         version: 4.3.3(vite@5.4.10(@types/node@22.8.6))
       types:
         specifier: workspace:*
-        version: link:../../types
+        version: link:../types
       typescript:
         specifier: ^5.2.2
         version: 5.6.3
