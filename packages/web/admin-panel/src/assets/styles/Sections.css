@@ -341,7 +341,7 @@ input[type="submit"] {
 }
 
 .PostNews .PhotoGallery img {
-  height: 200px;
+  height: 250px;
   object-fit: cover;
 }
 
@@ -490,4 +490,13 @@ input[type="submit"] {
 
 .PostNews hr {
   border: 1px solid #b7b4b4;
+}
+
+.AboutUsDescription {
+  display: flex;
+  gap: 30px;
+}
+
+.AboutUsDescription p {
+  margin: 0;
 }
