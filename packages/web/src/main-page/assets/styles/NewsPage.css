@@ -1,25 +1,25 @@
-header.news-page {
+header.NewsPage {
   display: flex;
   gap: 40px;
   padding: 10px 0px 20px;
 }
 
-header.news-page img {
+header.NewsPage img {
   height: 200px;
 }
 
-header.news-page div {
+header.NewsPage div {
   display: flex;
   flex-direction: column;
 }
 
-header.news-page div h1 {
+header.NewsPage div h1 {
   margin: 0;
   font-size: 3rem;
   padding: 20px 0px 5px;
 }
 
-header.news-page div h2 {
+header.NewsPage div h2 {
   margin: 0;
   font-size: 1.8rem;
 }
@@ -28,7 +28,7 @@ main {
   padding-bottom: 60px;
 }
 
-.main-page-link {
+.MainPageLink {
   max-width: max-content;
   display: flex;
   flex-direction: row;
@@ -37,25 +37,25 @@ main {
   margin-bottom: 20px;
 }
 
-.main-page-link p {
+.MainPageLink p {
   margin: 0;
   padding-top: 4px;
 }
 
-.news-post .title,
-.news-post p {
+.NewsPost .Title,
+.NewsPost p {
   margin: 0;
 }
 
-.news-post .title {
+.NewsPost .Title {
   font-size: 1.4rem;
 }
 
-.news-post .content {
+.NewsPost .Content {
   padding-top: 16px;
 }
 
-.news-post hr {
+.NewsPost hr {
   border: 1px solid #b7b4b4;
   margin: 35px 0px 20px;
 }

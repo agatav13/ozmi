@@ -2,8 +2,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AdminPanel from "./admin-panel";
 import MainPage from "./main-page";
 
-// inne tytuły stron ??
-
 export default function App() {
   return (
     <BrowserRouter>

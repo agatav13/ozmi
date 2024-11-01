@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer>
-      <img src="images/ozmi-logo.webp" alt="Logo Ośrodka Zastosowań Matematyki i Informatyki" />
+      <img src="ozmi-logo.webp" alt="Logo Ośrodka Zastosowań Matematyki i Informatyki" />
       <p>
         <b>Adres</b><br />
         Uniwersytet Zielonogórski,<br />

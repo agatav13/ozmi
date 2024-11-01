@@ -36,67 +36,67 @@ a {
   cursor: pointer;
 }
 
-.text-align-right {
+.TextAlignRight {
   text-align: right;
 }
 
-.text-align-center {
+.TextAlignCenter {
   text-align: center;
 }
 
-.text-shadow-link {
+.TextShadowLink {
   transition-duration: 0.3s;
 }
 
-.text-shadow-link:hover {
+.TextShadowLink:hover {
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
 }
 
-h2.section-title {
+h2.SectionTitle {
   font-size: 2em;
 }
 
-header.main-page {
+header.MainPage {
   height: 150px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-header.main-page img {
+header.MainPage img {
   height: 90px;
 }
 
-header.main-page .main-page-nav {
+header.MainPage .MainPageNav {
   font-family: "Roboto", sans-serif;
   display: flex;
   gap: 5vw;
   margin-left: 40px;
 }
 
-header.main-page .main-page-nav a {
+header.MainPage .MainPageNav a {
   transition-duration: 0.3s;
 }
 
-header.main-page .main-page-nav a:hover {
+header.MainPage .MainPageNav a:hover {
   text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
 }
 
-.about-us h1 {
+.AboutUs h1 {
   margin: 0;
   font-size: 3rem;
 }
 
-.about-us h2 {
+.AboutUs h2 {
   font-size: 1.6rem;
 }
 
-.about-us p:first-of-type {
+.AboutUs p:first-of-type {
   font-weight: bold;
   text-align: justify;
 }
 
-.news-tiles {
+.NewsTiles {
   aspect-ratio: 2/1;
   display: flex;
   justify-content: space-between;
@@ -105,8 +105,8 @@ header.main-page .main-page-nav a:hover {
   gap: 10px;
 }
 
-.tile,
-.expanded-tile {
+.Tile,
+.ExpandedTile {
   border-radius: 10px;
   background-color: #70738e;
   width: 100%;
@@ -115,22 +115,22 @@ header.main-page .main-page-nav a:hover {
   transition-duration: 0.4s;
 }
 
-.tile {
+.Tile {
   height: 100%;
   padding: 10px;
 }
 
-.tile:hover {
+.Tile:hover {
   transform: translateY(2px);
 }
 
-.tile .date-post,
-.expanded-tile .date-post {
+.Tile .DatePost,
+.ExpandedTile .DatePost {
   margin: 0;
   text-align: right;
 }
 
-.tile .photo-post {
+.Tile .PhotoPost {
   max-width: 100%;
   height: 150px;
   object-fit: cover;
@@ -138,20 +138,20 @@ header.main-page .main-page-nav a:hover {
   flex-grow: 1;
 }
 
-.tile .title-post {
+.Tile .TitlePost {
   padding-bottom: 10px;
   font-size: 1.1rem;
 }
 
-.tile .title-post,
-.expanded-tile .title-post {
+.Tile .TitlePost,
+.ExpandedTile .TitlePost {
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.tile .see-more,
-.expanded-tile .see-more {
+.Tile .SeeMore,
+.ExpandedTile .SeeMore {
   margin: 0;
   align-self: flex-end;
   background-color: transparent;
@@ -161,45 +161,45 @@ header.main-page .main-page-nav a:hover {
   padding: 0;
 }
 
-.expanded-tile {
+.ExpandedTile {
   padding: 10px 20px;
 }
 
-.expanded-tile .photo-post {
+.ExpandedTile .PhotoPost {
   max-width: 100%;
   max-height: 400px;
   align-self: center;
   margin: 12px 0;
 }
 
-.expanded-tile .title-post {
+.ExpandedTile .TitlePost {
   font-size: 1.5rem;
   padding-bottom: 4px;
 }
 
-.expanded-tile .category-post {
+.ExpandedTile .CategoryPost {
   margin: 0;
   font-weight: 500;
   padding-bottom: 12px;
 }
 
-.expanded-tile .content-post {
+.ExpandedTile .ContentPost {
   text-align: justify;
   margin: 0;
   padding-bottom: 10px;
 }
 
-.education-tiles {
+.EducationTiles {
   aspect-ratio: 1/1;
 }
 
-.education-row-1,
-.education-row-2 {
+.EducationRow1,
+.EducationRow2 {
   display: flex;
   aspect-ratio: 2/1;
 }
 
-.education-tile {
+.EducationTile {
   display: flex;
   padding: 20px 30px;
   font-size: 1.6em;
@@ -208,17 +208,17 @@ header.main-page .main-page-nav a:hover {
   transition-duration: 0.6s;
 }
 
-.education-tile:hover {
+.EducationTile:hover {
   transform: scale(1.025);
   z-index: 5;
 }
 
-.bottom-text {
+.BottomText {
   align-items: end;
   padding-right: 60px;
 }
 
-.top-text {
+.TopText {
   align-items: start;
 }
 
@@ -239,26 +239,15 @@ header.main-page .main-page-nav a:hover {
   color: white;
 }
 
-.education-tile p {
+.EducationTile p {
   margin: 0;
 }
 
-.bottom-text .tile-text {
+.BottomText .TileText {
   padding-right: 40px;
 }
 
-.logo-gallery {
-  padding: 20px 0;
-  display: flex;
-  gap: 40px;
-  justify-content: center;
-}
-
-.logo-gallery img {
-  height: 75px;
-}
-
-.right-arrow {
+.RightArrow {
   border-style: solid;
   border-width: 0 5px 5px 0;
   border-radius: 2px;
@@ -270,18 +259,18 @@ header.main-page .main-page-nav a:hover {
   right: 40px;
 }
 
-.case-study {
+.CaseStudy {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.case-study img {
+.CaseStudy img {
   height: 26px;
   width: 26px;
 }
 
-.case-study h3 {
+.CaseStudy h3 {
   font-size: 1.4em;
 }
 
