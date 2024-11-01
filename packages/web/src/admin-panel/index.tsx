@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  ClerkProvider,
-  SignedIn,
-  SignedOut,
-  SignInButton,
-} from "@clerk/clerk-react";
+import { ClerkProvider, SignedIn, SignedOut, SignInButton } from "@clerk/clerk-react";
 import Header from "./components/Header";
 import NavBar from "./components/NavBar";
 

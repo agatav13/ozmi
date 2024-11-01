@@ -1,11 +1,22 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AdminPanel from "./admin-panel";
+import MainPage from "./main-page";
 
-// tu react router
+// inne tytuły stron ??
 
 export default function App() {
   return (
-    <>
-      <AdminPanel />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={<MainPage />}
+        />
+        <Route
+          path="/admin-panel"
+          element={<AdminPanel />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
